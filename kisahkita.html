@@ -1,0 +1,2502 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KisahKita Digital — Buat, Edit & Hosting Undangan Pernikahanmu Sendiri</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond, Plus Jakarta Sans & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Tone.js untuk Audio Melodi Lembut -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <style>
+.custom-scroll::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+    background: rgba(122, 145, 126, 0.35);
+    border-radius: 9999px;
+}
+.dev-scroll::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.dev-scroll::-webkit-scrollbar-track {
+    background: rgba(122, 145, 126, 0.08);
+}
+.dev-scroll::-webkit-scrollbar-thumb {
+    background: rgba(212, 140, 112, 0.45);
+    border-radius: 9999px;
+}
+.luxury-gold-btn {
+    background: linear-gradient(135deg, #D48C70 0%, #BD7356 100%);
+}
+</style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FAF7F2',
+                        creamDark: '#F2ECE1',
+                        sage: '#7A917E',
+                        sageDark: '#5F7563',
+                        sageLight: '#EBF0EC',
+                        terracotta: '#D48C70',
+                        terracottaDark: '#BD7356',
+                        terracottaLight: '#F9ECE6',
+                        charcoal: '#2D312E',
+                        charcoalMuted: '#5C615D',
+                        gold: '#C59B27',
+                        goldLight: '#FBF5E3',
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        playfair: ['"Playfair Display"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(45, 49, 46, 0.08)',
+                        'card': '0 4px 20px -2px rgba(122, 145, 126, 0.12)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-cream text-charcoal font-sans antialiased selection:bg-terracotta/20 selection:text-charcoal overflow-x-hidden">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[140] flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <header class="sticky top-0 z-40 bg-white border-b border-sage/20 shadow-card">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <div class="w-10 h-10 rounded-2xl bg-sage text-white flex items-center justify-center shadow-sm group-hover:bg-terracotta transition-colors duration-300">
+                        <i data-lucide="leaf" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl font-bold tracking-tight text-charcoal">KisahKita</span>
+                        <span class="block text-[10px] uppercase tracking-[0.2em] text-sage font-semibold -mt-1">Digital Studio</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-bold text-charcoal">
+                    <a href="#template-galeri" class="hover:text-terracottaDark transition-colors font-medium">Pilihan Template</a>
+                    <a href="#studio-section" class="hover:text-terracottaDark transition-colors font-bold text-terracottaDark">Studio Edit Gratis</a>
+                    <a href="#harga" class="hover:text-terracottaDark transition-colors font-medium">Paket Hosting</a>
+                    <a href="#faq-section" class="hover:text-terracottaDark transition-colors font-medium">FAQ</a>
+                    <a href="#tentang-kami" class="hover:text-terracottaDark transition-colors font-medium">Tentang Kami</a>
+                    <a href="javascript:void(0)" onclick="openDevPanel()" class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-goldLight hover:bg-amber-100 text-charcoal border border-gold/40 text-xs font-bold shadow-sm transition-all relative">
+                        <i data-lucide="crown" class="w-3.5 h-3.5 text-gold"></i>
+                        <span>Developer</span>
+                        <span id="nav-dev-pending-badge" class="ml-1 px-1.5 py-0.2 rounded-full bg-terracotta text-white text-[10px] font-bold">2</span>
+                    </a>
+                </nav>
+
+                <!-- CTA Buttons -->
+                <div class="flex items-center gap-3">
+                    <button onclick="openDevPanel()" class="md:hidden inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-goldLight border border-gold/40 text-charcoal text-xs font-bold cursor-pointer">
+                        <i data-lucide="crown" class="w-3.5 h-3.5 text-gold"></i>
+                        <span>Dev</span>
+                    </button>
+                    <a href="#studio-section" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-terracotta hover:bg-terracottaDark text-white text-xs sm:text-sm font-semibold shadow-sm hover:shadow transition-all">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        <span>Coba Edit Gratis</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="relative pt-12 pb-16 lg:pt-16 lg:pb-24 overflow-hidden">
+        <div class="absolute top-10 left-[-5%] w-72 h-72 bg-sage/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-5 right-[-5%] w-96 h-96 bg-terracotta/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="max-w-4xl mx-auto text-center space-y-6">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sageLight border border-sage/20 text-sageDark text-xs sm:text-sm font-medium">
+                    <span class="w-2 h-2 rounded-full bg-terracotta animate-pulse"></span>
+                    <span>Tanpa Login • Edit & Upload Foto Sepuasnya Dulu</span>
+                </div>
+
+                <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-charcoal leading-[1.12] tracking-tight">
+                    Coba Buat Undanganmu Gratis Sekarang — <span class="italic text-terracotta font-semibold">Cocok?</span> Baru Bayar & Langsung Online!
+                </h1>
+
+                <p class="text-base sm:text-lg text-charcoalMuted max-w-2xl mx-auto leading-relaxed">
+                    Pilih template aesthetic favoritmu, unggah foto prewedding sendiri, dan tulis kata-kata indahmu langsung di layar. Jika hasilnya sudah pas di hati, cukup selesaikan pembayaran dan link undanganmu langsung aktif!
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+                    <a href="#studio-section" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-sage hover:bg-sageDark text-white font-semibold text-sm sm:text-base shadow-soft hover:shadow-lg transition-all flex items-center justify-center gap-2.5">
+                        <i data-lucide="wand-2" class="w-5 h-5"></i>
+                        <span>Mulai Desain di Studio Gratis</span>
+                    </a>
+                    <a href="#template-galeri" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-creamDark text-charcoal border border-sage/25 font-semibold text-sm sm:text-base transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="layout-grid" class="w-4 h-4 text-terracotta"></i>
+                        <span>Lihat 4 Template Siap Pakai</span>
+                    </a>
+                </div>
+
+                <!-- Step Pills -->
+                <div class="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto text-left">
+                    <div class="bg-white/80 backdrop-blur rounded-2xl p-3.5 border border-sage/15 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-sageLight text-sageDark font-bold text-xs flex items-center justify-center shrink-0">1</div>
+                        <div>
+                            <p class="text-xs font-bold text-charcoal">Pilih Template</p>
+                            <p class="text-[11px] text-charcoalMuted">4 gaya aesthetic siap pakai</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/80 backdrop-blur rounded-2xl p-3.5 border border-sage/15 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-terracottaLight text-terracottaDark font-bold text-xs flex items-center justify-center shrink-0">2</div>
+                        <div>
+                            <p class="text-xs font-bold text-charcoal">Upload Foto & Kata</p>
+                            <p class="text-[11px] text-charcoalMuted">Lihat hasil live detik itu juga</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/80 backdrop-blur rounded-2xl p-3.5 border border-sage/15 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-sageLight text-sageDark font-bold text-xs flex items-center justify-center shrink-0">3</div>
+                        <div>
+                            <p class="text-xs font-bold text-charcoal">Bayar & Langsung Live</p>
+                            <p class="text-[11px] text-charcoalMuted">Dapat link kisahkita.id instan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== GALERI PILIHAN TEMPLATE ==================== -->
+    <section id="template-galeri" class="py-16 bg-white/70 border-y border-sage/15">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.2em] text-terracotta font-bold">Koleksi Desain Siap Pakai</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal mt-1">Pilih Template Favoritmu</h2>
+                </div>
+                <p class="text-sm text-charcoalMuted max-w-md">Semua template bisa langsung kamu edit foto, warna, dan kata-katanya di Studio bawah ini secara gratis.</p>
+            </div>
+
+            <div id="template-cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Di-render otomatis lewat JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== INTERACTIVE LIVE INVITATION STUDIO ==================== -->
+    <section id="studio-section" class="py-16 lg:py-20">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Header Studio -->
+            <div class="text-center max-w-2xl mx-auto mb-8 space-y-2">
+                <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-terracottaLight text-terracottaDark text-xs font-bold">
+                    <i data-lucide="palette" class="w-3.5 h-3.5"></i>
+                    <span>Interactive Live Studio</span>
+                </span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal">Kustomisasi Undanganmu di Sini</h2>
+                <p class="text-sm text-charcoalMuted">Ubah teks, unggah foto dari galeri HP/laptopmu, dan lihat tampilannya berubah secara langsung di layar sebelah kanan.</p>
+            </div>
+
+            <!-- Bar Atas Studio: Cek Link Custom & Tombol Hosting -->
+            <div class="bg-white rounded-3xl p-4 sm:p-5 border border-sage/20 shadow-soft mb-6 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-3 flex-1">
+                    <div class="flex items-center gap-2 text-xs font-bold text-sageDark shrink-0">
+                        <i data-lucide="globe" class="w-4 h-4"></i>
+                        <span>Alamat Link Undanganmu:</span>
+                    </div>
+                    <div class="flex items-center bg-cream rounded-2xl border border-sage/25 px-3.5 py-2 flex-1 max-w-md focus-within:border-sage">
+                        <span class="text-xs sm:text-sm font-semibold text-charcoalMuted select-none">kisahkita.id/</span>
+                        <input id="custom-slug-input" type="text" value="nadia-raka" oninput="checkSlugAvailability()" placeholder="nama-pasangan" class="bg-transparent text-xs sm:text-sm font-bold text-charcoal focus:outline-none w-full ml-0.5">
+                        <span id="slug-status-badge" class="ml-2 px-2.5 py-0.5 rounded-full bg-sageLight text-sageDark text-[10px] font-bold shrink-0 flex items-center gap-1">
+                            ✓ Tersedia
+                        </span>
+                    </div>
+                </div>
+                <button onclick="openCheckoutModal()" class="px-6 py-3 rounded-2xl bg-terracotta hover:bg-terracottaDark text-white text-xs sm:text-sm font-bold shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer">
+                    <i data-lucide="rocket" class="w-4 h-4"></i>
+                    <span>Lanjut Hosting & Pembayaran</span>
+                </button>
+            </div>
+
+            <!-- Workspace Utama: Kiri Editor (5 Kolom), Kanan Live Preview (7 Kolom) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                
+                <!-- ==================== PANEL KIRI: EDITOR 4 TAB ==================== -->
+                <div class="lg:col-span-5 bg-white rounded-3xl border border-sage/20 shadow-soft overflow-hidden flex flex-col h-full">
+                    
+                    <!-- Navigasi Tab Editor -->
+                    <div class="grid grid-cols-4 bg-creamDark/70 p-2 gap-1.5 border-b border-sage/15 shrink-0">
+                        <button onclick="switchEditorTab(1)" id="tab-btn-1" class="editor-tab-btn active flex flex-col items-center justify-center py-2.5 px-1 rounded-2xl text-[11px] font-bold bg-white text-sageDark shadow-sm transition-all cursor-pointer">
+                            <i data-lucide="palette" class="w-4 h-4 mb-1"></i>
+                            <span>1. Tema</span>
+                        </button>
+                        <button onclick="switchEditorTab(2)" id="tab-btn-2" class="editor-tab-btn flex flex-col items-center justify-center py-2.5 px-1 rounded-2xl text-[11px] font-semibold text-charcoalMuted hover:bg-white/60 transition-all cursor-pointer">
+                            <i data-lucide="heart" class="w-4 h-4 mb-1"></i>
+                            <span>2. Mempelai</span>
+                        </button>
+                        <button onclick="switchEditorTab(3)" id="tab-btn-3" class="editor-tab-btn flex flex-col items-center justify-center py-2.5 px-1 rounded-2xl text-[11px] font-semibold text-charcoalMuted hover:bg-white/60 transition-all cursor-pointer">
+                            <i data-lucide="image-plus" class="w-4 h-4 mb-1"></i>
+                            <span>3. Foto</span>
+                        </button>
+                        <button onclick="switchEditorTab(4)" id="tab-btn-4" class="editor-tab-btn flex flex-col items-center justify-center py-2.5 px-1 rounded-2xl text-[11px] font-semibold text-charcoalMuted hover:bg-white/60 transition-all cursor-pointer">
+                            <i data-lucide="pen-tool" class="w-4 h-4 mb-1"></i>
+                            <span>4. Kata & Kado</span>
+                        </button>
+                    </div>
+
+                    <!-- Isi Konten Tab Editor -->
+                    <div class="p-5 sm:p-6 flex-1 overflow-y-auto custom-scroll space-y-5">
+                        
+                        <!-- TAB 1: PILIH TEMA & MUSIK -->
+                        <div id="editor-tab-1" class="editor-tab-panel space-y-5">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-charcoal">Pilih Gaya Tema (Warna)</h3>
+                                <p class="text-xs text-charcoalMuted mt-0.5">Khusus mengatur palet warna undangan tanpa mengubah struktur desain template pilihanmu.</p>
+                            </div>
+
+                            <div id="studio-theme-selector" class="grid grid-cols-2 gap-3">
+                                <!-- Diisi JS -->
+                            </div>
+
+                            <!-- Pengaturan Musik Latar -->
+                            <div class="bg-cream rounded-2xl p-4 border border-sage/15 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-xs font-bold text-charcoal flex items-center gap-1.5">
+                                        <i data-lucide="music" class="w-4 h-4 text-terracotta"></i>
+                                        <span>Musik Latar Undangan</span>
+                                    </label>
+                                    <button onclick="toggleStudioMusic()" id="studio-music-btn" class="px-3 py-1 rounded-xl bg-sage text-white text-[11px] font-semibold hover:bg-sageDark transition-colors cursor-pointer">
+                                        ▶ Tes Musik
+                                    </button>
+                                </div>
+                                <select id="input-music-choice" onchange="changeMusicTrack()" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-sage/25 text-xs font-medium focus:outline-none focus:border-sage">
+                                    <option value="piano">Senandung Piano Lembut (Romantis)</option>
+                                    <option value="acoustic">Petikan Akustik Hangat (Garden)</option>
+                                    <option value="gamelan">Alunan Siter Klasik (Nusantara)</option>
+                                </select>
+                                <p id="studio-music-caption" class="text-[11px] text-charcoalMuted">Musik akan otomatis mengalun saat tamu menekan tombol "Buka Undangan".</p>
+
+                                <!-- Request Khusus (Otomatis masuk ke Comment Developer) -->
+                                <div class="mt-3 pt-3 border-t border-sage/15 space-y-2">
+                                    <label class="block text-[11px] font-bold text-charcoal flex items-center gap-1.5">
+                                        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-terracotta"></i>
+                                        <span>Request Khusus</span>
+                                    </label>
+                                    <textarea id="input-custom-song" rows="2" placeholder="Ketik lagu khusus, revisi tampilan, atau catatan untuk developer..." class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs focus:outline-none focus:border-sage"></textarea>
+                                    <button onclick="devRequestCustomSong()" class="w-full py-2 rounded-xl bg-sage hover:bg-sageDark text-white text-xs font-semibold transition-colors cursor-pointer flex items-center justify-center gap-1.5">
+                                        <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                                        <span>Kirim Request Khusus ke Developer</span>
+                                    </button>
+                                    <p id="dev-song-status" class="text-[10px] text-sageDark font-semibold mt-1"></p>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 flex justify-end">
+                                <button onclick="switchEditorTab(2)" class="px-5 py-2.5 rounded-xl bg-sage text-white text-xs font-semibold hover:bg-sageDark transition-colors flex items-center gap-1.5 cursor-pointer">
+                                    <span>Lanjut: Data Mempelai</span>
+                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- TAB 2: DATA MEMPELAI & ACARA -->
+                        <div id="editor-tab-2" class="editor-tab-panel hidden space-y-4">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-charcoal">Data Mempelai & Jadwal</h3>
+                                <p class="text-xs text-charcoalMuted mt-0.5">Ketik nama kalian dan lihat perubahan langsung di pratinjau.</p>
+                            </div>
+
+                            <div class="bg-cream rounded-2xl p-4 border border-sage/15 space-y-2.5">
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-terracottaDark">Mempelai Wanita</span>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                    <div>
+                                        <label class="block text-[11px] text-charcoalMuted mb-1">Nama Panggilan</label>
+                                        <input id="input-bride-nick" type="text" value="Nadia" oninput="syncStudioToPreview()" class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs font-semibold focus:outline-none focus:border-sage">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[11px] text-charcoalMuted mb-1">Nama Lengkap & Gelar</label>
+                                        <input id="input-bride-full" type="text" value="Nadia Putri Maharani, S.Ars" oninput="syncStudioToPreview()" class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs font-medium focus:outline-none focus:border-sage">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] text-charcoalMuted mb-1">Nama Orang Tua</label>
+                                    <input id="input-bride-parents" type="text" value="Putri pertama Bpk. Hendra Wijaya & Ibu Ratna Sari" oninput="syncStudioToPreview()" class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs focus:outline-none focus:border-sage">
+                                </div>
+                            </div>
+
+                            <div class="bg-cream rounded-2xl p-4 border border-sage/15 space-y-2.5">
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-sageDark">Mempelai Pria</span>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                    <div>
+                                        <label class="block text-[11px] text-charcoalMuted mb-1">Nama Panggilan</label>
+                                        <input id="input-groom-nick" type="text" value="Raka" oninput="syncStudioToPreview()" class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs font-semibold focus:outline-none focus:border-sage">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[11px] text-charcoalMuted mb-1">Nama Lengkap & Gelar</label>
+                                        <input id="input-groom-full" type="text" value="Raka Pratama Putra, S.T" oninput="syncStudioToPreview()" class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs font-medium focus:outline-none focus:border-sage">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] text-charcoalMuted mb-1">Nama Orang Tua</label>
+                                    <input id="input-groom-parents" type="text" value="Putra kedua Bpk. Budi Santoso & Ibu Dewi Lestari" oninput="syncStudioToPreview()" class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs focus:outline-none focus:border-sage">
+                                </div>
+                            </div>
+
+                            <div class="bg-cream rounded-2xl p-4 border border-sage/15 space-y-2.5">
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal">Waktu & Lokasi Acara</span>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                    <div>
+                                        <label class="block text-[11px] text-charcoalMuted mb-1">Hari & Tanggal Acara</label>
+                                        <input id="input-event-date" type="text" value="Sabtu, 21 November 2026" oninput="syncStudioToPreview()" class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs font-medium focus:outline-none focus:border-sage">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[11px] text-charcoalMuted mb-1">Jam Akad & Resepsi</label>
+                                        <input id="input-event-time" type="text" value="Akad 08.30 • Resepsi 11.00 WIB" oninput="syncStudioToPreview()" class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs font-medium focus:outline-none focus:border-sage">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] text-charcoalMuted mb-1">Nama Gedung / Lokasi</label>
+                                    <input id="input-venue-name" type="text" value="Gedung Sasana Kriya, Taman Mini, Jakarta" oninput="syncStudioToPreview()" class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs font-medium focus:outline-none focus:border-sage">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] text-charcoalMuted mb-1">Link Google Maps</label>
+                                    <input id="input-maps-url" type="url" value="https://maps.google.com" oninput="syncStudioToPreview()" class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs focus:outline-none focus:border-sage">
+                                </div>
+                            </div>
+
+                            <div class="pt-2 flex justify-between">
+                                <button onclick="switchEditorTab(1)" class="px-4 py-2 rounded-xl bg-cream text-charcoal text-xs font-semibold hover:bg-creamDark cursor-pointer">← Kembali</button>
+                                <button onclick="switchEditorTab(3)" class="px-5 py-2.5 rounded-xl bg-sage text-white text-xs font-semibold hover:bg-sageDark flex items-center gap-1.5 cursor-pointer">
+                                    <span>Lanjut: Upload Foto</span>
+                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- TAB 3: UPLOAD FOTO & GALERI -->
+                        <div id="editor-tab-3" class="editor-tab-panel hidden space-y-4">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-charcoal">Upload Foto Kalian</h3>
+                                <p class="text-xs text-charcoalMuted mt-0.5">Pilih foto langsung dari HP atau komputermu. Foto otomatis terpasang di pratinjau undangan!</p>
+                            </div>
+
+                            <div class="bg-cream rounded-2xl p-4 border border-sage/20 space-y-2.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-bold text-charcoal">1. Foto Sampul Utama (Cover)</span>
+                                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-sageLight text-sageDark font-semibold">Wajib</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <img id="thumb-cover-preview" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=300&q=80" alt="Thumb Cover" class="w-16 h-20 rounded-xl object-cover border border-sage/20 shrink-0">
+                                    <label class="flex-1 border-2 border-dashed border-sage/35 hover:border-sage bg-white rounded-xl p-3 text-center cursor-pointer transition-colors">
+                                        <i data-lucide="upload-cloud" class="w-5 h-5 text-sage mx-auto mb-1"></i>
+                                        <span class="block text-xs font-semibold text-charcoal">Klik untuk Ganti Foto Sampul</span>
+                                        <span class="block text-[10px] text-charcoalMuted">JPG, PNG, WEBP (Maks 10MB)</span>
+                                        <input type="file" accept="image/*" onchange="handleSinglePhotoUpload(event, 'cover')" class="hidden">
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-cream rounded-2xl p-3.5 border border-sage/20 space-y-2 text-center">
+                                    <span class="block text-[11px] font-bold text-charcoal">2. Foto Mempelai Wanita</span>
+                                    <img id="thumb-bride-preview" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Thumb Wanita" class="w-16 h-16 rounded-full object-cover mx-auto border-2 border-white shadow-sm">
+                                    <label class="block py-2 px-2 rounded-xl bg-white hover:bg-sageLight border border-sage/25 text-[11px] font-semibold text-charcoal cursor-pointer transition-colors">
+                                        Upload Foto
+                                        <input type="file" accept="image/*" onchange="handleSinglePhotoUpload(event, 'bride')" class="hidden">
+                                    </label>
+                                </div>
+
+                                <div class="bg-cream rounded-2xl p-3.5 border border-sage/20 space-y-2 text-center">
+                                    <span class="block text-[11px] font-bold text-charcoal">3. Foto Mempelai Pria</span>
+                                    <img id="thumb-groom-preview" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Thumb Pria" class="w-16 h-16 rounded-full object-cover mx-auto border-2 border-white shadow-sm">
+                                    <label class="block py-2 px-2 rounded-xl bg-white hover:bg-sageLight border border-sage/25 text-[11px] font-semibold text-charcoal cursor-pointer transition-colors">
+                                        Upload Foto
+                                        <input type="file" accept="image/*" onchange="handleSinglePhotoUpload(event, 'groom')" class="hidden">
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="bg-cream rounded-2xl p-4 border border-sage/20 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-xs font-bold text-charcoal">4. Galeri Foto Momen (Bisa Banyak Foto)</span>
+                                        <p class="text-[11px] text-charcoalMuted">Tambah atau hapus foto galeri prewedding kalian.</p>
+                                    </div>
+                                    <label class="px-3 py-2 rounded-xl bg-terracotta hover:bg-terracottaDark text-white text-xs font-semibold cursor-pointer flex items-center gap-1 shrink-0">
+                                        <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                                        <span>Tambah Foto</span>
+                                        <input type="file" accept="image/*" multiple onchange="handleGalleryPhotosUpload(event)" class="hidden">
+                                    </label>
+                                </div>
+                                <div id="editor-gallery-grid" class="grid grid-cols-3 gap-2.5 pt-1"></div>
+                            </div>
+
+                            <div class="pt-2 flex justify-between">
+                                <button onclick="switchEditorTab(2)" class="px-4 py-2 rounded-xl bg-cream text-charcoal text-xs font-semibold hover:bg-creamDark cursor-pointer">← Kembali</button>
+                                <button onclick="switchEditorTab(4)" class="px-5 py-2.5 rounded-xl bg-sage text-white text-xs font-semibold hover:bg-sageDark flex items-center gap-1.5 cursor-pointer">
+                                    <span>Lanjut: Kata-Kata & Kado</span>
+                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- TAB 4: KATA-KATA, KUTIPAN & AMPLOP DIGITAL -->
+                        <div id="editor-tab-4" class="editor-tab-panel hidden space-y-4">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-charcoal">Kata-Kata Indah & Amplop</h3>
+                                <p class="text-xs text-charcoalMuted mt-0.5">Tulis kalimat pembuka, kisah cinta, atau pilih inspirasi kutipan sekali klik.</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-charcoal mb-1">Salam & Kalimat Pembuka</label>
+                                <textarea id="input-opening-text" rows="2" oninput="syncStudioToPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-sage/25 text-xs leading-relaxed focus:outline-none focus:border-sage">Dengan memohon rahmat dan ridho Tuhan Yang Maha Esa, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir di hari bahagia kami:</textarea>
+                            </div>
+
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-xs font-bold text-charcoal">Kutipan Cinta / Ayat Suci</label>
+                                    <button type="button" onclick="cycleInspirationQuote()" class="px-3 py-1 rounded-full bg-terracottaLight hover:bg-terracotta hover:text-white text-terracottaDark text-[11px] font-bold transition-colors flex items-center gap-1 cursor-pointer">
+                                        <i data-lucide="sparkles" class="w-3 h-3"></i>
+                                        <span>Pilih Inspirasi Kata-Kata</span>
+                                    </button>
+                                </div>
+                                <textarea id="input-quote-text" rows="3" oninput="syncStudioToPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-sage/25 text-xs italic leading-relaxed focus:outline-none focus:border-sage">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tenteram kepadanya." (QS. Ar-Rum: 21)</textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-charcoal mb-1">Cerita Singkat Pertemuan (Love Story)</label>
+                                <textarea id="input-lovestory-text" rows="3" oninput="syncStudioToPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-sage/25 text-xs leading-relaxed focus:outline-none focus:border-sage">Berawal dari pertemuan sederhana di sebuah kedai kopi pada tahun 2022, percakapan hangat membawa kami pada keyakinan untuk melangkah bersama menuju ikatan suci pernikahan.</textarea>
+                            </div>
+
+                            <div class="bg-cream rounded-2xl p-4 border border-sage/15 space-y-2.5">
+                                <span class="text-xs font-bold text-charcoal flex items-center gap-1.5">
+                                    <i data-lucide="gift" class="w-4 h-4 text-sageDark"></i>
+                                    <span>Rekening / E-Wallet Amplop Digital</span>
+                                </span>
+                                <div class="grid grid-cols-2 gap-2.5">
+                                    <div>
+                                        <label class="block text-[11px] text-charcoalMuted mb-1">Nama Bank / E-Wallet</label>
+                                        <input id="input-bank-name" type="text" value="Bank BCA" oninput="syncStudioToPreview()" class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs font-semibold focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[11px] text-charcoalMuted mb-1">Nomor Rekening</label>
+                                        <input id="input-bank-number" type="text" value="8820491022" oninput="syncStudioToPreview()" class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs font-semibold focus:outline-none">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] text-charcoalMuted mb-1">Atas Nama Pemilik Rekening</label>
+                                    <input id="input-bank-holder" type="text" value="Nadia Putri Maharani" oninput="syncStudioToPreview()" class="w-full px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs focus:outline-none">
+                                </div>
+                            </div>
+
+                            <div class="pt-2 flex items-center justify-between gap-2">
+                                <button onclick="switchEditorTab(3)" class="px-4 py-2 rounded-xl bg-cream text-charcoal text-xs font-semibold hover:bg-creamDark cursor-pointer">← Kembali</button>
+                                <button onclick="openCheckoutModal()" class="px-5 py-3 rounded-xl bg-terracotta hover:bg-terracottaDark text-white text-xs font-bold shadow-sm transition-all cursor-pointer">
+                                    Selesai & Hosting Sekarang 🚀
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ==================== PANEL KANAN: REAL-TIME LIVE PREVIEW ==================== -->
+                <div class="lg:col-span-7 bg-creamDark/80 rounded-3xl p-4 sm:p-6 border border-sage/20 flex flex-col items-center h-full">
+                    
+                    <div class="w-full flex flex-wrap items-center justify-between gap-3 mb-5 bg-white/90 backdrop-blur px-4 py-2.5 rounded-2xl border border-sage/15 shrink-0">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-sage animate-pulse"></span>
+                            <span class="text-xs font-bold text-charcoal">Live Preview Otomatis</span>
+                            <span id="preview-active-theme-label" class="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-sageLight text-sageDark text-[10px] font-bold">Seruni Sage</span>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <button onclick="resetStudioCover()" class="px-3 py-1.5 rounded-xl bg-cream hover:bg-sageLight text-charcoal text-[11px] font-semibold transition-colors cursor-pointer">
+                                Lihat Sampul
+                            </button>
+                            <div class="bg-cream p-1 rounded-xl flex items-center gap-1 border border-sage/15">
+                                <button onclick="setPreviewMode('mobile')" id="mode-mobile-btn" class="px-2.5 py-1 rounded-lg bg-white text-charcoal shadow-sm text-[11px] font-bold flex items-center gap-1 cursor-pointer">
+                                    <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
+                                    <span>HP</span>
+                                </button>
+                                <button onclick="setPreviewMode('desktop')" id="mode-desktop-btn" class="px-2.5 py-1 rounded-lg text-charcoalMuted hover:text-charcoal text-[11px] font-semibold flex items-center gap-1 cursor-pointer">
+                                    <i data-lucide="monitor" class="w-3.5 h-3.5"></i>
+                                    <span>Desktop</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="preview-frame-wrapper" class="w-full max-w-[375px] h-[640px] bg-charcoal rounded-[44px] p-3 shadow-2xl border-4 border-charcoal relative transition-all duration-500">
+                        <div id="preview-phone-notch" class="w-28 h-5 bg-charcoal rounded-b-2xl mx-auto absolute top-3 left-1/2 -translate-x-1/2 z-30 transition-opacity"></div>
+
+                        <div id="studio-preview-canvas" class="w-full h-full rounded-[34px] overflow-hidden relative flex flex-col bg-[#F4F7F4] text-[#2D312E] transition-all duration-500">
+                            
+                            <!-- COVER SAMPUL UNDANGAN -->
+                    <div id="studio-preview-cover" class="absolute inset-0 z-20 flex flex-col items-center justify-between p-6 text-center transition-all duration-700 bg-[#E6EDE7] overflow-hidden">
+                        <!-- Ornamen Dekoratif Dinamis Sesuai Desain Template -->
+                        <div id="prev-cover-ornament" class="pointer-events-none"></div>
+
+                        <div class="mt-5 relative z-10">
+                            <span id="prev-cover-subtitle" class="text-[10px] uppercase tracking-[0.28em] font-bold opacity-75">The Wedding Of</span>
+                        </div>
+
+                        <div id="prev-cover-center-group" class="my-auto space-y-3 relative z-10 w-full flex flex-col items-center">
+                            <div id="prev-cover-photo-frame" class="w-36 h-44 sm:w-40 sm:h-48 mx-auto rounded-t-full rounded-b-3xl overflow-hidden border-4 border-white shadow-lg transition-all duration-500">
+                                <img id="prev-cover-img" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=500&q=80" alt="Sampul Pengantin" class="w-full h-full object-cover">
+                            </div>
+                            <h2 id="prev-cover-names" class="font-serif text-3xl sm:text-4xl font-bold tracking-tight">Nadia & Raka</h2>
+                            <div id="prev-cover-divider" class="w-12 h-0.5 bg-current/25 mx-auto"></div>
+                            <p id="prev-cover-date" class="text-xs font-medium opacity-80">Sabtu, 21 November 2026</p>
+                        </div>
+
+                        <div id="prev-cover-card" class="w-full max-w-xs bg-white/85 backdrop-blur-sm rounded-2xl p-4 shadow-sm space-y-2 text-[#2D312E] relative z-10 transition-all duration-500">
+                            <p class="text-[10px] text-charcoalMuted">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+                            <p class="text-xs font-bold">Tamu Undangan Spesial</p>
+                            <button onclick="openStudioInvitationContent()" id="prev-open-btn" class="w-full py-2.5 rounded-xl bg-[#7A917E] text-white text-xs font-semibold shadow-sm hover:opacity-90 transition-all cursor-pointer flex items-center justify-center gap-1.5">
+                                <span>💌 Buka Undangan</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ISI LENGKAP UNDANGAN -->
+                    <div id="studio-preview-scroll-body" class="flex-1 overflow-y-auto custom-scroll p-5 sm:p-7 pt-9 space-y-7 text-center">
+                                <div class="flex items-center justify-between text-[11px] border-b border-current/15 pb-2.5">
+                                    <span id="prev-topbar-names" class="font-serif font-bold text-sm">Nadia & Raka</span>
+                                    <div class="flex items-center gap-2">
+                                        <button onclick="toggleStudioMusic()" class="px-2 py-0.5 rounded-full bg-white/70 text-[10px] font-semibold cursor-pointer">🎵 Musik</button>
+                                        <button onclick="resetStudioCover()" class="underline opacity-75 hover:opacity-100 cursor-pointer">Sampul</button>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-3 max-w-md mx-auto">
+                                    <p id="prev-quote-text" class="font-serif italic text-sm sm:text-base leading-relaxed opacity-90">
+                                        "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tenteram kepadanya." (QS. Ar-Rum: 21)
+                                    </p>
+                                    <div class="w-12 h-0.5 bg-current/20 mx-auto"></div>
+                                    <p id="prev-opening-text" class="text-xs leading-relaxed opacity-85">
+                                        Dengan memohon rahmat dan ridho Tuhan Yang Maha Esa, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir di hari bahagia kami:
+                                    </p>
+                                </div>
+
+                                <div class="bg-white/85 rounded-3xl p-5 shadow-sm text-[#2D312E] max-w-md mx-auto space-y-4">
+                        <div id="prev-couple-card" class="bg-white/85 rounded-3xl p-5 shadow-sm text-[#2D312E] max-w-md mx-auto space-y-4 transition-all duration-500">
+                            <div class="space-y-1.5">
+                                <img id="prev-bride-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Mempelai Wanita" class="w-20 h-20 rounded-full object-cover mx-auto border-2 border-sage/30 shadow-sm transition-all duration-500">
+                                <h3 id="prev-bride-full" class="font-serif text-2xl font-bold">Nadia Putri Maharani, S.Ars</h3>
+                                <p id="prev-bride-parents" class="text-[11px] text-charcoalMuted">Putri pertama Bpk. Hendra Wijaya & Ibu Ratna Sari</p>
+                            </div>
+
+                            <div id="prev-ampersand" class="font-serif text-2xl italic text-terracotta">&</div>
+
+                            <div class="space-y-1.5">
+                                <img id="prev-groom-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Mempelai Pria" class="w-20 h-20 rounded-full object-cover mx-auto border-2 border-sage/30 shadow-sm transition-all duration-500">
+                                <h3 id="prev-groom-full" class="font-serif text-2xl font-bold">Raka Pratama Putra, S.T</h3>
+                                <p id="prev-groom-parents" class="text-[11px] text-charcoalMuted">Putra kedua Bpk. Budi Santoso & Ibu Dewi Lestari</p>
+                            </div>
+                        </div>
+
+                        <div id="prev-event-card" class="bg-white/85 rounded-3xl p-5 shadow-sm text-[#2D312E] max-w-md mx-auto space-y-3 transition-all duration-500">
+                            <span id="prev-event-badge" class="inline-block px-3 py-1 rounded-full bg-terracottaLight text-terracottaDark text-[10px] font-bold uppercase tracking-wider">Rangkaian Acara</span>
+                            <h4 id="prev-event-date" class="font-serif text-2xl font-bold">Sabtu, 21 November 2026</h4>
+                                    <p id="prev-event-time" class="text-xs font-semibold text-sageDark">Akad 08.30 • Resepsi 11.00 WIB</p>
+                                    <p id="prev-venue-name" class="text-xs text-charcoalMuted">Gedung Sasana Kriya, Taman Mini, Jakarta</p>
+                                    <div class="pt-1">
+                                        <a id="prev-maps-link" href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-sage text-white text-xs font-semibold hover:bg-sageDark transition-colors">
+                                            <span>📍 Buka Petunjuk Google Maps</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-md mx-auto space-y-2">
+                                    <h4 class="font-serif text-2xl font-bold">Kisah Cinta Kami</h4>
+                                    <p id="prev-lovestory-text" class="text-xs leading-relaxed opacity-85 bg-white/60 rounded-2xl p-4">
+                                        Berawal dari pertemuan sederhana di sebuah kedai kopi pada tahun 2022, percakapan hangat membawa kami pada keyakinan untuk melangkah bersama menuju ikatan suci pernikahan.
+                                    </p>
+                                </div>
+
+                                <div class="max-w-md mx-auto space-y-3">
+                                    <h4 class="font-serif text-2xl font-bold">Galeri Momen Bahagia</h4>
+                                    <div id="prev-gallery-grid" class="grid grid-cols-2 gap-2.5"></div>
+                                </div>
+
+                                <div class="bg-white/85 rounded-3xl p-5 shadow-sm text-[#2D312E] max-w-md mx-auto space-y-3">
+                                    <h4 class="font-serif text-2xl font-bold">Amplop Digital</h4>
+                                    <p class="text-[11px] text-charcoalMuted">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika ingin berbagi tanda kasih:</p>
+                                    <div class="bg-cream rounded-2xl p-3.5 border border-sage/20 flex items-center justify-between text-left">
+                                        <div>
+                                            <p id="prev-bank-name" class="text-[10px] font-bold uppercase text-sageDark">Bank BCA</p>
+                                            <p id="prev-bank-number" class="text-sm font-bold tracking-wider">8820491022</p>
+                                            <p id="prev-bank-holder" class="text-[11px] text-charcoalMuted">a.n. Nadia Putri Maharani</p>
+                                        </div>
+                                        <button onclick="copyStudioBank()" class="px-3.5 py-2 rounded-xl bg-terracotta text-white text-xs font-semibold hover:bg-terracottaDark cursor-pointer">
+                                            Salin
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white/90 rounded-3xl p-5 shadow-sm text-[#2D312E] max-w-md mx-auto space-y-3 text-left">
+                                    <h4 class="font-serif text-2xl font-bold text-center">Ucapan & Konfirmasi Kehadiran</h4>
+                                    <input id="prev-rsvp-name" type="text" placeholder="Nama Lengkap Anda" class="w-full px-3.5 py-2 rounded-xl bg-cream border border-sage/20 text-xs focus:outline-none">
+                                    <select id="prev-rsvp-status" class="w-full px-3.5 py-2 rounded-xl bg-cream border border-sage/20 text-xs focus:outline-none">
+                                        <option value="Hadir">InsyaAllah Hadir</option>
+                                        <option value="Masih Ragu">Masih Ragu</option>
+                                        <option value="Berhalangan">Maaf Berhalangan</option>
+                                    </select>
+                                    <textarea id="prev-rsvp-msg" rows="2" placeholder="Tulis doa & harapan untuk mempelai..." class="w-full px-3.5 py-2 rounded-xl bg-cream border border-sage/20 text-xs focus:outline-none"></textarea>
+                                    <button onclick="addStudioRsvpComment()" class="w-full py-2.5 rounded-xl bg-sage text-white text-xs font-semibold hover:bg-sageDark cursor-pointer">
+                                        Kirim Ucapan Doa
+                                    </button>
+
+                                    <div id="prev-rsvp-list" class="space-y-2 pt-2 max-h-36 overflow-y-auto custom-scroll">
+                                        <div class="bg-cream rounded-xl p-2.5 text-[11px]">
+                                            <div class="flex justify-between font-bold">
+                                                <span>Sahabat Kuliah</span>
+                                                <span class="text-sageDark">Hadir</span>
+                                            </div>
+                                            <p class="text-charcoalMuted mt-0.5">Selamat ya kalian berdua! Lancar sampai hari H 💕</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pb-4 text-[10px] opacity-70">
+                                    Dibuat dengan penuh cinta menggunakan KisahKita Digital
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PAKET HOSTING TRANSPARAN ==================== -->
+    <section id="harga" class="py-16 bg-white/70 border-t border-sage/15">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto space-y-2 mb-12">
+                <span class="text-xs uppercase tracking-[0.2em] text-sage font-bold">Siap Online Kapan Saja</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal">Pilih Paket Hosting Setelah Desainmu Cocok</h2>
+                <p class="text-sm text-charcoalMuted">Semua fitur di Studio dapat dicoba gratis. Bayar hanya saat kamu siap memublikasikan link undanganmu.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-cream rounded-3xl p-7 border border-sage/20 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-charcoalMuted">Paket Hemat</span>
+                        <h3 class="font-serif text-3xl font-bold text-charcoal mt-1">Aktif 6 Bulan</h3>
+                        <p class="font-serif text-3xl font-bold text-sageDark my-4">Rp 79.000</p>
+                        <ul class="space-y-2.5 text-xs sm:text-sm text-charcoalMuted">
+                            <li>✓ Subdomain <strong>kisahkita.id/nama-kalian</strong></li>
+                            <li>✓ Bebas Upload Foto & Edit Teks</li>
+                            <li>✓ Kirim Tamu Tanpa Batas</li>
+                            <li>✓ RSVP, Ucapan & Amplop Digital</li>
+                        </ul>
+                    </div>
+                    <button onclick="openCheckoutModal('hemat')" class="mt-6 w-full py-3 rounded-2xl bg-white hover:bg-sageLight text-charcoal border border-sage/25 text-xs font-bold transition-colors cursor-pointer">
+                        Pilih Paket Hemat
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-3xl p-7 border-2 border-terracotta shadow-soft flex flex-col justify-between relative">
+                    <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-terracotta text-white text-[10px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full">Paling Populer ✨</span>
+                    <div>
+                        <span class="text-xs font-bold text-terracottaDark">Paket Favorit</span>
+                        <h3 class="font-serif text-3xl font-bold text-charcoal mt-1">Aktif Selamanya</h3>
+                        <p class="font-serif text-3xl font-bold text-terracotta my-4">Rp 129.000</p>
+                        <ul class="space-y-2.5 text-xs sm:text-sm text-charcoal">
+                            <li>✓ <strong>Link Aktif Selamanya (Tanpa Expired)</strong></li>
+                            <li>✓ Semua 4 Template Aesthetic</li>
+                            <li>✓ Upload Galeri Foto Resolusi Tinggi</li>
+                            <li>✓ Bebas Edit & Revisi Kapan Saja</li>
+                        </ul>
+                    </div>
+                    <button onclick="openCheckoutModal('favorit')" class="mt-6 w-full py-3.5 rounded-2xl bg-terracotta hover:bg-terracottaDark text-white text-xs font-bold shadow-sm transition-colors cursor-pointer">
+                        Pilih Paket Favorit
+                    </button>
+                </div>
+
+                <div class="bg-cream rounded-3xl p-7 border border-sage/20 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-sageDark">Paket Eksklusif</span>
+                        <h3 class="font-serif text-3xl font-bold text-charcoal mt-1">Prioritas + Dibantu</h3>
+                        <p class="font-serif text-3xl font-bold text-charcoal my-4">Rp 199.000</p>
+                        <ul class="space-y-2.5 text-xs sm:text-sm text-charcoalMuted">
+                            <li>✓ Semua Fitur Paket Favorit</li>
+                            <li>✓ <strong>Dibantu Developer Rapikan Foto & Layout</strong></li>
+                            <li>✓ Request Lagu Latar Khusus</li>
+                            <li>✓ Dukungan Prioritas via WhatsApp</li>
+                        </ul>
+                    </div>
+                    <button onclick="openCheckoutModal('eksklusif')" class="mt-6 w-full py-3 rounded-2xl bg-sage hover:bg-sageDark text-white text-xs font-bold transition-colors cursor-pointer">
+                        Pilih Paket Eksklusif
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FAQ SECTION ==================== -->
+    <section id="faq-section" class="py-16 lg:py-24 bg-cream relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-2xl mx-auto space-y-2.5 mb-12">
+                <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sageLight text-sageDark text-xs font-bold">
+                    <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+                    <span>Bantuan & Informasi</span>
+                </span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal">Pertanyaan yang Sering Diajukan</h2>
+                <p class="text-sm text-charcoalMuted">Temukan jawaban lengkap seputar pembuatan hingga aktivasi hosting undanganmu di sini.</p>
+            </div>
+
+            <div id="faq-accordion-container" class="space-y-3.5">
+                <div class="faq-item bg-white rounded-3xl border border-sage/20 shadow-card overflow-hidden transition-all duration-300">
+                    <button type="button" onclick="toggleFaqItem(this)" aria-expanded="true" class="w-full px-6 py-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-cream/50 transition-colors">
+                        <span class="font-serif text-xl sm:text-2xl font-bold text-charcoal">Bagaimana cara membuat undangan dan langsung aktif/hosting?</span>
+                        <span class="faq-icon w-8 h-8 rounded-full bg-terracotta text-white flex items-center justify-center shrink-0 transition-transform duration-300 rotate-45">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </span>
+                    </button>
+                    <div class="faq-content grid grid-rows-[1fr] transition-all duration-300 ease-in-out">
+                        <div class="overflow-hidden">
+                            <p class="px-6 pb-5 text-xs sm:text-sm text-charcoalMuted leading-relaxed border-t border-sage/10 pt-3.5">
+                                Pilih template favoritmu, ubah nama mempelai, unggah foto prewedding, dan tulis kata-kata langsung di <strong class="text-charcoal">Interactive Live Studio</strong> secara gratis. Setelah hasilnya pas, klik <strong class="text-charcoal">Lanjut Hosting & Pembayaran</strong>, dan link undanganmu akan langsung di-hosting setelah pembayaran dikonfirmasi.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white rounded-3xl border border-sage/20 shadow-card overflow-hidden transition-all duration-300">
+                    <button type="button" onclick="toggleFaqItem(this)" aria-expanded="false" class="w-full px-6 py-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-cream/50 transition-colors">
+                        <span class="font-serif text-xl sm:text-2xl font-bold text-charcoal">Apakah data, foto, atau kata-kata bisa diubah kembali setelah pembayaran?</span>
+                        <span class="faq-icon w-8 h-8 rounded-full bg-sageLight text-sageDark flex items-center justify-center shrink-0 transition-transform duration-300">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </span>
+                    </button>
+                    <div class="faq-content grid grid-rows-[0fr] transition-all duration-300 ease-in-out">
+                        <div class="overflow-hidden">
+                            <p class="px-6 pb-5 text-xs sm:text-sm text-charcoalMuted leading-relaxed border-t border-sage/10 pt-3.5">
+                                Tentu saja bisa! Kamu tetap memiliki akses penuh untuk mengganti foto, memperbarui jadwal acara, atau menambah cerita cinta kapan saja tanpa biaya tambahan.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER BAWAH ==================== -->
+    <footer id="tentang-kami" class="bg-[#262A27] text-cream pt-16 pb-10 border-t border-sage/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-10 h-10 rounded-2xl bg-sage text-white flex items-center justify-center shadow-sm">
+                            <i data-lucide="leaf" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="font-serif text-2xl font-bold tracking-tight text-white">KisahKita</span>
+                            <span class="block text-[10px] uppercase tracking-[0.2em] text-terracotta font-semibold -mt-1">Digital Studio</span>
+                        </div>
+                    </div>
+                    <p class="text-xs sm:text-sm text-cream/75 leading-relaxed text-justify">
+                        <strong class="text-white">KisahKita Digital</strong> hadir agar setiap calon pengantin dapat berkreasi merangkai undangan impiannya sendiri, melihat hasilnya secara langsung, dan membagikannya ke orang-orang terkasih dalam hitungan menit.
+                    </p>
+                </div>
+
+                <div class="md:col-span-3 space-y-4">
+                    <h3 class="font-serif text-xl font-bold text-white">Navigasi Cepat</h3>
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-cream/75">
+                        <li><a href="#template-galeri" class="hover:text-terracottaLight transition-colors">Katalog Tema Siap Pakai</a></li>
+                        <li><a href="#studio-section" class="hover:text-terracottaLight transition-colors">Studio Coba Edit Gratis</a></li>
+                        <li><a href="#harga" class="hover:text-terracottaLight transition-colors">Paket & Harga Hosting</a></li>
+                        <li><a href="#faq-section" class="hover:text-terracottaLight transition-colors">Pertanyaan Umum (FAQ)</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-4 space-y-4">
+                    <h3 class="font-serif text-xl font-bold text-white">Ikuti Inspirasi Pernikahan</h3>
+                    <div class="border border-white/10 rounded-3xl p-5 space-y-3.5">
+                        <p class="text-sm font-bold text-white">@kisahkita.digital</p>
+                        <p class="text-xs text-cream/75">Inspirasi Desain, Tips & Testimoni Pasangan</p>
+                        <a href="https://instagram.com/kisahkita.digital" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-2xl bg-terracotta hover:bg-terracottaDark text-white text-xs font-bold transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                            <span>Kunjungi Instagram Kami</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 text-xs text-cream/60">
+                <p>&copy; 2026 KisahKita Digital. Seluruh Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== MODAL CHECKOUT & INSTANT HOSTING ==================== -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-charcoal/60 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto">
+        <div class="bg-white w-full max-w-3xl rounded-3xl shadow-2xl border border-sage/20 overflow-hidden my-auto">
+            <div class="bg-cream px-6 py-4 border-b border-sage/15 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-terracotta"></span>
+                    <h3 class="font-serif text-2xl font-bold text-charcoal">Checkout & Aktivasi Hosting Instan</h3>
+                </div>
+                <button onclick="closeCheckoutModal()" class="p-2 rounded-xl bg-white text-charcoal hover:bg-terracottaLight transition-colors cursor-pointer">✕</button>
+            </div>
+
+            <!-- LANGKAH 1: PEMBAYARAN -->
+            <div id="checkout-step-payment" class="p-6 space-y-6 max-h-[82vh] overflow-y-auto custom-scroll">
+                <div class="bg-cream rounded-2xl p-4 border border-sage/20 flex flex-col sm:flex-row items-center gap-4">
+                    <img id="checkout-cover-thumb" src="" alt="Preview Cover" class="w-16 h-20 rounded-xl object-cover border-2 border-white shadow-sm shrink-0">
+                    <div class="flex-1 text-center sm:text-left space-y-1">
+                        <span id="checkout-theme-badge" class="inline-block px-2.5 py-0.5 rounded-full bg-sageLight text-sageDark text-[10px] font-bold">Tema: Seruni Sage</span>
+                        <h4 id="checkout-couple-title" class="font-serif text-2xl font-bold text-charcoal">Nadia & Raka</h4>
+                        <p class="text-xs text-charcoalMuted">Link Aktif: <strong id="checkout-live-url" class="text-terracottaDark">kisahkita.id/nadia-raka</strong></p>
+                    </div>
+                    <button onclick="closeCheckoutModal()" class="px-3 py-1.5 rounded-xl bg-white border border-sage/20 text-[11px] font-semibold text-charcoal hover:bg-sageLight cursor-pointer">
+                        ✎ Edit Lagi
+                    </button>
+                </div>
+
+                <!-- Pilihan Paket Hosting -->
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-charcoal">1. Pilih Paket Hosting</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="hosting-pkg" value="hemat" data-price="79000" data-name="Paket Hemat (6 Bulan)" onchange="updateCheckoutTotal()" class="peer hidden">
+                            <div class="p-3.5 rounded-2xl border border-sage/25 peer-checked:border-terracotta peer-checked:bg-terracottaLight/40 transition-all">
+                                <p class="text-xs font-bold text-charcoal">Paket Hemat</p>
+                                <p class="text-[11px] text-charcoalMuted">Aktif 6 Bulan</p>
+                                <p class="font-serif text-lg font-bold text-charcoal mt-1">Rp 79.000</p>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="hosting-pkg" value="favorit" data-price="129000" data-name="Paket Favorit (Selamanya)" onchange="updateCheckoutTotal()" checked class="peer hidden">
+                            <div class="p-3.5 rounded-2xl border border-sage/25 peer-checked:border-terracotta peer-checked:bg-terracottaLight/40 transition-all">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-xs font-bold text-charcoal">Paket Favorit</p>
+                                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-terracotta text-white font-bold">Best</span>
+                                </div>
+                                <p class="text-[11px] text-charcoalMuted">Aktif Selamanya</p>
+                                <p class="font-serif text-lg font-bold text-terracottaDark mt-1">Rp 129.000</p>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="hosting-pkg" value="eksklusif" data-price="199000" data-name="Paket Eksklusif (Prioritas)" onchange="updateCheckoutTotal()" class="peer hidden">
+                            <div class="p-3.5 rounded-2xl border border-sage/25 peer-checked:border-terracotta peer-checked:bg-terracottaLight/40 transition-all">
+                                <p class="text-xs font-bold text-charcoal">Paket Eksklusif</p>
+                                <p class="text-[11px] text-charcoalMuted">Selamanya + Dibantu</p>
+                                <p class="font-serif text-lg font-bold text-charcoal mt-1">Rp 199.000</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Metode Pembayaran -->
+                <div class="space-y-2.5">
+                    <label class="block text-xs font-bold text-charcoal">2. Pilih Metode Pembayaran Instan</label>
+                    <div class="grid grid-cols-3 gap-2.5">
+                        <button type="button" onclick="selectPaymentMethod('qris')" id="pay-btn-qris" class="pay-method-btn p-3 rounded-2xl border-2 border-sage bg-sageLight/40 text-xs font-bold text-charcoal flex flex-col items-center gap-1 cursor-pointer">
+                            <span>📱 QRIS Instan</span>
+                            <span class="text-[10px] font-normal text-charcoalMuted">Semua E-Wallet/Bank</span>
+                        </button>
+                        <button type="button" onclick="selectPaymentMethod('va')" id="pay-btn-va" class="pay-method-btn p-3 rounded-2xl border border-sage/25 bg-white text-xs font-semibold text-charcoal flex flex-col items-center gap-1 cursor-pointer">
+                            <span>🏦 Virtual Account</span>
+                            <span class="text-[10px] font-normal text-charcoalMuted">BCA / Mandiri / BRI</span>
+                        </button>
+                        <button type="button" onclick="selectPaymentMethod('ewallet')" id="pay-btn-ewallet" class="pay-method-btn p-3 rounded-2xl border border-sage/25 bg-white text-xs font-semibold text-charcoal flex flex-col items-center gap-1 cursor-pointer">
+                            <span>💳 GoPay / DANA</span>
+                            <span class="text-[10px] font-normal text-charcoalMuted">Cek Otomatis</span>
+                        </button>
+                    </div>
+
+                    <div id="payment-instruction-box" class="bg-cream rounded-2xl p-4 border border-sage/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div id="pay-detail-qris" class="flex items-center gap-4 w-full">
+                            <div class="w-24 h-24 bg-white p-2 rounded-xl border border-sage/20 shrink-0 flex items-center justify-center">
+                                <svg viewBox="0 0 100 100" class="w-full h-full fill-charcoal">
+                                    <rect x="10" y="10" width="25" height="25" rx="3"/><rect x="15" y="15" width="15" height="15" fill="white"/><rect x="18" y="18" width="9" height="9"/>
+                                    <rect x="65" y="10" width="25" height="25" rx="3"/><rect x="70" y="15" width="15" height="15" fill="white"/><rect x="73" y="18" width="9" height="9"/>
+                                    <rect x="10" y="65" width="25" height="25" rx="3"/><rect x="15" y="70" width="15" height="15" fill="white"/><rect x="18" y="73" width="9" height="9"/>
+                                    <rect x="42" y="15" width="8" height="8"/><rect x="52" y="25" width="8" height="16"/><rect x="40" y="42" width="20" height="20" rx="4"/>
+                                    <rect x="15" y="45" width="16" height="8"/><rect x="68" y="48" width="18" height="8"/><rect x="45" y="70" width="12" height="18"/><rect x="68" y="72" width="18" height="14"/>
+                                </svg>
+                            </div>
+                            <div class="space-y-1 text-left">
+                                <span class="px-2 py-0.5 rounded bg-terracottaLight text-terracottaDark text-[10px] font-bold">QRIS OTOMATIS</span>
+                                <p class="text-xs font-bold text-charcoal">Scan QRIS menggunakan GoPay, OVO, DANA, ShopeePay, atau Mobile Banking</p>
+                                <p class="text-[11px] text-charcoalMuted">Merchant: <strong>KisahKita Digital Indonesia</strong></p>
+                            </div>
+                        </div>
+
+                        <div id="pay-detail-va" class="hidden w-full space-y-1.5">
+                            <span class="px-2 py-0.5 rounded bg-sageLight text-sageDark text-[10px] font-bold">VIRTUAL ACCOUNT BCA / MANDIRI</span>
+                            <div class="flex items-center justify-between bg-white px-3.5 py-2.5 rounded-xl border border-sage/20">
+                                <div>
+                                    <p class="text-[10px] text-charcoalMuted">Nomor Virtual Account</p>
+                                    <p class="text-sm font-bold tracking-wider text-charcoal">8801 0812 9940 2110</p>
+                                </div>
+                                <button type="button" onclick="copyTextValue('8801081299402110', 'Nomor VA berhasil disalin')" class="px-3 py-1.5 rounded-lg bg-sage text-white text-xs font-semibold cursor-pointer">Salin VA</button>
+                            </div>
+                        </div>
+
+                        <div id="pay-detail-ewallet" class="hidden w-full space-y-1.5">
+                            <span class="px-2 py-0.5 rounded bg-terracottaLight text-terracottaDark text-[10px] font-bold">TRANSFER E-WALLET (DANA / GOPAY)</span>
+                            <div class="flex items-center justify-between bg-white px-3.5 py-2.5 rounded-xl border border-sage/20">
+                                <div>
+                                    <p class="text-[10px] text-charcoalMuted">Nomor Tujuan a.n. KisahKita Digital</p>
+                                    <p class="text-sm font-bold tracking-wider text-charcoal">0812-8890-4421</p>
+                                </div>
+                                <button type="button" onclick="copyTextValue('081288904421', 'Nomor E-Wallet berhasil disalin')" class="px-3 py-1.5 rounded-lg bg-terracotta text-white text-xs font-semibold cursor-pointer">Salin Nomor</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-2 border-t border-sage/15 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                        <p class="text-xs text-charcoalMuted">Total Pembayaran</p>
+                        <p id="checkout-total-display" class="font-serif text-3xl font-bold text-charcoal">Rp 129.000</p>
+                    </div>
+                    <button type="button" onclick="confirmInstantHostingPayment()" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-sage hover:bg-sageDark text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer">
+                        <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                        <span>Konfirmasi Pembayaran & Ajukan Hosting</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- LANGKAH 2: SUKSES -->
+            <div id="checkout-step-success" class="hidden p-6 sm:p-8 text-center space-y-5 max-h-[85vh] overflow-y-auto custom-scroll">
+                <div class="w-16 h-16 rounded-full bg-sageLight text-sageDark flex items-center justify-center mx-auto shadow-sm">
+                    <i data-lucide="party-popper" class="w-8 h-8"></i>
+                </div>
+
+                <div class="space-y-1.5">
+                    <span class="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold">● MENUNGGU APPROVAL DEVELOPER UNTUK HOSTING</span>
+                    <h3 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal">Pembayaran Berhasil Tercatat!</h3>
+                    <p class="text-xs sm:text-sm text-charcoalMuted max-w-md mx-auto">
+                        Pesananmu telah masuk ke Dashboard Developer. Begitu di-approve, link undanganmu langsung online & aktif!
+                    </p>
+                </div>
+
+                <div class="bg-cream rounded-2xl p-4 border border-sage/25 max-w-lg mx-auto space-y-3">
+                    <p class="text-[11px] font-semibold text-charcoalMuted">Alamat Link Undangan Publik Kamu:</p>
+                    <div class="flex items-center justify-between bg-white px-3.5 py-2.5 rounded-xl border border-sage/20 gap-2">
+                        <span id="published-final-url" class="text-xs sm:text-sm font-bold text-sageDark truncate">https://kisahkita.id/nadia-raka</span>
+                        <button onclick="copyPublishedLink()" class="px-3.5 py-1.5 rounded-lg bg-sage text-white text-xs font-semibold hover:bg-sageDark shrink-0 cursor-pointer">
+                            Salin Link
+                        </button>
+                    </div>
+
+                    <div class="pt-2 border-t border-sage/15 text-left space-y-2">
+                        <label class="block text-[11px] font-bold text-charcoal">Kirim Personal dengan Nama Tamu (Opsional):</label>
+                        <div class="flex gap-2">
+                            <input id="share-guest-name" type="text" placeholder="Ketik nama tamu, misal: Kak Sarah & Partner" class="flex-1 px-3 py-2 rounded-xl bg-white border border-sage/25 text-xs focus:outline-none">
+                            <button onclick="shareToWhatsApp()" class="px-4 py-2 rounded-xl bg-[#25D366] hover:opacity-90 text-white text-xs font-bold flex items-center gap-1.5 shrink-0 cursor-pointer">
+                                <span>Share WA</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-sage/15 text-left space-y-2">
+                        <label class="block text-[11px] font-bold text-charcoal">Lampirkan Bukti Transfer (Opsional):</label>
+                        <div class="flex gap-2">
+                            <label class="flex-1 border-2 border-dashed border-sage/35 hover:border-sage bg-white rounded-xl p-2.5 text-center cursor-pointer transition-colors">
+                                <span class="block text-xs font-semibold text-charcoal">Pilih Bukti Transfer</span>
+                                <input type="file" accept="image/*" id="dev-payment-proof" onchange="devUploadPaymentProof(event)" class="hidden">
+                            </label>
+                            <button onclick="devSubmitPaymentProof()" class="px-4 py-2.5 rounded-xl bg-terracotta hover:bg-terracottaDark text-white text-xs font-bold flex items-center justify-center gap-1.5 shrink-0 cursor-pointer">
+                                <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                                <span>Kirim Bukti</span>
+                            </button>
+                        </div>
+                        <p id="dev-proof-status" class="text-[10px] text-charcoalMuted mt-1"></p>
+                    </div>
+                </div>
+
+                <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <button onclick="openPublishedGuestView()" class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-terracotta hover:bg-terracottaDark text-white font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 cursor-pointer">
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                        <span>Lihat Pratinjau Mode Tamu</span>
+                    </button>
+                    <button onclick="closeCheckoutModal()" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-cream hover:bg-creamDark text-charcoal font-semibold text-xs sm:text-sm cursor-pointer">
+                        Kembali ke Studio
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== FULLSCREEN GUEST VIEW MODAL ==================== -->
+    <div id="guest-live-modal" class="fixed inset-0 z-[60] hidden bg-charcoal/80 backdrop-blur-md overflow-y-auto">
+        <div class="sticky top-0 z-30 bg-white text-charcoal px-4 py-3 flex items-center justify-between border-b border-sage/20 shadow-sm">
+            <div class="flex items-center gap-2 text-xs">
+                <span class="w-2 h-2 rounded-full bg-sage animate-pulse"></span>
+                <span>Pratinjau Tampilan Tamu: <strong id="guest-modal-url-label" class="text-terracottaDark">kisahkita.id/nadia-raka</strong></span>
+            </div>
+            <button onclick="closeGuestLiveModal()" class="px-3.5 py-1.5 rounded-xl bg-cream hover:bg-creamDark text-charcoal text-xs font-semibold cursor-pointer">
+                ✕ Tutup Mode Tamu
+            </button>
+        </div>
+        <div class="min-h-[calc(100vh-52px)] flex items-center justify-center p-3 sm:p-6">
+            <div id="guest-live-container" class="w-full max-w-xl rounded-3xl overflow-hidden shadow-2xl border border-sage/20 bg-[#F4F7F4] text-[#2D312E]"></div>
+        </div>
+    </div>
+
+    <!-- ==================== LIGHT LUXURY DEVELOPER DASHBOARD PENJUALAN & HOSTING ==================== -->
+    <div id="dev-panel-modal" class="fixed inset-0 z-[100] hidden flex-col bg-cream text-charcoal overflow-hidden">
+        
+        <!-- 1. LIGHT LUXURY LOGIN SCREEN -->
+        <div id="dev-login-screen" class="relative flex flex-col items-center justify-center h-full p-6 text-center overflow-hidden bg-gradient-to-br from-cream via-white to-creamDark">
+            <div class="absolute top-16 left-16 w-80 h-80 bg-sage/15 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-16 right-16 w-96 h-96 bg-terracotta/15 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <button onclick="closeDevPanel()" class="absolute top-6 right-6 bg-white hover:bg-terracottaLight text-charcoal border border-sage/25 rounded-2xl w-11 h-11 flex items-center justify-center shadow-sm transition-all cursor-pointer">
+                ✕
+            </button>
+
+            <div class="max-w-md w-full bg-white/95 backdrop-blur-xl border border-gold/40 rounded-[32px] p-8 sm:p-10 shadow-soft relative">
+                <div class="w-14 h-14 rounded-2xl bg-sage border border-sage/40 text-white flex items-center justify-center mx-auto mb-5 shadow-sm">
+                    <i data-lucide="leaf" class="w-7 h-7"></i>
+                </div>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal mb-2">KisahKita</h2>
+                <span class="inline-block px-3.5 py-1 rounded-full bg-goldLight border border-gold/30 text-amber-800 text-[10px] font-bold uppercase tracking-[0.22em] mb-3">
+                    Developer Executive
+                </span>
+                
+                <div class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase tracking-widest text-charcoalMuted mb-2">Password</label>
+                        <input type="password" id="dev-password" placeholder="Masukan Password" class="w-full px-4 py-3.5 rounded-2xl bg-cream border border-sage/30 text-charcoal placeholder-charcoalMuted/50 focus:outline-none focus:border-terracotta transition-all">
+                    </div>
+                    <p id="dev-login-error" class="text-xs text-terracottaDark font-semibold hidden flex items-center gap-2">
+                        <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i>
+                        <span>Password salah, silakan periksa kembali.</span>
+                    </p>
+                </div>
+
+                <div class="pt-6 flex gap-3">
+                    <button onclick="devLogin()" class="flex-1 py-3.5 rounded-2xl luxury-gold-btn text-white font-bold text-xs sm:text-sm hover:opacity-95 transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer">
+                        <span>Login</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. LIGHT LUXURY EXECUTIVE DASHBOARD SCREEN -->
+        <div id="dev-dashboard-screen" class="hidden flex-col h-full overflow-hidden">
+            
+            <!-- Top Executive Header -->
+            <header class="h-20 border-b border-sage/20 bg-white/95 backdrop-blur-md flex items-center justify-between px-6 sm:px-8 shrink-0 shadow-sm">
+                <div class="flex items-center gap-4">
+                    <div class="w-11 h-11 rounded-2xl bg-goldLight border border-gold/40 text-gold flex items-center justify-center shadow-sm">
+                        <i data-lucide="crown" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2.5">
+                            <h2 class="font-serif text-2xl font-bold text-charcoal tracking-tight">KisahKita Sales & Hosting Suite</h2>
+                            <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-sageLight border border-sage/30 text-sageDark text-[10px] font-bold">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                LIVE SERVER READY
+                            </span>
+                        </div>
+                        <p class="text-[11px] text-charcoalMuted">Verifikasi Pembayaran Berhasil, Custom Song & Aktivasi Hosting Undangan</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button onclick="devAddDemoTransaction()" class="hidden md:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-cream hover:bg-creamDark border border-sage/25 text-charcoal text-xs font-semibold transition-all cursor-pointer">
+                        <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-terracotta"></i>
+                        <span>Simulasi Order Masuk</span>
+                    </button>
+                    <button onclick="devLogout()" class="px-4 py-2 rounded-xl bg-terracottaLight hover:bg-terracotta text-terracottaDark hover:text-white border border-terracotta/30 text-xs font-bold transition-all flex items-center gap-2 cursor-pointer">
+                        <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+                        <span>Keluar</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Scrollable Dashboard Area -->
+            <main class="flex-1 overflow-y-auto dev-scroll p-6 sm:p-8 lg:p-10 space-y-8 bg-cream">
+                
+                <!-- ROW 1: 4 EXECUTIVE KPI CARDS (LIGHT & CLEAN) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+                    <!-- KPI 1 -->
+                    <div class="bg-white rounded-3xl p-6 border border-gold/35 relative overflow-hidden shadow-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-amber-800">Total Pendapatan Hosting</span>
+                            <div class="w-9 h-9 rounded-xl bg-goldLight text-gold flex items-center justify-center border border-gold/30">
+                                <i data-lucide="wallet" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                        <p class="font-serif text-3xl sm:text-4xl font-bold text-charcoal" id="dev-stat-total-sales">Rp 0</p>
+                        <p class="text-[11px] text-sageDark mt-2 flex items-center gap-1 font-semibold">
+                            <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
+                            <span>Terverifikasi & Undangan Online</span>
+                        </p>
+                    </div>
+
+                    <!-- KPI 2 -->
+                    <div class="bg-white rounded-3xl p-6 border border-terracotta/35 relative overflow-hidden shadow-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-terracottaDark">Perlu Approve Hosting</span>
+                            <div class="w-9 h-9 rounded-xl bg-terracottaLight text-terracottaDark flex items-center justify-center">
+                                <i data-lucide="clock" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                        <p class="font-serif text-3xl sm:text-4xl font-bold text-terracotta" id="dev-stat-pending">0</p>
+                        <p class="text-[11px] text-charcoalMuted mt-2">Pembayaran berhasil, siap di-hosting</p>
+                    </div>
+
+                    <!-- KPI 3 -->
+                    <div class="bg-white rounded-3xl p-6 border border-sage/35 relative overflow-hidden shadow-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-sageDark">Undangan Live (Hosted)</span>
+                            <div class="w-9 h-9 rounded-xl bg-sageLight text-sageDark flex items-center justify-center">
+                                <i data-lucide="globe" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                        <p class="font-serif text-3xl sm:text-4xl font-bold text-sageDark" id="dev-stat-approved">0</p>
+                        <p class="text-[11px] text-charcoalMuted mt-2">Subdomain kisahkita.id aktif</p>
+                    </div>
+
+                    <!-- KPI 4 -->
+                    <div class="bg-white rounded-3xl p-6 border border-sage/25 relative overflow-hidden shadow-card">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal">Request Custom Song</span>
+                            <div class="w-9 h-9 rounded-xl bg-creamDark text-terracottaDark flex items-center justify-center">
+                                <i data-lucide="music" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                        <p class="font-serif text-3xl sm:text-4xl font-bold text-charcoal" id="dev-stat-custom-music">0</p>
+                        <p class="text-[11px] text-charcoalMuted mt-2">Pesanan dengan pengaturan lagu khusus</p>
+                    </div>
+                </div>
+
+                <!-- ROW 2: SALES & HOSTING ANALYTICS BAR -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-8 bg-white rounded-3xl p-6 border border-sage/20 shadow-card flex flex-col justify-between">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-charcoal">Performa Penjualan Paket Hosting</h3>
+                                <p class="text-xs text-charcoalMuted">Ringkasan transaksi masuk berdasarkan status aktivasi hosting</p>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-goldLight border border-gold/30 text-amber-800 text-[11px] font-bold">November 2026</span>
+                        </div>
+                        <div class="grid grid-cols-7 gap-3 items-end h-28 pt-2 px-2">
+                            <div class="flex flex-col items-center gap-1.5"><div class="w-full bg-sage/20 rounded-t-xl h-10"></div><span class="text-[10px] text-charcoalMuted">Sen</span></div>
+                            <div class="flex flex-col items-center gap-1.5"><div class="w-full bg-sage/30 rounded-t-xl h-14"></div><span class="text-[10px] text-charcoalMuted">Sel</span></div>
+                            <div class="flex flex-col items-center gap-1.5"><div class="w-full bg-sage/45 rounded-t-xl h-16"></div><span class="text-[10px] text-charcoalMuted">Rab</span></div>
+                            <div class="flex flex-col items-center gap-1.5"><div class="w-full bg-sage/30 rounded-t-xl h-12"></div><span class="text-[10px] text-charcoalMuted">Kam</span></div>
+                            <div class="flex flex-col items-center gap-1.5"><div class="w-full bg-terracotta/55 rounded-t-xl h-20"></div><span class="text-[10px] text-charcoalMuted">Jum</span></div>
+                            <div class="flex flex-col items-center gap-1.5"><div class="w-full bg-terracotta/80 rounded-t-xl h-24"></div><span class="text-[10px] text-charcoalMuted">Sab</span></div>
+                            <div class="flex flex-col items-center gap-1.5"><div class="w-full luxury-gold-btn rounded-t-xl h-24 shadow-sm"></div><span class="text-[10px] text-terracottaDark font-bold">Hari Ini</span></div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-4 bg-gradient-to-br from-white to-creamDark rounded-3xl p-6 border border-gold/35 shadow-card flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-amber-800">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-gold"></i>
+                                <span>Workflow Hosting</span>
+                            </span>
+                            <h4 class="font-serif text-2xl font-bold text-charcoal">1-Klik Approve & Live Hosting</h4>
+                            <p class="text-xs text-charcoalMuted leading-relaxed">
+                                Indikator tombol berwarna <strong class="text-rose-600">Merah</strong> menandakan belum diedit/di-approve, dan berubah <strong class="text-emerald-600">Hijau</strong> setelah selesai diproses. Klik <strong class="text-emerald-700">Approve Payment</strong> untuk langsung menghosting undangan.
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-sage/15 text-xs">
+                            <span class="text-charcoalMuted">Total Order Tercatat:</span>
+                            <span id="dev-tx-payment-count" class="font-bold text-charcoal text-sm">0 Pesanan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROW 3: TABEL TRANSAKSI PENJUALAN & APPROVAL HOSTING -->
+                <div class="bg-white rounded-3xl border border-sage/20 shadow-card overflow-hidden">
+                    <div class="p-6 sm:p-7 border-b border-sage/15 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <div class="flex items-center gap-2.5">
+                                <h3 class="font-serif text-2xl font-bold text-charcoal">Daftar Transaksi & Antrean Hosting</h3>
+                                <span id="dev-dash-pending-count" class="px-3 py-0.5 rounded-full bg-terracotta text-white text-[11px] font-bold">0 Perlu Approve</span>
+                            </div>
+                            <p class="text-xs text-charcoalMuted mt-1">Gunakan 3 tombol sejajar di pojok kanan untuk Comment, Custom Song, dan Approve Payment (Hosting).</p>
+                        </div>
+
+                        <!-- Filter Tabs -->
+                        <div class="flex items-center gap-1.5 bg-cream p-1.5 rounded-2xl border border-sage/20 self-start md:self-auto">
+                            <button onclick="setDevFilter('all')" id="filter-btn-all" class="dev-filter-btn px-3.5 py-1.5 rounded-xl bg-sage text-white text-xs font-bold transition-all cursor-pointer">
+                                Semua
+                            </button>
+                            <button onclick="setDevFilter('pending')" id="filter-btn-pending" class="dev-filter-btn px-3.5 py-1.5 rounded-xl text-charcoalMuted hover:text-charcoal text-xs font-semibold transition-all cursor-pointer">
+                                Perlu Approve
+                            </button>
+                            <button onclick="setDevFilter('approved')" id="filter-btn-approved" class="dev-filter-btn px-3.5 py-1.5 rounded-xl text-charcoalMuted hover:text-charcoal text-xs font-semibold transition-all cursor-pointer">
+                                Sudah Hosted
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Responsive Table -->
+                    <div class="overflow-x-auto dev-scroll">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-sage/15 bg-creamDark/60 text-[10px] font-bold text-charcoalMuted uppercase tracking-wider">
+                                    <th class="px-6 py-4">Mempelai & Link Domain</th>
+                                    <th class="px-5 py-4">Paket & Tema</th>
+                                    <th class="px-5 py-4">Nominal & Metode</th>
+                                    <th class="px-5 py-4">Status Pembayaran</th>
+                                    <th class="px-5 py-4">Status Hosting</th>
+                                    <th class="px-6 py-4 text-right">Aksi (Comment • Custom Song • Approve Payment)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dev-tx-payments-list" class="divide-y divide-sage/10 text-xs">
+                                <!-- Diisi dinamis lewat JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="dev-tx-pagination" class="p-4 border-t border-sage/15 flex justify-center gap-2 bg-cream/40"></div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 1: COMMENT / CATATAN TRANSAKSI ==================== -->
+    <div id="dev-comment-modal" class="fixed inset-0 z-[110] hidden bg-charcoal/60 backdrop-blur-sm items-center justify-center p-4">
+        <div class="bg-white text-charcoal rounded-3xl p-7 max-w-md w-full shadow-2xl border border-sage/25 relative">
+            <button onclick="closeDevCommentModal()" class="absolute top-5 right-5 bg-cream hover:bg-terracottaLight text-charcoal rounded-full w-9 h-9 flex items-center justify-center transition-colors cursor-pointer">✕</button>
+            <div class="space-y-4">
+                <div class="flex items-center gap-2 text-terracottaDark text-xs font-bold uppercase tracking-wider">
+                    <i data-lucide="message-square" class="w-4 h-4"></i>
+                    <span>Comment & Catatan Pesanan</span>
+                </div>
+                <div>
+                    <h3 class="font-serif text-2xl font-bold text-charcoal" id="dev-comment-couple">Nadia & Raka</h3>
+                    <p class="text-[11px] text-charcoalMuted" id="dev-comment-slug">kisahkita.id/nadia-raka</p>
+                </div>
+
+                <div id="dev-comment-history" class="bg-cream rounded-2xl p-3.5 border border-sage/20 max-h-44 overflow-y-auto dev-scroll space-y-2.5 text-xs"></div>
+
+                <div class="space-y-2">
+                    <label class="block text-[11px] font-bold text-charcoal">Tambah Comment / Catatan Developer:</label>
+                    <textarea id="dev-comment-input" rows="3" placeholder="Tulis catatan verifikasi, permintaan revisi foto, atau info hosting..." class="w-full px-4 py-3 rounded-2xl bg-cream border border-sage/25 text-charcoal placeholder-charcoalMuted/60 text-xs focus:outline-none focus:border-sage"></textarea>
+                </div>
+
+                <div class="pt-2 flex gap-2.5">
+                    <button onclick="saveDevComment()" class="flex-1 py-3 rounded-xl bg-sage hover:bg-sageDark text-white font-bold text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                        <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                        <span>Simpan Comment</span>
+                    </button>
+                    <button onclick="closeDevCommentModal()" class="px-5 py-3 rounded-xl bg-cream hover:bg-creamDark text-charcoal text-xs font-semibold cursor-pointer">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 2: CUSTOM SONG ==================== -->
+    <div id="dev-custom-music-modal" class="fixed inset-0 z-[110] hidden bg-charcoal/60 backdrop-blur-sm items-center justify-center p-4">
+        <div class="bg-white text-charcoal rounded-3xl p-7 max-w-md w-full shadow-2xl border border-sage/25 relative">
+            <button onclick="closeDevCustomMusic()" class="absolute top-5 right-5 bg-cream hover:bg-terracottaLight text-charcoal rounded-full w-9 h-9 flex items-center justify-center transition-colors cursor-pointer">✕</button>
+            <div class="space-y-4">
+                <div class="flex items-center gap-2 text-amber-700 text-xs font-bold uppercase tracking-wider">
+                    <i data-lucide="music" class="w-4 h-4"></i>
+                    <span>Pengaturan Custom Song</span>
+                </div>
+                <div>
+                    <h3 class="font-serif text-2xl font-bold text-charcoal">Custom Lagu Latar</h3>
+                    <p class="text-xs text-charcoalMuted">Pasangan: <strong id="dev-cm-couple" class="text-charcoal"></strong></p>
+                </div>
+
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[11px] font-bold text-charcoal mb-1">Judul Lagu</label>
+                        <input type="text" id="dev-cm-song-title" placeholder="Contoh: Sampai Jadi Debu" class="w-full px-4 py-2.5 rounded-xl bg-cream border border-sage/25 text-charcoal placeholder-charcoalMuted/60 text-xs focus:outline-none focus:border-sage">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-charcoal mb-1">Artis / Penyanyi</label>
+                        <input type="text" id="dev-cm-artist" placeholder="Contoh: Banda Neira" class="w-full px-4 py-2.5 rounded-xl bg-cream border border-sage/25 text-charcoal placeholder-charcoalMuted/60 text-xs focus:outline-none focus:border-sage">
+                    </div>
+                    <div class="bg-cream p-3.5 rounded-2xl border border-sage/20 space-y-2.5">
+                        <label class="block text-[11px] font-bold text-charcoal flex items-center gap-1.5">
+                            <i data-lucide="upload" class="w-3.5 h-3.5 text-terracotta"></i>
+                            <span>Upload File Musik</span>
+                        </label>
+                        <div class="flex gap-2">
+                            <input type="url" id="dev-cm-url" placeholder="https://youtube.com/watch?v=... atau link mp3" class="hidden">
+                            <label class="w-full py-3 rounded-xl bg-sage hover:bg-sageDark text-white text-xs font-semibold cursor-pointer flex items-center justify-center gap-2 transition-colors">
+                                <i data-lucide="upload" class="w-4 h-4"></i>
+                                <span>Upload File</span>
+                                <input type="file" id="dev-cm-file-input" accept="audio/*" onchange="handleDevCustomAudioUpload(event)" class="hidden">
+                            </label>
+                        </div>
+                        <div id="dev-cm-file-preview" class="hidden flex items-center justify-between bg-white px-3 py-2 rounded-xl border border-sage/20 text-[11px]">
+                            <span id="dev-cm-file-name" class="font-semibold text-sageDark truncate"></span>
+                            <button type="button" onclick="toggleDevPreviewAudio()" id="dev-cm-play-btn" class="px-2.5 py-1 rounded-lg bg-terracotta text-white font-bold text-[10px] shrink-0 cursor-pointer">▶ Putar</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-charcoal mb-1">Catatan Tambahan</label>
+                        <textarea id="dev-cm-notes" rows="2" placeholder="Mulai detik ke 00:45 atau catatan khusus..." class="w-full px-4 py-2.5 rounded-xl bg-cream border border-sage/25 text-charcoal placeholder-charcoalMuted/60 text-xs focus:outline-none focus:border-sage"></textarea>
+                    </div>
+                </div>
+
+                <div class="pt-3 flex gap-2.5">
+                    <button onclick="saveDevCustomMusic()" class="flex-1 py-3 rounded-xl bg-sage hover:bg-sageDark text-white font-bold text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                        <i data-lucide="save" class="w-4 h-4"></i>
+                        <span>Simpan Custom Song</span>
+                    </button>
+                    <button onclick="closeDevCustomMusic()" class="px-5 py-3 rounded-xl bg-cream hover:bg-creamDark text-charcoal text-xs font-semibold cursor-pointer">Batal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+// 1. DATA 4 TEMPLATE UTAMA DENGAN DESAIN, LAYOUT, BINGKAI & ORNAMEN BERBEDA
+const studioTemplates = [
+    {
+        id: 'seruni-sage',
+        name: 'Seruni Sage',
+        styleTag: 'Botanical Arch • Minimalis',
+        desc: 'Desain kubah lengkung (arch) modern dengan daun botanical melayang dan kartu membulat bersih.',
+        coverImg: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80',
+        coverBg: '#E6EDE7',
+        bodyBg: '#F4F7F4',
+        textColor: '#2D312E',
+        btnBg: '#7A917E',
+        fontClass: 'font-serif',
+        badgeBg: 'bg-sageLight text-sageDark',
+        coverSubtitle: 'THE WEDDING OF',
+        photoFrameClass: 'w-36 h-44 sm:w-40 sm:h-48 mx-auto rounded-t-full rounded-b-3xl overflow-hidden border-4 border-white shadow-lg',
+        coverCardClass: 'w-full max-w-xs bg-white/85 backdrop-blur-sm rounded-2xl p-4 shadow-sm space-y-2 text-[#2D312E]',
+        contentCardClass: 'bg-white/85 rounded-3xl p-5 shadow-sm text-[#2D312E] max-w-md mx-auto',
+        avatarClass: 'w-20 h-20 rounded-full object-cover mx-auto border-2 border-[#7A917E]/40 shadow-sm',
+        ornamentHtml: `
+            <svg class="absolute -top-6 -left-6 w-32 h-32 text-[#7A917E]/25" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M10,90 C10,40 40,10 90,10 C70,45 45,70 10,90 Z"/>
+                <path d="M25,95 C30,60 55,35 95,30 C75,60 55,80 25,95 Z" opacity="0.6"/>
+            </svg>
+            <svg class="absolute -bottom-6 -right-6 w-32 h-32 text-[#7A917E]/20 rotate-180" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M10,90 C10,40 40,10 90,10 C70,45 45,70 10,90 Z"/>
+            </svg>
+        `
+    },
+    {
+        id: 'senja-terracotta',
+        name: 'Senja Terracotta',
+        styleTag: 'Editorial Polaroid • Rustic',
+        desc: 'Gaya majalah editorial & bingkai polaroid miring artistik dengan garis tepi rustic yang hangat.',
+        coverImg: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80',
+        coverBg: '#F6E5DD',
+        bodyBg: '#FBF5F2',
+        textColor: '#3A2A24',
+        btnBg: '#D48C70',
+        fontClass: 'font-serif',
+        badgeBg: 'bg-terracottaLight text-terracottaDark',
+        coverSubtitle: 'SAVE OUR DATE • CELEBRATION',
+        photoFrameClass: 'w-40 h-44 sm:w-44 sm:h-48 mx-auto rounded-lg overflow-hidden border-[8px] border-b-[24px] border-white shadow-xl -rotate-2',
+        coverCardClass: 'w-full max-w-xs bg-[#FFFDFB] border-2 border-dashed border-[#D48C70]/50 rounded-xl p-4 shadow-md space-y-2 text-[#3A2A24]',
+        contentCardClass: 'bg-[#FFFDFB] border border-[#D48C70]/35 rounded-xl p-5 shadow-md text-[#3A2A24] max-w-md mx-auto',
+        avatarClass: 'w-20 h-24 rounded-xl object-cover mx-auto border-4 border-white shadow-md rotate-2',
+        ornamentHtml: `
+            <div class="absolute inset-3 border border-dashed border-[#D48C70]/40 rounded-2xl"></div>
+            <div class="absolute top-4 right-5 w-14 h-14 rounded-full bg-[#D48C70]/15 blur-md"></div>
+        `
+    },
+    {
+        id: 'kirana-klasik',
+        name: 'Kirana Klasik',
+        styleTag: 'Royal Frame • Monogram Emas',
+        desc: 'Bingkai ganda bergaya kerajaan (double gold border), foto oval klasik, dan tipografi mewah.',
+        coverImg: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80',
+        coverBg: '#EFECE2',
+        bodyBg: '#FAF8F3',
+        textColor: '#2C2A25',
+        btnBg: '#9C8254',
+        fontClass: 'font-playfair',
+        badgeBg: 'bg-amber-100 text-amber-900',
+        coverSubtitle: '✦ ROYAL WEDDING INVITATION ✦',
+        photoFrameClass: 'w-36 h-48 sm:w-40 sm:h-52 mx-auto rounded-[999px] overflow-hidden border-2 border-[#9C8254] ring-4 ring-white shadow-lg',
+        coverCardClass: 'w-full max-w-xs bg-white/95 border border-[#9C8254]/50 rounded-none p-4 shadow-md space-y-2 text-[#2C2A25]',
+        contentCardClass: 'bg-white border-2 border-double border-[#9C8254]/50 rounded-none p-5 shadow-sm text-[#2C2A25] max-w-md mx-auto',
+        avatarClass: 'w-20 h-20 rounded-full object-cover mx-auto border-2 border-[#9C8254] p-0.5 bg-white shadow-sm',
+        ornamentHtml: `
+            <div class="absolute inset-3 border border-[#9C8254]/45"></div>
+            <div class="absolute inset-4 border border-[#9C8254]/25"></div>
+            <div class="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#9C8254]"></div>
+            <div class="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[#9C8254]"></div>
+            <div class="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-[#9C8254]"></div>
+            <div class="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-[#9C8254]"></div>
+        `
+    },
+    {
+        id: 'nusantara-modern',
+        name: 'Nusantara Modern',
+        styleTag: 'Gunungan & Batik Kontemporer',
+        desc: 'Siluet gunungan Jawa/Nusantara di latar belakang dengan bingkai lengkung sogan yang berwibawa.',
+        coverImg: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80',
+        coverBg: '#EAE0D0',
+        bodyBg: '#F7F2EA',
+        textColor: '#33261D',
+        btnBg: '#7A563E',
+        fontClass: 'font-playfair',
+        badgeBg: 'bg-stone-200 text-stone-800',
+        coverSubtitle: 'PAWIWAHAN AGENG • PERNIKAHAN',
+        photoFrameClass: 'w-38 h-44 sm:w-42 sm:h-48 mx-auto rounded-t-[80px] rounded-b-lg overflow-hidden border-[3px] border-[#7A563E] ring-4 ring-[#F7F2EA] shadow-lg',
+        coverCardClass: 'w-full max-w-xs bg-[#FBF8F3] border-t-4 border-[#7A563E] rounded-b-2xl p-4 shadow-md space-y-2 text-[#33261D]',
+        contentCardClass: 'bg-[#FBF8F3] border-y-2 border-[#7A563E]/40 rounded-2xl p-5 shadow-sm text-[#33261D] max-w-md mx-auto',
+        avatarClass: 'w-20 h-20 rounded-t-full rounded-b-lg object-cover mx-auto border-2 border-[#7A563E] shadow-sm',
+        ornamentHtml: `
+            <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-80 text-[#7A563E]/10" viewBox="0 0 200 240" fill="currentColor">
+                <path d="M100,10 C135,60 175,115 180,195 L20,195 C25,115 65,60 100,10 Z"/>
+                <rect x="75" y="195" width="50" height="25" rx="4"/>
+            </svg>
+            <div class="absolute top-0 inset-x-0 h-2 bg-[#7A563E]/70"></div>
+        `
+    }
+];
+
+const inspirationQuotes = [
+    '"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tenteram kepadanya." (QS. Ar-Rum: 21)',
+    '"Cinta bukan tentang menemukan seseorang yang sempurna, melainkan belajar melihat orang yang tidak sempurna dengan cara yang sempurna."',
+    '"Dua jiwa, satu hati. Hari ini kami memulai bab baru perjalanan hidup bersama, dan kehadiranmu adalah doa terindah bagi kami."',
+    '"Semoga Tuhan memberkati langkah kecil kami hari ini menjadi perjalanan panjang yang penuh tawa, kesabaran, dan kasih sayang."'
+];
+let currentQuoteIdx = 0;
+
+let activeTemplate = studioTemplates[0];
+let activeColorTheme = studioTemplates[0];
+let uploadedPhotos = {
+    cover: studioTemplates[0].coverImg,
+    hasCustomCover: false,
+    bride: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+    groom: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+    gallery: [
+        'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=500&q=80',
+        'https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=500&q=80'
+    ]
+};
+
+// Toast notification helper
+function showToast(message) {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = 'bg-charcoal text-white text-xs px-4 py-2.5 rounded-2xl shadow-lg border border-white/10 transition-all duration-300 opacity-0 translate-y-2';
+    toast.textContent = message;
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.classList.remove('opacity-0', 'translate-y-2');
+    }, 10);
+    setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+    }, 3200);
+}
+
+// Switch Editor Tab
+function switchEditorTab(tabNumber) {
+    for (let i = 1; i <= 4; i++) {
+        const panel = document.getElementById(`editor-tab-${i}`);
+        const btn = document.getElementById(`tab-btn-${i}`);
+        if (panel) panel.classList.toggle('hidden', i !== tabNumber);
+        if (btn) {
+            if (i === tabNumber) {
+                btn.className = "editor-tab-btn flex flex-col items-center justify-center py-2.5 px-1 rounded-2xl text-[11px] font-bold bg-white text-sageDark shadow-sm transition-all cursor-pointer";
+            } else {
+                btn.className = "editor-tab-btn flex flex-col items-center justify-center py-2.5 px-1 rounded-2xl text-[11px] font-semibold text-charcoalMuted hover:bg-white/60 transition-all cursor-pointer";
+            }
+        }
+    }
+}
+
+// Sync Studio Inputs to Live Preview
+function syncStudioToPreview() {
+    const brideNick = document.getElementById('input-bride-nick').value.trim() || 'Nadia';
+    const groomNick = document.getElementById('input-groom-nick').value.trim() || 'Raka';
+    const brideFull = document.getElementById('input-bride-full').value.trim();
+    const groomFull = document.getElementById('input-groom-full').value.trim();
+    const brideParents = document.getElementById('input-bride-parents').value.trim();
+    const groomParents = document.getElementById('input-groom-parents').value.trim();
+    const eventDate = document.getElementById('input-event-date').value.trim();
+    const eventTime = document.getElementById('input-event-time').value.trim();
+    const venueName = document.getElementById('input-venue-name').value.trim();
+    const mapsUrl = document.getElementById('input-maps-url').value.trim();
+    const openingText = document.getElementById('input-opening-text').value.trim();
+    const quoteText = document.getElementById('input-quote-text').value.trim();
+    const loveStory = document.getElementById('input-lovestory-text').value.trim();
+    const bankName = document.getElementById('input-bank-name').value.trim();
+    const bankNumber = document.getElementById('input-bank-number').value.trim();
+    const bankHolder = document.getElementById('input-bank-holder').value.trim();
+
+    // Update preview texts
+    document.getElementById('prev-cover-names').textContent = `${brideNick} & ${groomNick}`;
+    document.getElementById('prev-topbar-names').textContent = `${brideNick} & ${groomNick}`;
+    document.getElementById('prev-cover-date').textContent = eventDate;
+    document.getElementById('prev-bride-full').textContent = brideFull;
+    document.getElementById('prev-bride-parents').textContent = brideParents;
+    document.getElementById('prev-groom-full').textContent = groomFull;
+    document.getElementById('prev-groom-parents').textContent = groomParents;
+    document.getElementById('prev-event-date').textContent = eventDate;
+    document.getElementById('prev-event-time').textContent = eventTime;
+    document.getElementById('prev-venue-name').textContent = venueName;
+    document.getElementById('prev-maps-link').href = mapsUrl || '#';
+    document.getElementById('prev-opening-text').textContent = openingText;
+    document.getElementById('prev-quote-text').textContent = `"${quoteText}"`;
+    document.getElementById('prev-lovestory-text').textContent = loveStory;
+    document.getElementById('prev-bank-name').textContent = bankName;
+    document.getElementById('prev-bank-number').textContent = bankNumber;
+    document.getElementById('prev-bank-holder').textContent = `a.n. ${bankHolder}`;
+}
+
+// Render Landing Templates
+function renderLandingTemplates() {
+    const container = document.getElementById('template-cards-container');
+    if (!container) return;
+    container.innerHTML = studioTemplates.map(tpl => {
+        const isActive = tpl.id === activeTemplate.id;
+        return `
+        <div onclick="selectTemplateAndScroll('${tpl.id}')" class="group bg-cream rounded-3xl overflow-hidden border-2 ${isActive ? 'border-terracotta ring-4 ring-terracotta/15 shadow-soft' : 'border-sage/20 shadow-card'} hover:shadow-soft hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between cursor-pointer">
+            <div>
+                <div class="relative h-56 overflow-hidden">
+                    <img src="${tpl.coverImg}" alt="${tpl.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-full text-[11px] font-bold shadow-sm ${tpl.badgeBg}">${tpl.styleTag}</span>
+                    ${isActive ? `<span class="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-full bg-terracotta text-white text-[10px] font-bold shadow-sm">✓ Dipilih</span>` : ''}
+                </div>
+                <div class="p-5 space-y-1.5">
+                    <h3 class="font-serif text-2xl font-bold text-charcoal">${tpl.name}</h3>
+                    <p class="text-xs text-charcoalMuted leading-relaxed">${tpl.desc}</p>
+                </div>
+            </div>
+            <div class="px-5 pb-5">
+                <button type="button" onclick="event.stopPropagation(); selectTemplateAndScroll('${tpl.id}')" class="w-full py-2.5 rounded-xl ${isActive ? 'bg-terracotta text-white' : 'bg-white group-hover:bg-terracotta group-hover:text-white text-charcoal border border-sage/25'} text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer">
+                    <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                    <span>${isActive ? 'Sedang Ditampilkan di Preview' : 'Pilih & Lihat Live Preview'}</span>
+                </button>
+            </div>
+        </div>
+    `}).join('');
+    if (window.lucide) lucide.createIcons();
+}
+
+function renderStudioThemeSelector() {
+    const container = document.getElementById('studio-theme-selector');
+    if (!container) return;
+    const colorOptions = [
+        { id: 'seruni-sage', name: 'Sage Botanical', subtitle: 'Hijau Sage Lembut', swatch: '#7A917E' },
+        { id: 'senja-terracotta', name: 'Senja Terracotta', subtitle: 'Hangat Terracotta', swatch: '#D48C70' },
+        { id: 'kirana-klasik', name: 'Gading & Emas', subtitle: 'Klasik Sampanye', swatch: '#9C8254' },
+        { id: 'nusantara-modern', name: 'Cokelat Sogan', subtitle: 'Hangat Nusantara', swatch: '#7A563E' }
+    ];
+    container.innerHTML = colorOptions.map(opt => {
+        const isSelected = opt.id === activeColorTheme.id;
+        return `
+            <button type="button" onclick="applyColorTheme('${opt.id}')" class="p-3 rounded-2xl border-2 text-left transition-all cursor-pointer ${isSelected ? 'border-terracotta bg-terracottaLight/30 shadow-sm' : 'border-sage/20 bg-cream hover:bg-white'}">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="w-4 h-4 rounded-full border border-black/10 shrink-0" style="background-color: ${opt.swatch}"></span>
+                    <span class="text-xs font-bold text-charcoal truncate">${opt.name}</span>
+                </div>
+                <p class="text-[10px] text-charcoalMuted">${opt.subtitle}</p>
+            </button>
+        `;
+    }).join('');
+}
+
+function selectTemplateAndScroll(templateId) {
+    applyTemplate(templateId);
+    resetStudioCover();
+    switchEditorTab(1);
+    const studioEl = document.getElementById('studio-section');
+    if (studioEl) {
+        studioEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    showToast(`Template "${activeTemplate.name}" aktif!`);
+}
+
+function applyColorTheme(themeId) {
+    const found = studioTemplates.find(t => t.id === themeId);
+    if (!found) return;
+    activeColorTheme = found;
+
+    const canvas = document.getElementById('studio-preview-canvas');
+    const cover = document.getElementById('studio-preview-cover');
+    const openBtn = document.getElementById('prev-open-btn');
+
+    if (canvas) {
+        canvas.style.backgroundColor = found.bodyBg;
+        canvas.style.color = found.textColor;
+    }
+    if (cover) cover.style.backgroundColor = found.coverBg;
+    if (openBtn) openBtn.style.backgroundColor = found.btnBg;
+
+    const themeLabel = document.getElementById('preview-active-theme-label');
+    if (themeLabel) themeLabel.textContent = `${activeTemplate.name} • ${found.name}`;
+    renderStudioThemeSelector();
+}
+
+function applyTemplate(templateId) {
+    const found = studioTemplates.find(t => t.id === templateId);
+    if (!found) return;
+    activeTemplate = found;
+
+    if (!uploadedPhotos.hasCustomCover) {
+        uploadedPhotos.cover = found.coverImg;
+        const prevCoverImg = document.getElementById('prev-cover-img');
+        const thumbCover = document.getElementById('thumb-cover-preview');
+        if (prevCoverImg) prevCoverImg.src = found.coverImg;
+        if (thumbCover) thumbCover.src = found.coverImg;
+    }
+
+    const coverNames = document.getElementById('prev-cover-names');
+    const photoFrame = document.getElementById('prev-cover-photo-frame');
+    const coverCard = document.getElementById('prev-cover-card');
+    const ornamentEl = document.getElementById('prev-cover-ornament');
+    const subtitleEl = document.getElementById('prev-cover-subtitle');
+    const coupleCard = document.getElementById('prev-couple-card');
+    const eventCard = document.getElementById('prev-event-card');
+    const brideImg = document.getElementById('prev-bride-img');
+    const groomImg = document.getElementById('prev-groom-img');
+
+    if (photoFrame) photoFrame.className = `${found.photoFrameClass} transition-all duration-500`;
+    if (coverCard) coverCard.className = `${found.coverCardClass} relative z-10 transition-all duration-500`;
+    if (ornamentEl) ornamentEl.innerHTML = found.ornamentHtml || '';
+    if (subtitleEl) subtitleEl.textContent = found.coverSubtitle || 'THE WEDDING OF';
+    if (coupleCard) coupleCard.className = `${found.contentCardClass} space-y-4 transition-all duration-500`;
+    if (eventCard) eventCard.className = `${found.contentCardClass} space-y-3 transition-all duration-500`;
+    if (brideImg) brideImg.className = `${found.avatarClass} transition-all duration-500`;
+    if (groomImg) groomImg.className = `${found.avatarClass} transition-all duration-500`;
+
+    if (coverNames) {
+        coverNames.classList.remove('font-serif', 'font-playfair');
+        coverNames.classList.add(found.fontClass);
+    }
+
+    applyColorTheme(templateId);
+    renderLandingTemplates();
+}
+
+function handleSinglePhotoUpload(event, type) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    if (type === 'cover') {
+        uploadedPhotos.cover = url;
+        uploadedPhotos.hasCustomCover = true;
+        document.getElementById('prev-cover-img').src = url;
+        document.getElementById('thumb-cover-preview').src = url;
+    } else if (type === 'bride') {
+        uploadedPhotos.bride = url;
+        document.getElementById('prev-bride-img').src = url;
+        document.getElementById('thumb-bride-preview').src = url;
+    } else if (type === 'groom') {
+        uploadedPhotos.groom = url;
+        document.getElementById('prev-groom-img').src = url;
+        document.getElementById('thumb-groom-preview').src = url;
+    }
+    showToast('Foto berhasil diperbarui!');
+}
+
+function handleGalleryPhotosUpload(event) {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+    for (let f of files) {
+        uploadedPhotos.gallery.push(URL.createObjectURL(f));
+    }
+    renderEditorGallery();
+    renderPreviewGallery();
+    showToast('Foto galeri berhasil ditambahkan!');
+}
+
+function renderEditorGallery() {
+    const container = document.getElementById('editor-gallery-grid');
+    if (!container) return;
+    container.innerHTML = uploadedPhotos.gallery.map((url, idx) => `
+        <div class="relative group rounded-xl overflow-hidden h-20 border border-sage/20 bg-white">
+            <img src="${url}" class="w-full h-full object-cover">
+            <button onclick="removeGalleryPhoto(${idx})" class="absolute top-1 right-1 w-6 h-6 rounded-full bg-rose-600 text-white text-[10px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">✕</button>
+        </div>
+    `).join('');
+}
+
+function renderPreviewGallery() {
+    const container = document.getElementById('prev-gallery-grid');
+    if (!container) return;
+    container.innerHTML = uploadedPhotos.gallery.map(url => `
+        <div class="rounded-2xl overflow-hidden h-36 border border-sage/20 shadow-sm">
+            <img src="${url}" class="w-full h-full object-cover">
+        </div>
+    `).join('');
+}
+
+function removeGalleryPhoto(idx) {
+    uploadedPhotos.gallery.splice(idx, 1);
+    renderEditorGallery();
+    renderPreviewGallery();
+    showToast('Foto galeri dihapus.');
+}
+
+function cycleInspirationQuote() {
+    currentQuoteIdx = (currentQuoteIdx + 1) % inspirationQuotes.length;
+    const input = document.getElementById('input-quote-text');
+    if (input) {
+        input.value = inspirationQuotes[currentQuoteIdx];
+        syncStudioToPreview();
+    }
+}
+
+function openStudioInvitationContent() {
+    const cover = document.getElementById('studio-preview-cover');
+    if (cover) {
+        cover.style.transform = 'translateY(-100%)';
+        cover.style.opacity = '0';
+        setTimeout(() => cover.classList.add('hidden'), 500);
+    }
+    if (isMusicPlaying === false) {
+        toggleStudioMusic(true);
+    }
+}
+
+function resetStudioCover() {
+    const cover = document.getElementById('studio-preview-cover');
+    if (cover) {
+        cover.classList.remove('hidden');
+        cover.style.transform = 'translateY(0)';
+        cover.style.opacity = '1';
+    }
+}
+
+function setPreviewMode(mode) {
+    const wrapper = document.getElementById('preview-frame-wrapper');
+    const mobileBtn = document.getElementById('mode-mobile-btn');
+    const desktopBtn = document.getElementById('mode-desktop-btn');
+    const notch = document.getElementById('preview-phone-notch');
+
+    if (mode === 'desktop') {
+        wrapper.className = 'w-full h-[640px] bg-charcoal rounded-[24px] p-2 shadow-2xl border-4 border-charcoal relative transition-all duration-500';
+        if (notch) notch.style.opacity = '0';
+        if (mobileBtn) { mobileBtn.className = "px-2.5 py-1 rounded-lg text-charcoalMuted hover:text-charcoal text-[11px] font-semibold flex items-center gap-1 cursor-pointer"; }
+        if (desktopBtn) { desktopBtn.className = "px-2.5 py-1 rounded-lg bg-white text-charcoal shadow-sm text-[11px] font-bold flex items-center gap-1 cursor-pointer"; }
+    } else {
+        wrapper.className = 'w-full max-w-[375px] h-[640px] bg-charcoal rounded-[44px] p-3 shadow-2xl border-4 border-charcoal relative transition-all duration-500';
+        if (notch) notch.style.opacity = '1';
+        if (mobileBtn) { mobileBtn.className = "px-2.5 py-1 rounded-lg bg-white text-charcoal shadow-sm text-[11px] font-bold flex items-center gap-1 cursor-pointer"; }
+        if (desktopBtn) { desktopBtn.className = "px-2.5 py-1 rounded-lg text-charcoalMuted hover:text-charcoal text-[11px] font-semibold flex items-center gap-1 cursor-pointer"; }
+    }
+}
+
+// RSVP
+function addStudioRsvpComment() {
+    const nameInput = document.getElementById('prev-rsvp-name');
+    const statusSelect = document.getElementById('prev-rsvp-status');
+    const msgInput = document.getElementById('prev-rsvp-msg');
+    const list = document.getElementById('prev-rsvp-list');
+
+    if (!nameInput.value.trim() || !msgInput.value.trim()) {
+        showToast('Isi nama dan pesan ucapan terlebih dahulu.');
+        return;
+    }
+
+    const item = document.createElement('div');
+    item.className = 'bg-cream rounded-xl p-2.5 text-[11px] text-left';
+    item.innerHTML = `
+        <div class="flex justify-between font-bold">
+            <span>${nameInput.value.trim()}</span>
+            <span class="text-sageDark">${statusSelect.value}</span>
+        </div>
+        <p class="text-charcoalMuted mt-0.5">${msgInput.value.trim()}</p>
+    `;
+    list.prepend(item);
+    nameInput.value = '';
+    msgInput.value = '';
+    showToast('Ucapan & doa berhasil dikirim!');
+}
+
+function copyStudioBank() {
+    const num = document.getElementById('prev-bank-number').textContent;
+    copyTextValue(num, 'Nomor rekening berhasil disalin!');
+}
+
+function copyTextValue(text, toastMsg) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+        document.execCommand('copy');
+        showToast(toastMsg);
+    } catch (err) {
+        showToast('Gagal menyalin teks.');
+    }
+    document.body.removeChild(textArea);
+}
+
+// Checkout & Hosting
+function openCheckoutModal(preselectedPkg = null) {
+    const slug = document.getElementById('custom-slug-input').value.trim() || 'nadia-raka';
+    const brideNick = document.getElementById('input-bride-nick').value.trim() || 'Nadia';
+    const groomNick = document.getElementById('input-groom-nick').value.trim() || 'Raka';
+
+    document.getElementById('checkout-cover-thumb').src = uploadedPhotos.cover;
+    document.getElementById('checkout-theme-badge').textContent = `Template: ${activeTemplate.name} (${activeColorTheme.name})`;
+    document.getElementById('checkout-couple-title').textContent = `${brideNick} & ${groomNick}`;
+    document.getElementById('checkout-live-url').textContent = `kisahkita.id/${slug}`;
+
+    if (preselectedPkg) {
+        const radio = document.querySelector(`input[name="hosting-pkg"][value="${preselectedPkg}"]`);
+        if (radio) radio.checked = true;
+    }
+    updateCheckoutTotal();
+
+    document.getElementById('checkout-step-payment').classList.remove('hidden');
+    document.getElementById('checkout-step-success').classList.add('hidden');
+
+    const modal = document.getElementById('checkout-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    if (window.lucide) lucide.createIcons();
+}
+
+function closeCheckoutModal() {
+    const modal = document.getElementById('checkout-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+function updateCheckoutTotal() {
+    const selected = document.querySelector('input[name="hosting-pkg"]:checked');
+    if (!selected) return;
+    const price = parseInt(selected.getAttribute('data-price') || '129000', 10);
+    document.getElementById('checkout-total-display').textContent = 'Rp ' + price.toLocaleString('id-ID');
+}
+
+let selectedPaymentMethod = 'qris';
+function selectPaymentMethod(method) {
+    selectedPaymentMethod = method;
+    document.querySelectorAll('.pay-method-btn').forEach(btn => {
+        btn.classList.remove('border-2', 'border-sage', 'bg-sageLight/40', 'font-bold');
+        btn.classList.add('border', 'border-sage/25', 'bg-white', 'font-semibold');
+    });
+    const activeBtn = document.getElementById(`pay-btn-${method}`);
+    if (activeBtn) {
+        activeBtn.classList.remove('border', 'border-sage/25', 'bg-white', 'font-semibold');
+        activeBtn.classList.add('border-2', 'border-sage', 'bg-sageLight/40', 'font-bold');
+    }
+
+    document.getElementById('pay-detail-qris').classList.toggle('hidden', method !== 'qris');
+    document.getElementById('pay-detail-va').classList.toggle('hidden', method !== 'va');
+    document.getElementById('pay-detail-ewallet').classList.toggle('hidden', method !== 'ewallet');
+}
+
+let devTransactions = [
+    {
+        id: 'TX-9021',
+        couple: 'Nadia & Raka',
+        slug: 'nadia-raka',
+        package: 'Paket Favorit (Selamanya)',
+        theme: 'Seruni Sage (Sage Botanical)',
+        amount: 129000,
+        method: 'QRIS Instan',
+        paymentStatus: 'paid',
+        hostingStatus: 'pending',
+        date: 'Hari Ini, 20:15 WIB',
+        comments: [
+            { sender: 'Nadia & Raka (Request Khusus)', text: 'Tolong gunakan lagu romantis ya kak.', time: '20:16 WIB' }
+        ],
+        customSong: { title: 'Sampai Jadi Debu', artist: 'Banda Neira', url: '', fileName: '', fileUrl: '', notes: 'Mulai detik 30' }
+    },
+    {
+        id: 'TX-8842',
+        couple: 'Dinda & Dimas',
+        slug: 'dinda-dimas',
+        package: 'Paket Hemat (6 Bulan)',
+        theme: 'Senja Terracotta',
+        amount: 79000,
+        method: 'Virtual Account',
+        paymentStatus: 'paid',
+        hostingStatus: 'approved',
+        date: 'Kemarin, 14:30 WIB',
+        comments: [
+            { sender: 'Developer', text: 'Hosting sudah diaktifkan.', time: 'Kemarin, 15:00 WIB' }
+        ],
+        customSong: null
+    }
+];
+let currentActiveOrderId = 'TX-9021';
+let activeModalTxId = null;
+
+function confirmInstantHostingPayment() {
+    const slug = document.getElementById('custom-slug-input').value.trim() || 'nadia-raka';
+    const brideNick = document.getElementById('input-bride-nick').value.trim() || 'Nadia';
+    const groomNick = document.getElementById('input-groom-nick').value.trim() || 'Raka';
+    const selectedPkg = document.querySelector('input[name="hosting-pkg"]:checked');
+    const pkgName = selectedPkg ? selectedPkg.getAttribute('data-name') : 'Paket Favorit (Selamanya)';
+    const price = selectedPkg ? parseInt(selectedPkg.getAttribute('data-price') || '129000', 10) : 129000;
+    const customReqNote = document.getElementById('input-custom-song')?.value.trim() || '';
+
+    const methodLabels = { qris: 'QRIS Instan', va: 'Virtual Account', ewallet: 'GoPay / DANA' };
+    const newTxId = 'TX-' + Math.floor(1000 + Math.random() * 9000);
+
+    const initialComments = [];
+    if (customReqNote) {
+        initialComments.push({
+            sender: `${brideNick} & ${groomNick} (Request Khusus)`,
+            text: customReqNote,
+            time: 'Baru saja'
+        });
+    }
+
+    const newTransaction = {
+        id: newTxId,
+        couple: `${brideNick} & ${groomNick}`,
+        slug: slug,
+        package: pkgName,
+        theme: `${activeTemplate.name} (${activeColorTheme.name})`,
+        amount: price,
+        method: methodLabels[selectedPaymentMethod] || 'QRIS Instan',
+        paymentStatus: 'paid',
+        hostingStatus: 'pending',
+        date: 'Hari Ini, ' + new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+        comments: initialComments,
+        customSong: null
+    };
+
+    devTransactions.unshift(newTransaction);
+    currentActiveOrderId = newTxId;
+    updateDevNavBadge();
+
+    document.getElementById('published-final-url').textContent = `https://kisahkita.id/${slug}`;
+    document.getElementById('checkout-step-payment').classList.add('hidden');
+    document.getElementById('checkout-step-success').classList.remove('hidden');
+    if (window.lucide) lucide.createIcons();
+    showToast('Pembayaran tercatat! Menunggu approval developer untuk hosting.');
+}
+
+function shareToWhatsApp() {
+    const guestName = document.getElementById('share-guest-name').value.trim() || 'Tamu Undangan';
+    const slug = document.getElementById('custom-slug-input').value.trim() || 'nadia-raka';
+    const text = `Kepada Yth. ${guestName},\n\nTanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami.\n\nBerikut tautan undangan digital kami:\nhttps://kisahkita.id/${slug}\n\nMerupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.\n\nTerima Kasih.\nSalam hangat,\nNadia & Raka`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+}
+
+function copyPublishedLink() {
+    const slug = document.getElementById('custom-slug-input').value.trim() || 'nadia-raka';
+    copyTextValue(`https://kisahkita.id/${slug}`, 'Link undangan berhasil disalin!');
+}
+
+function devUploadPaymentProof(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    document.getElementById('dev-proof-status').textContent = `✓ Bukti "${file.name}" terpilih.`;
+    showToast('Bukti transfer dilampirkan!');
+}
+
+function devSubmitPaymentProof() {
+    showToast('Bukti transfer berhasil dikirim ke Developer!');
+}
+
+function openPublishedGuestView() {
+    const slug = document.getElementById('custom-slug-input').value.trim() || 'nadia-raka';
+    document.getElementById('guest-modal-url-label').textContent = `kisahkita.id/${slug}`;
+    const container = document.getElementById('guest-live-container');
+    container.innerHTML = document.getElementById('studio-preview-canvas').innerHTML;
+
+    const modal = document.getElementById('guest-live-modal');
+    modal.classList.remove('hidden');
+    if (window.lucide) lucide.createIcons();
+}
+
+function closeGuestLiveModal() {
+    document.getElementById('guest-live-modal').classList.add('hidden');
+}
+
+// Developer Panel & Dashboard
+function openDevPanel() {
+    const modal = document.getElementById('dev-panel-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+
+    const isAuthed = localStorage.getItem('dev_auth') === 'true';
+    if (isAuthed) {
+        document.getElementById('dev-login-screen').classList.add('hidden');
+        document.getElementById('dev-dashboard-screen').classList.remove('hidden');
+        renderDevDashboard();
+    } else {
+        document.getElementById('dev-login-screen').classList.remove('hidden');
+        document.getElementById('dev-dashboard-screen').classList.add('hidden');
+    }
+    if (window.lucide) lucide.createIcons();
+}
+
+function closeDevPanel() {
+    document.getElementById('dev-panel-modal').classList.add('hidden');
+    document.getElementById('dev-panel-modal').classList.remove('flex');
+}
+
+function devLogin() {
+    const pass = document.getElementById('dev-password').value.trim();
+    if (pass === 'karpussuaha04') {
+        localStorage.setItem('dev_auth', 'true');
+        document.getElementById('dev-login-screen').classList.add('hidden');
+        document.getElementById('dev-dashboard-screen').classList.remove('hidden');
+        renderDevDashboard();
+        showToast('Berhasil masuk ke Developer Dashboard!');
+    } else {
+        document.getElementById('dev-login-error').classList.remove('hidden');
+    }
+}
+
+function devLogout() {
+    localStorage.removeItem('dev_auth');
+    document.getElementById('dev-login-screen').classList.remove('hidden');
+    document.getElementById('dev-dashboard-screen').classList.add('hidden');
+    document.getElementById('dev-password').value = '';
+    document.getElementById('dev-login-error').classList.add('hidden');
+    showToast('Keluar dari Developer Dashboard.');
+}
+
+let devCurrentFilter = 'all';
+function setDevFilter(filter) {
+    devCurrentFilter = filter;
+    document.querySelectorAll('.dev-filter-btn').forEach(btn => {
+        btn.className = "dev-filter-btn px-3.5 py-1.5 rounded-xl text-charcoalMuted hover:text-charcoal text-xs font-semibold transition-all cursor-pointer";
+    });
+    const activeBtn = document.getElementById(`filter-btn-${filter}`);
+    if (activeBtn) {
+        activeBtn.className = "dev-filter-btn px-3.5 py-1.5 rounded-xl bg-sage text-white text-xs font-bold transition-all cursor-pointer";
+    }
+    renderDevDashboardTable();
+}
+
+function renderDevDashboard() {
+    let totalSales = 0;
+    let pendingCount = 0;
+    let approvedCount = 0;
+    let customSongCount = 0;
+
+    devTransactions.forEach(tx => {
+        if (tx.paymentStatus === 'paid') totalSales += tx.amount;
+        if (tx.hostingStatus === 'pending') pendingCount++;
+        if (tx.hostingStatus === 'approved') approvedCount++;
+        if (tx.customSong && (tx.customSong.title || tx.customSong.url || tx.customSong.fileName)) customSongCount++;
+    });
+
+    document.getElementById('dev-stat-total-sales').textContent = 'Rp ' + totalSales.toLocaleString('id-ID');
+    document.getElementById('dev-stat-pending').textContent = pendingCount;
+    document.getElementById('dev-stat-approved').textContent = approvedCount;
+    document.getElementById('dev-stat-custom-music').textContent = customSongCount;
+    document.getElementById('dev-tx-payment-count').textContent = devTransactions.length + ' Pesanan';
+    document.getElementById('dev-dash-pending-count').textContent = pendingCount + ' Perlu Approve';
+
+    updateDevNavBadge();
+    renderDevDashboardTable();
+}
+
+function updateDevNavBadge() {
+    let pendingCount = devTransactions.filter(t => t.hostingStatus === 'pending').length;
+    const badge = document.getElementById('nav-dev-pending-badge');
+    if (badge) {
+        badge.textContent = pendingCount;
+        badge.classList.toggle('hidden', pendingCount === 0);
+    }
+}
+
+function renderDevDashboardTable() {
+    const tbody = document.getElementById('dev-tx-payments-list');
+    if (!tbody) return;
+
+    let filtered = devTransactions;
+    if (devCurrentFilter === 'pending') {
+        filtered = devTransactions.filter(t => t.hostingStatus === 'pending');
+    } else if (devCurrentFilter === 'approved') {
+        filtered = devTransactions.filter(t => t.hostingStatus === 'approved');
+    }
+
+    if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-10 text-center text-charcoalMuted">Tidak ada transaksi ditemukan.</td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = filtered.map(tx => {
+        const hasComment = tx.comments && tx.comments.length > 0;
+        const hasSong = tx.customSong && (tx.customSong.title || tx.customSong.url || tx.customSong.fileName);
+        const isApproved = tx.hostingStatus === 'approved';
+
+        const commentBtnClass = hasComment ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100' : 'bg-rose-50 text-rose-700 border border-rose-300 hover:bg-rose-100';
+        const songBtnClass = hasSong ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100' : 'bg-rose-50 text-rose-700 border border-rose-300 hover:bg-rose-100';
+        const approveBtnClass = isApproved ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-rose-600 text-white hover:bg-rose-700';
+
+        return `
+            <tr class="hover:bg-cream/40 transition-colors">
+                <td class="px-6 py-4">
+                    <p class="font-bold text-charcoal text-sm">${tx.couple}</p>
+                    <a href="https://kisahkita.id/${tx.slug}" target="_blank" class="text-xs text-sageDark font-semibold hover:underline">kisahkita.id/${tx.slug}</a>
+                    <span class="block text-[10px] text-charcoalMuted">${tx.date} • ID: ${tx.id}</span>
+                </td>
+                <td class="px-5 py-4">
+                    <span class="font-semibold text-charcoal">${tx.package}</span>
+                    <span class="block text-[11px] text-charcoalMuted">${tx.theme}</span>
+                </td>
+                <td class="px-5 py-4">
+                    <span class="font-bold text-charcoal">Rp ${tx.amount.toLocaleString('id-ID')}</span>
+                    <span class="block text-[11px] text-charcoalMuted">${tx.method}</span>
+                </td>
+                <td class="px-5 py-4">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">✓ Paid (Lunas)</span>
+                </td>
+                <td class="px-5 py-4">
+                    ${tx.hostingStatus === 'approved' 
+                        ? '<span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">✓ Hosted Aktif</span>' 
+                        : '<span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">⏳ Pending Approve</span>'}
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <div class="inline-flex items-center gap-1.5 justify-end">
+                        <button onclick="openDevCommentModal('${tx.id}')" class="w-[154px] h-[36px] rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${commentBtnClass}">
+                            <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+                            <span>Comment</span>
+                        </button>
+                        <button onclick="openDevCustomMusic('${tx.id}')" class="w-[154px] h-[36px] rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${songBtnClass}">
+                            <i data-lucide="music" class="w-3.5 h-3.5"></i>
+                            <span>Custom Song</span>
+                        </button>
+                        <button onclick="devToggleApproveHosting('${tx.id}')" class="w-[154px] h-[36px] rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer shadow-sm ${approveBtnClass}">
+                            <i data-lucide="${isApproved ? 'check-check' : 'rocket'}" class="w-3.5 h-3.5"></i>
+                            <span>${isApproved ? 'Hosted Aktif' : 'Approve Payment'}</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }).join('');
+    if (window.lucide) lucide.createIcons();
+}
+
+function devToggleApproveHosting(txId) {
+    const tx = devTransactions.find(t => t.id === txId);
+    if (!tx) return;
+    if (tx.hostingStatus === 'approved') {
+        tx.hostingStatus = 'pending';
+        showToast(`Hosting untuk ${tx.couple} dinonaktifkan sementara.`);
+    } else {
+        tx.hostingStatus = 'approved';
+        tx.comments.push({ sender: 'Developer', text: 'Pembayaran diverifikasi & hosting diaktifkan!', time: 'Baru saja' });
+        showToast(`Hosting untuk ${tx.couple} berhasil di-approve dan aktif online!`);
+    }
+    renderDevDashboard();
+}
+
+function openDevCommentModal(txId) {
+    activeModalTxId = txId;
+    const tx = devTransactions.find(t => t.id === txId);
+    if (!tx) return;
+
+    document.getElementById('dev-comment-couple').textContent = tx.couple;
+    document.getElementById('dev-comment-slug').textContent = `kisahkita.id/${tx.slug}`;
+    document.getElementById('dev-comment-input').value = '';
+
+    const historyBox = document.getElementById('dev-comment-history');
+    if (tx.comments && tx.comments.length > 0) {
+        historyBox.innerHTML = tx.comments.map(c => `
+            <div class="bg-white p-2.5 rounded-xl border border-sage/15 space-y-0.5">
+                <div class="flex justify-between font-bold text-[10px] text-sageDark">
+                    <span>${c.sender}</span>
+                    <span class="text-charcoalMuted">${c.time}</span>
+                </div>
+                <p class="text-charcoal">${c.text}</p>
+            </div>
+        `).join('');
+    } else {
+        historyBox.innerHTML = `<p class="text-charcoalMuted text-center py-2">Belum ada catatan/comment.</p>`;
+    }
+
+    const modal = document.getElementById('dev-comment-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    if (window.lucide) lucide.createIcons();
+}
+
+function closeDevCommentModal() {
+    const modal = document.getElementById('dev-comment-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+function saveDevComment() {
+    const tx = devTransactions.find(t => t.id === activeModalTxId);
+    if (!tx) return;
+    const text = document.getElementById('dev-comment-input').value.trim();
+    if (!text) {
+        showToast('Tulis comment terlebih dahulu.');
+        return;
+    }
+
+    tx.comments.push({
+        sender: 'Developer',
+        text: text,
+        time: 'Baru saja'
+    });
+    closeDevCommentModal();
+    renderDevDashboard();
+    showToast('Comment berhasil disimpan!');
+}
+
+function devAddDemoTransaction() {
+    const demoNames = ['Rizky & Amalia', 'Fajar & Siska', 'Gilang & Kirana', 'Bayu & Maharani'];
+    const randomName = demoNames[Math.floor(Math.random() * demoNames.length)];
+    const slugName = randomName.toLowerCase().replace(/ & /g, '-');
+    const newId = 'TX-' + Math.floor(1000 + Math.random() * 9000);
+
+    devTransactions.unshift({
+        id: newId,
+        couple: randomName,
+        slug: slugName,
+        package: 'Paket Favorit (Selamanya)',
+        theme: 'Senja Terracotta',
+        amount: 129000,
+        method: 'QRIS Instan',
+        paymentStatus: 'paid',
+        hostingStatus: 'pending',
+        date: 'Baru saja',
+        comments: [{ sender: randomName + ' (Request Khusus)', text: 'Mohon bantu rapikan foto sampul ya kak', time: 'Baru saja' }],
+        customSong: null
+    });
+    renderDevDashboard();
+    showToast(`Simulasi order masuk untuk ${randomName}!`);
+}
+
+// FAQ Accordion
+function toggleFaqItem(btn) {
+    const item = btn.closest('.faq-item');
+    const content = item.querySelector('.faq-content');
+    const icon = item.querySelector('.faq-icon');
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+    document.querySelectorAll('.faq-item').forEach(el => {
+        el.querySelector('.faq-content').style.gridTemplateRows = '0fr';
+        el.querySelector('.faq-icon').classList.remove('rotate-45');
+        el.querySelector('button').setAttribute('aria-expanded', 'false');
+    });
+
+    if (!isExpanded) {
+        btn.setAttribute('aria-expanded', 'true');
+        content.style.gridTemplateRows = '1fr';
+        icon.classList.add('rotate-45');
+    }
+}
+
+// Audio Latar Studio Toggle
+let isMusicPlaying = false;
+let musicInterval = null;
+
+function changeMusicTrack() {
+    const caption = document.getElementById('studio-music-caption');
+    if (caption) caption.textContent = 'Musik akan otomatis mengalun saat tamu menekan tombol "Buka Undangan".';
+    if (isMusicPlaying) {
+        toggleStudioMusic(false);
+        toggleStudioMusic(true);
+    }
+}
+
+async function toggleStudioMusic(forceState = null) {
+    const btn = document.getElementById('studio-music-btn');
+    const nextState = forceState !== null ? forceState : !isMusicPlaying;
+
+    if (!nextState) {
+        isMusicPlaying = false;
+        if (musicInterval) clearInterval(musicInterval);
+        if (btn) btn.textContent = '▶ Tes Musik';
+        return;
+    }
+
+    isMusicPlaying = true;
+    if (btn) btn.textContent = '⏸ Jeda Musik';
+
+    const choice = document.getElementById('input-music-choice')?.value;
+
+    try {
+        if (window.Tone) {
+            await Tone.start();
+            const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+            synth.volume.value = -14;
+            const chords = {
+                piano: [['C4', 'E4', 'G4'], ['A3', 'C4', 'E4'], ['F3', 'A3', 'C4'], ['G3', 'B3', 'D4']],
+                acoustic: [['G3', 'B3', 'D4'], ['E3', 'G3', 'B3'], ['C3', 'E3', 'G3'], ['D3', 'F#3', 'A3']],
+                gamelan: [['D4', 'E4', 'G4'], ['A4', 'B4', 'D5'], ['G4', 'A4', 'B4'], ['E4', 'G4', 'A4']]
+            };
+            const seq = chords[choice] || chords.piano;
+            let idx = 0;
+            synth.triggerAttackRelease(seq[0], '2n');
+            if (musicInterval) clearInterval(musicInterval);
+            musicInterval = setInterval(() => {
+                if (!isMusicPlaying) return;
+                idx = (idx + 1) % seq.length;
+                synth.triggerAttackRelease(seq[idx], '2n');
+            }, 1600);
+        }
+    } catch (err) {}
+}
+
+function devRequestCustomSong() {
+    const reqText = document.getElementById('input-custom-song')?.value.trim();
+    if (!reqText) {
+        showToast('Tulis permintaan khusus terlebih dahulu.');
+        return;
+    }
+
+    const brideNick = document.getElementById('input-bride-nick')?.value.trim() || 'Nadia';
+    const groomNick = document.getElementById('input-groom-nick')?.value.trim() || 'Raka';
+    const slug = document.getElementById('custom-slug-input')?.value.trim() || 'nadia-raka';
+
+    let targetTx = devTransactions.find(t => t.slug === slug) || devTransactions[0];
+    if (targetTx) {
+        targetTx.comments.push({
+            sender: `${brideNick} & ${groomNick} (Request Khusus)`,
+            text: reqText,
+            time: 'Baru saja'
+        });
+    }
+
+    const statusEl = document.getElementById('dev-song-status');
+    if (statusEl) {
+        statusEl.textContent = '✓ Request khusus berhasil dikirim ke riwayat Comment Developer!';
+    }
+    showToast('Request Khusus masuk ke Comment Developer!');
+}
+
+let devTempAudioFile = null;
+let devAudioPlayer = null;
+
+function handleDevCustomAudioUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const objectUrl = URL.createObjectURL(file);
+    devTempAudioFile = {
+        name: file.name,
+        objectUrl: objectUrl
+    };
+
+    const titleInput = document.getElementById('dev-cm-song-title');
+    if (titleInput && !titleInput.value.trim()) {
+        titleInput.value = file.name.replace(/\.[^/.]+$/, '');
+    }
+
+    document.getElementById('dev-cm-file-name').textContent = `🎵 ${file.name}`;
+    document.getElementById('dev-cm-file-preview').classList.remove('hidden');
+
+    if (devAudioPlayer) {
+        devAudioPlayer.pause();
+    }
+    devAudioPlayer = new Audio(objectUrl);
+    document.getElementById('dev-cm-play-btn').textContent = '▶ Putar';
+    showToast(`File musik "${file.name}" siap dihubungkan!`);
+}
+
+function toggleDevPreviewAudio() {
+    if (!devAudioPlayer) return;
+    const btn = document.getElementById('dev-cm-play-btn');
+    if (devAudioPlayer.paused) {
+        devAudioPlayer.play().catch(() => {});
+        btn.textContent = '⏸ Jeda';
+    } else {
+        devAudioPlayer.pause();
+        btn.textContent = '▶ Putar';
+    }
+}
+
+function openDevCustomMusic(txId) {
+    activeModalTxId = txId;
+    const tx = devTransactions.find(t => t.id === txId);
+    if (!tx) return;
+
+    devTempAudioFile = tx.customSong?.fileName ? { name: tx.customSong.fileName, objectUrl: tx.customSong.fileUrl || '' } : null;
+    if (devAudioPlayer) {
+        devAudioPlayer.pause();
+        devAudioPlayer = null;
+    }
+
+    document.getElementById('dev-cm-couple').textContent = tx.couple;
+    document.getElementById('dev-cm-song-title').value = tx.customSong?.title || '';
+    document.getElementById('dev-cm-artist').value = tx.customSong?.artist || '';
+    document.getElementById('dev-cm-url').value = tx.customSong?.url || '';
+    document.getElementById('dev-cm-notes').value = tx.customSong?.notes || '';
+    document.getElementById('dev-cm-file-input').value = '';
+
+    const previewBox = document.getElementById('dev-cm-file-preview');
+    if (tx.customSong?.fileName) {
+        document.getElementById('dev-cm-file-name').textContent = `🎵 ${tx.customSong.fileName}`;
+        previewBox.classList.remove('hidden');
+        if (tx.customSong.fileUrl) {
+            devAudioPlayer = new Audio(tx.customSong.fileUrl);
+        }
+    } else {
+        previewBox.classList.add('hidden');
+    }
+
+    const modal = document.getElementById('dev-custom-music-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    if (window.lucide) lucide.createIcons();
+}
+
+function saveDevCustomMusic() {
+    const tx = devTransactions.find(t => t.id === activeModalTxId);
+    if (!tx) return;
+
+    const title = document.getElementById('dev-cm-song-title')?.value.trim();
+    const artist = document.getElementById('dev-cm-artist')?.value.trim();
+    const notes = document.getElementById('dev-cm-notes')?.value.trim();
+
+    if (!title && !devTempAudioFile) {
+        showToast('Isi Judul Lagu atau Upload File Musik terlebih dahulu.');
+        return;
+    }
+
+    tx.customSong = {
+        title: title || (devTempAudioFile ? devTempAudioFile.name : 'Custom Song'),
+        artist: artist || '-',
+        url: '',
+        fileName: devTempAudioFile ? devTempAudioFile.name : '',
+        fileUrl: devTempAudioFile ? devTempAudioFile.objectUrl : '',
+        notes
+    };
+    closeDevCustomMusic();
+    renderDevDashboard();
+    showToast(`Custom Song untuk ${tx.couple} berhasil disimpan!`);
+}
+
+function closeDevCustomMusic() {
+    const modal = document.getElementById('dev-custom-music-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    if (devAudioPlayer) {
+        devAudioPlayer.pause();
+        devAudioPlayer = null;
+    }
+}
+
+// Initializer on window load
+window.onload = function() {
+    renderLandingTemplates();
+    renderStudioThemeSelector();
+    syncStudioToPreview();
+    renderEditorGallery();
+    renderPreviewGallery();
+    if (window.lucide) lucide.createIcons();
+};
+    </script>
+</body>
+</html>
