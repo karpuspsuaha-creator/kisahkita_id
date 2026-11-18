@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FDFAF4">
+<meta name="description" content="Undangan pernikahan Anindya &amp; Kirana — 12 Desember 2026, Grand Garden Ballroom Jakarta.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Wedding of Anindya &amp; Kirana">
+<meta property="og:description" content="Dengan penuh cinta Kami mengundang Anda untuk hadir di hari pernikahan kami.">
+<meta property="og:image" content="assets/images/hero-wedding.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+<title>Anindya &amp; Kirana — The Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/ornaments.css">
+<link rel="stylesheet" href="css/signature-transition.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Template untuk botanical signature transition -->
+<template id="tpl-sig">
+  <svg class="sig" viewBox="0 0 400 60" fill="none" role="img" aria-label="Garis botanical">
+    <path class="sig__vine" pathLength="1" d="M8 40C70 12 120 56 200 34C280 12 330 56 392 30"/>
+    <circle class="sig__bud" style="--x:8px;--y:40px;--i:11" cx="0" cy="0" r="2.6"/>
+    <path class="sig__leaf" style="--x:52px;--y:27px;--r:-32deg;--i:2" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+    <path class="sig__leaf" style="--x:100px;--y:38px;--r:20deg;--i:3" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+    <circle class="sig__bud" style="--x:150px;--y:46px;--i:6" cx="0" cy="0" r="2.2"/>
+    <path class="sig__leaf" style="--x:148px;--y:44px;--r:-18deg;--i:4" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+    <path class="sig__leaf" style="--x:196px;--y:36px;--r:24deg;--i:5" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+    <path class="sig__leaf" style="--x:244px;--y:25px;--r:-28deg;--i:7" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+    <path class="sig__leaf" style="--x:292px;--y:28px;--r:18deg;--i:8" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+    <path class="sig__leaf" style="--x:338px;--y:38px;--r:-20deg;--i:9" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+    <path class="sig__leaf" style="--x:378px;--y:30px;--r:30deg;--i:10" d="M0 0Q8 -7 16 0Q8 7 0 0Z"/>
+  </svg>
+</template>
+
+<div class="invitation-shell" id="invitation">
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+
+  <main class="main-content" id="mainContent" tabindex="-1" aria-hidden="true" inert>
+
+    <!-- ==================== 01 — THE BEGINNING ==================== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__media" data-parallax="0.18">
+        <img src="assets/images/hero-wedding.jpg" alt="" fetchpriority="high" decoding="async">
+      </div>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__content ds-container">
+        <p class="ds-label hero__eyebrow">01 — The Beginning</p>
+        <h1 class="hero__names" id="hero-title" tabindex="-1">Anindya <span class="amp">&amp;</span> Kirana</h1>
+        <svg class="sig hero__sig" viewBox="0 0 400 60" fill="none" role="img" aria-label="Garis botanical">
+          <path class="sig__vine" pathLength="1" d="M8 40C70 12 120 56 200 34C280 12 330 56 392 30"/>
+          <circle class="sig__bud" style="--x:8px;--y:40px;--i:11" cx="0" cy="0" r="2.6"/>
+          <path class="sig__leaf" style="--x:52px;--y:27px;--r:-32deg;--i:2" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+          <path class="sig__leaf" style="--x:100px;--y:38px;--r:20deg;--i:3" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+          <circle class="sig__bud" style="--x:150px;--y:46px;--i:6" cx="0" cy="0" r="2.2"/>
+          <path class="sig__leaf" style="--x:148px;--y:44px;--r:-18deg;--i:4" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+          <path class="sig__leaf" style="--x:196px;--y:36px;--r:24deg;--i:5" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+          <path class="sig__leaf" style="--x:244px;--y:25px;--r:-28deg;--i:7" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+          <path class="sig__leaf" style="--x:292px;--y:28px;--r:18deg;--i:8" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+          <path class="sig__leaf" style="--x:338px;--y:38px;--r:-20deg;--i:9" d="M0 0Q10 -9 20 0Q10 9 0 0Z"/>
+          <path class="sig__leaf" style="--x:378px;--y:30px;--r:30deg;--i:10" d="M0 0Q8 -7 16 0Q8 7 0 0Z"/>
+        </svg>
+        <p class="hero__verse">“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya.”</p>
+        <p class="hero__reference ds-meta">Ar-Rum: 21</p>
+        <p class="hero__date">12 <i aria-hidden="true"></i> 12 <i aria-hidden="true"></i> 2026</p>
+        <p class="hero__location ds-meta">Grand Garden Ballroom · Jakarta</p>
+      </div>
+      <div class="hero__scroll" aria-hidden="true"><span></span></div>
+    </section>
+
+    <!-- ==================== 02 — THE INVITATION ==================== -->
+    <section class="ds-section invitation" aria-labelledby="invitation-title">
+      <div class="ds-container invitation__inner">
+        <p class="ds-numeral invitation__numeral" aria-hidden="true">02</p>
+        <p class="ds-label">The Invitation</p>
+        <h2 class="ds-heading invitation__title" id="invitation-title">Maha Suci Allah</h2>
+        <img class="ds-orn ds-orn--center" src="assets/ornaments/sprig-divider.svg" alt="" aria-hidden="true">
+        <p class="ds-lead invitation__lead">Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu kepada kedua mempelai.</p>
+        <p class="invitation__to ds-label">Kepada Bapak/Ibu/Saudara/i</p>
+        <p class="guest-name">Tamu Undangan</p>
+      </div>
+    </section>
+
+    <div class="ds-container"><div data-sig="center"></div></div>
+
+    <!-- ==================== 03 — THE TWO OF US ==================== -->
+    <section class="ds-section ds-section--warm couple" aria-labelledby="couple-title">
+      <div class="ds-container">
+        <div class="section-head" data-reveal>
+          <p class="ds-numeral section-head__numeral" aria-hidden="true">03</p>
+          <p class="ds-label">The Two Of Us</p>
+          <h2 class="ds-heading" id="couple-title">Anindya & Kirana</h2>
+          <img class="ds-orn ds-orn--center" src="assets/ornaments/sprig-divider.svg" alt="" aria-hidden="true">
+        </div>
+
+        <div class="couple-grid">
+          <article class="couple-card" data-reveal>
+            <div class="couple-card__frame ds-ornamented">
+              <div class="ds-media ds-media--portrait">
+                <img src="assets/images/couple-story.jpg" alt="Potret Anindya" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <p class="ds-label couple-card__role">Putra dari</p>
+            <h3 class="ds-script ds-script--sm">Anindya</h3>
+            <p class="couple-card__parents">Bpk. A. Wibowo<br>dan Ibu H. Lestari</p>
+            <a class="social-handle ds-meta" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">@anindya.wibowo</a>
+          </article>
+
+          <div class="couple-amp" aria-hidden="true">&amp;</div>
+
+          <article class="couple-card couple-card--right" data-reveal>
+            <div class="couple-card__frame ds-ornamented">
+              <div class="ds-media ds-media--portrait">
+                <img src="assets/images/wedding-moment.jpg" alt="Potret Kirana" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <p class="ds-label couple-card__role">Putri dari</p>
+            <h3 class="ds-script ds-script--sm">Kirana</h3>
+            <p class="couple-card__parents">Bpk. B. Santoso<br>dan Ibu C. Wulandari</p>
+            <a class="social-handle ds-meta" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">@kirana.santoso</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="ds-container"><div data-sig="center"></div></div>
+
+    <!-- ==================== 04 — OUR STORY ==================== -->
+    <section class="ds-section story" aria-labelledby="story-title">
+      <div class="ds-container">
+        <div class="section-head" data-reveal>
+          <p class="ds-numeral section-head__numeral" aria-hidden="true">04</p>
+          <p class="ds-label">Our Story</p>
+          <h2 class="ds-heading" id="story-title">Tiga Bab, Satu Arah</h2>
+          <img class="ds-orn ds-orn--center" src="assets/ornaments/sprig-divider.svg" alt="" aria-hidden="true">
+        </div>
+
+        <ol class="story-list">
+          <li class="story-chapter" data-reveal>
+            <p class="story-chapter__year ds-numeral">2019</p>
+            <div class="story-chapter__body">
+              <h3 class="ds-heading--m ds-heading">Pertemuan Pertama</h3>
+              <p class="ds-body">Bertemu di sebuah buku puisi yang jatuh dari rak yang sama di toko buku dekat kampus. Bukan hal yang megah — dan justru itu yang membuat kami mulai saling percaya.</p>
+            </div>
+          </li>
+          <li class="story-chapter" data-reveal>
+            <p class="story-chapter__year ds-numeral">2022</p>
+            <div class="story-chapter__body">
+              <h3 class="ds-heading--m ds-heading">Rumah Pertama</h3>
+              <p class="ds-body">Kami memutuskan untuk serius berbagi satu atap, satu kompromi, dan satu meja kecil yang selalu lebih besar daripada ruang yang selalu kami tiempuh bersama.</p>
+            </div>
+          </li>
+          <li class="story-chapter" data-reveal>
+            <p class="story-chapter__year ds-numeral">2026</p>
+            <div class="story-chapter__body">
+              <h3 class="ds-heading--m ds-heading">Sebab &amp; Tanggal</h3>
+              <p class="ds-body">Kami memilih tanggal ini bukan karena kalender, tapi karena kami ingin setiap orang yang kami cintai hadir di ruangan yang sama, pada hari yang sama.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <div class="ds-container"><div data-sig="bleed"></div></div>
+
+    <!-- ==================== 05 — THE DAY ==================== -->
+    <section class="ds-section ds-section--warm schedule" aria-labelledby="schedule-title">
+      <div class="ds-container">
+        <div class="section-head" data-reveal>
+          <p class="ds-numeral section-head__numeral" aria-hidden="true">05</p>
+          <p class="ds-label">The Day</p>
+          <h2 class="ds-heading" id="schedule-title">Susunan Hari Ini</h2>
+          <img class="ds-orn ds-orn--center" src="assets/ornaments/sprig-divider.svg" alt="" aria-hidden="true">
+          <p class="ds-lead">Simak alur acara kami. Setiap momen disusun dengan doa, cinta, dan kebahagia bersama orang-orang terdekat.</p>
+        </div>
+
+        <ol class="timeline">
+          <li class="timeline-item" data-reveal>
+            <div class="timeline-item__time"><time datetime="2026-12-12T08:00:00+07:00">08.00</time><span class="ds-meta">WIB</span></div>
+            <div class="timeline-item__dot" aria-hidden="true"></div>
+            <div class="timeline-item__body">
+              <p class="ds-label">Pembukaan</p>
+              <h3 class="ds-heading--m ds-heading">Penyambutan Tamu</h3>
+              <p class="ds-body">Para tamu dipersilakan datang, mengisi buku ucapan, dan menikmati sapaan hangat dari keluarga.</p>
+              <p class="ds-meta">Durasi 30 menit</p>
+            </div>
+          </li>
+          <li class="timeline-item timeline-item--featured" data-reveal>
+            <div class="timeline-item__time"><time datetime="2026-12-12T09:00:00+07:00">09.00</time><span class="ds-meta">WIB</span></div>
+            <div class="timeline-item__dot" aria-hidden="true"></div>
+            <div class="timeline-item__body">
+              <p class="ds-label">Akad Nikah</p>
+              <h3 class="ds-heading--m ds-heading">Janji Suci</h3>
+              <p class="ds-body">Pemberkatan janji suci yang disaksikan oleh keluarga dan orang-orang yang kami cintai.</p>
+              <p class="ds-meta">09.00 — 11.00 WIB</p>
+            </div>
+          </li>
+          <li class="timeline-item" data-reveal>
+            <div class="timeline-item__time"><time datetime="2026-12-12T11:00:00+07:00">11.00</time><span class="ds-meta">WIB</span></div>
+            <div class="timeline-item__dot" aria-hidden="true"></div>
+            <div class="timeline-item__body">
+              <p class="ds-label">Momen Keluarga</p>
+              <h3 class="ds-heading--m ds-heading">Sesi Foto Bersama</h3>
+              <p class="ds-body">Abadikan kehangatan bersama keluarga dan sahabat sebagai kenangan indah di hari ini.</p>
+              <p class="ds-meta">Durasi 30 menit</p>
+            </div>
+          </li>
+          <li class="timeline-item" data-reveal>
+            <div class="timeline-item__time"><time datetime="2026-12-12T11:30:00+07:00">11.30</time><span class="ds-meta">WIB</span></div>
+            <div class="timeline-item__dot" aria-hidden="true"></div>
+            <div class="timeline-item__body">
+              <p class="ds-label">Resepsi</p>
+              <h3 class="ds-heading--m ds-heading">Entrance &amp; Ramah Tamah</h3>
+              <p class="ds-body">Selepas akad, kami menyambut Bapak/Ibu untuk berbagi kebahagiaan dalam resepsi pernikahan.</p>
+              <p class="ds-meta">11.30 — 13.00 WIB</p>
+            </div>
+          </li>
+          <li class="timeline-item" data-reveal>
+            <div class="timeline-item__time"><time datetime="2026-12-12T12:15:00+07:00">12.15</time><span class="ds-meta">WIB</span></div>
+            <div class="timeline-item__dot" aria-hidden="true"></div>
+            <div class="timeline-item__body">
+              <p class="ds-label">Kejutan Manis</p>
+              <h3 class="ds-heading--m ds-heading">Potong Tumpeng &amp; Doorprize</h3>
+              <p class="ds-body">Momen spesial bersama pasangan pengantin dan hadiah kecil untuk tamu yang beruntung.</p>
+              <p class="ds-meta">Durasi 30 menit</p>
+            </div>
+          </li>
+          <li class="timeline-item" data-reveal>
+            <div class="timeline-item__time"><time datetime="2026-12-12T13:00:00+07:00">13.00</time><span class="ds-meta">WIB</span></div>
+            <div class="timeline-item__dot" aria-hidden="true"></div>
+            <div class="timeline-item__body">
+              <p class="ds-label">Penutup</p>
+              <h3 class="ds-heading--m ds-heading">Salam Bahagia</h3>
+              <p class="ds-body">Rangkaian acara selesai. Terima kasih atas kehadiran dan doa restu untuk perjalanan kami.</p>
+              <p class="ds-meta">Acara selesai</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <div class="ds-container"><div data-sig="center"></div></div>
+
+    <!-- ==================== 06 — THE CEREMONY ==================== -->
+    <section class="ds-section ceremony" aria-labelledby="event-title">
+      <div class="ds-container">
+        <div class="section-head" data-reveal>
+          <p class="ds-numeral section-head__numeral" aria-hidden="true">06</p>
+          <p class="ds-label">The Ceremony</p>
+          <h2 class="ds-heading" id="event-title">Dua Momen, Satu Hari</h2>
+          <img class="ds-orn ds-orn--center" src="assets/ornaments/sprig-divider.svg" alt="" aria-hidden="true">
+        </div>
+
+        <div class="event-grid">
+          <article class="ds-card event-card" data-reveal>
+            <p class="ds-label">Akad Nikah</p>
+            <h3 class="ds-heading--m ds-heading">09.00 — 11.00 WIB</h3>
+            <p class="ds-meta">Sabtu, 12 Desember 2026</p>
+            <p class="ds-body">Pemberkatan janji suci di ruang utama.</p>
+          </article>
+          <article class="ds-card event-card" data-reveal>
+            <p class="ds-label">Resepsi</p>
+            <h3 class="ds-heading--m ds-heading">11.30 — 13.00 WIB</h3>
+            <p class="ds-meta">Sabtu, 12 Desember 2026</p>
+            <p class="ds-body">Ramah tamah bersama keluarga dan sahabat.</p>
+          </article>
+        </div>
+
+        <div class="ds-inset venue" data-reveal>
+          <div class="venue__text">
+            <p class="ds-label">Lokasi Acara</p>
+            <h3 class="ds-heading--m ds-heading">Grand Garden Ballroom</h3>
+            <p class="ds-body">Jl. Merpati Indah No. 12, Jakarta Selatan</p>
+          </div>
+          <a class="ds-btn ds-btn--primary venue__map" href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Garden%20Ballroom%2C%20Jl.%20Merpati%20Indah%20No.%2012%2C%20Jakarta%20Selatan" target="_blank" rel="noopener noreferrer" aria-label="Buka lokasi di Google Maps">Lihat Lokasi</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="ds-container"><div data-sig="center"></div></div>
+
+    <!-- ==================== 07 — THE MOMENTS ==================== -->
+    <section class="ds-section ds-section--warm gallery" aria-labelledby="gallery-title">
+      <div class="ds-container">
+        <div class="section-head" data-reveal>
+          <p class="ds-numeral section-head__numeral" aria-hidden="true">07</p>
+          <p class="ds-label">The Moments</p>
+          <h2 class="ds-heading" id="gallery-title">Momen yang Bercerita</h2>
+          <img class="ds-orn ds-orn--center" src="assets/ornaments/sprig-divider.svg" alt="" aria-hidden="true">
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-item gallery-item--tall" data-reveal data-lightbox>
+            <div class="ds-media ds-media--portrait ds-media--zooming"><img src="assets/images/wedding-ceremony.jpg" alt="Suasana upacara pernikahan" loading="lazy" decoding="async"></div>
+            <figcaption class="ds-media__caption">Janji yang diucap</figcaption>
+          </figure>
+          <figure class="gallery-item" data-reveal data-lightbox>
+            <div class="ds-media ds-media--editorial ds-media--zooming"><img src="assets/images/wedding-details.jpg" alt="Detail dekorasi pernikahan" loading="lazy" decoding="async"></div>
+            <figcaption class="ds-media__caption">Detail penuh makna</figcaption>
+          </figure>
+          <figure class="gallery-item" data-reveal data-lightbox>
+            <div class="ds-media ds-media--editorial ds-media--zooming"><img src="assets/images/wedding-venue.jpg" alt="Dekorasi venue pernikahan" loading="lazy" decoding="async"></div>
+            <figcaption class="ds-media__caption">Ruang untuk bahagia</figcaption>
+          </figure>
+          <figure class="gallery-item gallery-item--wide" data-reveal data-lightbox>
+            <div class="ds-media ds-media--wide ds-media--zooming"><img src="assets/images/couple-story.jpg" alt="Potret pasangan pengantin" loading="lazy" decoding="async"></div>
+            <figcaption class="ds-media__caption">Kita yang terus belajar</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <div class="ds-container"><div data-sig="center"></div></div>
+
+    <!-- ==================== 08 — THE COUNTDOWN ==================== -->
+    <section class="ds-section countdown" aria-labelledby="countdown-title">
+      <div class="ds-container countdown__inner">
+        <p class="ds-numeral countdown__numeral" aria-hidden="true">08</p>
+        <p class="ds-label">The Countdown</p>
+        <h2 class="ds-heading" id="countdown-title">Menuju Hari Bahagia</h2>
+        <div class="countdown" aria-label="Hitung mundur waktu acara" aria-live="off">
+          <div class="countdown__cell"><strong id="days">00</strong><span class="ds-label">Hari</span></div>
+          <div class="countdown__cell"><strong id="hours">00</strong><span class="ds-label">Jam</span></div>
+          <div class="countdown__cell"><strong id="minutes">00</strong><span class="ds-label">Menit</span></div>
+          <div class="countdown__cell"><strong id="seconds">00</strong><span class="ds-label">Detik</span></div>
+        </div>
+        <p id="countdownMessage" class="ds-meta" aria-live="polite">Sampai jumpa di hari bahagia kami.</p>
+      </div>
+    </section>
+
+    <div class="ds-container"><div data-sig="center"></div></div>
+
+    <!-- ==================== 09 — RSVP ==================== -->
+    <section class="ds-section ds-section--deep rsvp" aria-labelledby="rsvp-title">
+      <div class="ds-container rsvp__inner">
+        <p class="ds-numeral rsvp__numeral" aria-hidden="true">09</p>
+        <p class="ds-label">Rsvp</p>
+        <h2 class="ds-heading" id="rsvp-title">Doa Restu Anda</h2>
+        <img class="ds-orn ds-orn--center" src="assets/ornaments/sprig-divider.svg" alt="" aria-hidden="true">
+        <p class="ds-lead rsvp__lead">Kehadiran Anda adalah hadiah terindah. Mohon konfirmasi agar kami bisa menyiapkan tempat terbaik untuk Anda.</p>
+
+        <form class="rsvp-form" id="rsvpForm" novalidate>
+          <div class="ds-field">
+            <label class="ds-label" for="guestName">Nama</label>
+            <input class="ds-input" id="guestName" name="guestName" type="text" placeholder="Tuliskan nama Anda" required autocomplete="name">
+          </div>
+          <div class="rsvp-form__row">
+            <div class="ds-field">
+              <label class="ds-label" for="attendance">Konfirmasi</label>
+              <select class="ds-select" id="attendance" name="attendance">
+                <option value="">Pilih konfirmasi</option>
+                <option value="hadir">Hadir</option>
+                <option value="tidak-hadir">Berhalangan hadir</option>
+              </select>
+            </div>
+            <div class="ds-field">
+              <label class="ds-label" for="guestCount">Jumlah tamu</label>
+              <select class="ds-select" id="guestCount" name="guestCount">
+                <option value="1">1 orang</option>
+                <option value="2">2 orang</option>
+              </select>
+            </div>
+          </div>
+          <div class="ds-field">
+            <label class="ds-label" for="message">Ucapan &amp; doa</label>
+            <textarea class="ds-textarea" id="message" name="message" rows="4" placeholder="Tuliskan ucapan untuk kami" required></textarea>
+          </div>
+          <button type="submit" class="ds-btn ds-btn--fill rsvp-form__submit">Kirim Ucapan &amp; Doa</button>
+          <p class="ds-meta rsvp-form__hint">Tamu juga bisa mengonfirmasi langsung melalui WhatsApp.</p>
+          <a class="ds-btn ds-btn--ghost rsvp-form__wa" id="rsvpWhatsapp" href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">Konfirmasi via WhatsApp</a>
+        </form>
+      </div>
+    </section>
+
+    <div class="ds-container"><div data-sig="center"></div></div>
+
+    <!-- ==================== LIVESTREAM ==================== -->
+    <section class="ds-section livestream" aria-labelledby="livestream-title">
+      <div class="ds-container">
+        <div class="section-head" data-reveal>
+          <p class="ds-label">Live From The Ceremony</p>
+          <h2 class="ds-heading" id="livestream-title">Hadir dari Mana Saja</h2>
+          <img class="ds-orn ds-orn--center" src="assets/ornaments/sprig-divider.svg" alt="" aria-hidden="true">
+        </div>
+
+        <div class="livestream-card ds-card ds-card--flat" data-reveal>
+          <div class="livestream-preview">
+            <div class="livestream-placeholder" aria-hidden="true">
+              <span class="livestream-badge">Live</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="livestream-overlay">
+              <button class="livestream-play" id="livestreamPlay" type="button" aria-label="Putar siaran langsung">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <p class="ds-meta">Siaran langsung dimulai 10 menit sebelum acara</p>
+            </div>
+          </div>
+          <div class="livestream-info">
+            <p class="ds-label">Akad Nikah &amp; Resepsi</p>
+            <h3 class="ds-heading--m ds-heading">Sabtu, 12 Desember 2026 · 09.00 WIB</h3>
+            <p class="ds-body">Tidak bisa hadir secara langsung? Ikuti momen bahagia kami melalui siaran langsung.</p>
+            <div class="livestream-actions">
+              <a class="ds-btn ds-btn--primary" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">YouTube Live</a>
+              <a class="ds-btn ds-btn--primary" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram Live</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="calendar-row" data-reveal>
+          <button class="ds-btn ds-btn--primary" id="calendarBtn" type="button">Simpan ke Kalender</button>
+          <p class="ds-meta">Kami mengirim pengingat 1 jam sebelum acara dimulai</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="ds-container"><div data-sig="center"></div></div>
+
+    <!-- ==================== 10 — GIFT ==================== -->
+    <section class="ds-section ds-section--warm gift" aria-labelledby="gift-title">
+      <div class="ds-container">
+        <div class="section-head" data-reveal>
+          <p class="ds-numeral section-head__numeral" aria-hidden="true">10</p>
+          <p class="ds-label">Gift</p>
+          <h2 class="ds-heading" id="gift-title">Berbagi Kebahagiaan</h2>
+          <img class="ds-orn ds-orn--center" src="assets/ornaments/sprig-divider.svg" alt="" aria-hidden="true">
+          <p class="ds-lead">Kehadiran Anda adalah kado terindah. Jika berkenan, kami menyediakan opsi berikut.</p>
+        </div>
+
+        <div class="gift-grid">
+          <article class="ds-card gift-card" data-reveal>
+            <p class="ds-label">Bank Mandiri</p>
+            <div class="gift-account">
+              <code class="gift-account__number" data-copy="123000555777999">123000555777999</code>
+              <button class="gift-copy" type="button" data-copy="123000555777999" aria-label="Salin nomor rekening Bank Mandiri" title="Salin">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1z"/><path d="M19 5H8a2 2 0 0 0-2 2v14h2V7h11a2 2 0 0 0 2-2V7"/></svg>
+              </button>
+            </div>
+            <p class="ds-meta">a.n. Anindya Wibowo</p>
+          </article>
+
+          <article class="ds-card gift-card" data-reveal>
+            <p class="ds-label">Bank Central Asia</p>
+            <div class="gift-account">
+              <code class="gift-account__number" data-copy="1234567890">1234567890</code>
+              <button class="gift-copy" type="button" data-copy="1234567890" aria-label="Salin nomor rekening Bank BCA" title="Salin">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1z"/><path d="M19 5H8a2 2 0 0 0-2 2v14h2V7h11a2 2 0 0 0 2-2V7"/></svg>
+              </button>
+            </div>
+            <p class="ds-meta">a.n. Anindya Wibowo</p>
+          </article>
+
+          <article class="ds-card gift-card" data-reveal>
+            <p class="ds-label">Kotak Hadiah</p>
+            <p class="ds-body">Tersedia di meja resepsionis.</p>
+            <p class="ds-meta">Kehadiran Anda sudah cukup berarti.</p>
+          </article>
+        </div>
+
+        <blockquote class="ds-quote gift-note" data-reveal>
+          “Barangsiapa yang memberi sedekah, maka Allah akan melipatgandakan balasannya.”
+          <footer class="ds-meta">QS. Al-Baqarah: 245</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <div class="ds-container"><div data-sig="center"></div></div>
+
+    <!-- ==================== WISHES ==================== -->
+    <section class="ds-section wishes" aria-labelledby="wishes-title">
+      <div class="ds-container">
+        <div class="section-head" data-reveal>
+          <p class="ds-label">Wishes</p>
+          <h2 class="ds-heading" id="wishes-title">Doa dari Sahabat</h2>
+        </div>
+        <button class="wishes-pause ds-label" id="wishesPause" type="button" aria-pressed="false" aria-controls="wishesTrack">Jeda alur ucapan</button>
+        <div class="wishes-marquee" id="wishesMarquee" aria-label="Alur ucapan dan doa tamu">
+          <div class="wishes-marquee__track" id="wishesTrack">
+            <div class="wishes-marquee__group" id="wishesGroupA">
+              <article class="ds-inset wish-card wish-card--moving">
+                <p class="ds-body">“Selamat menempuh hidup baru. Semoga rumah tangga kalian selalu dipenuhi cinta, sabar, dan berkah.”</p>
+                <footer class="ds-meta">— Keluarga Besar</footer>
+              </article>
+              <article class="ds-inset wish-card wish-card--moving">
+                <p class="ds-body">“Happy wedding! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.”</p>
+                <footer class="ds-meta">— Sahabat Kami</footer>
+              </article>
+              <article class="ds-inset wish-card wish-card--moving">
+                <p class="ds-body">“Bahagia selalu dalam setiap langkah bersama.”</p>
+                <footer class="ds-meta">— Teman-Teman Anindya</footer>
+              </article>
+            </div>
+            <div class="wishes-marquee__group" id="wishesGroupB" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ds-container"><div data-sig="bleed"></div></div>
+
+    <!-- ==================== A NOTE FOR US ==================== -->
+    <section class="ds-section note" aria-labelledby="note-title">
+      <div class="ds-container note__inner">
+        <p class="ds-label">A Note For Us</p>
+        <h2 class="ds-heading" id="note-title">Sampai Jumpa</h2>
+        <div class="note__card ds-inset">
+          <p class="ds-lead">Terima kasih sudah melangkah sampai sini, dan terima kasih untuk setiap doa yang kalian tulis.</p>
+          <p class="ds-body">Kami tahu satu hari tidak cukup untuk merayakan semua yang kami rasakan. Karena itu kami menaruhnya di tangan kalian — di rumah kami yang baru, di meja yang selalu penuh, di hari-hari kecil yang akan kami jalani bersama.</p>
+          <p class="ds-body">Mohon doa restu kalian. Sampai bertemu di&nbsp;12&nbsp;Desember&nbsp;2026.</p>
+          <p class="ds-script note__sign">Anindya <span class="amp">&amp;</span> Kirana</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="ds-container"><div data-sig="center"></div></div>
+
+    <!-- ==================== CLOSING ==================== -->
+    <footer class="ds-section--warm closing">
+      <div class="ds-container closing__inner">
+        <div class="closing__corners ds-ornamented" aria-hidden="true">
+          <svg class="ds-orn ds-orn--corner ds-orn--tl closing__corner closing__corner--tl" viewBox="0 0 120 120" fill="none">
+            <path d="M2 118V2H118"/><path d="M2 66C12 56 24 55 34 60C27 70 15 71 2 66Z"/><path d="M60 2C56 12 55 24 60 34C70 27 71 15 66 2Z"/><circle cx="18" cy="18" r="2" fill="currentColor" stroke="none"/>
+          </svg>
+          <svg class="ds-orn ds-orn--corner ds-orn--tr closing__corner closing__corner--tr" viewBox="0 0 120 120" fill="none">
+            <path d="M2 118V2H118"/><path d="M2 66C12 56 24 55 34 60C27 70 15 71 2 66Z"/><path d="M60 2C56 12 55 24 60 34C70 27 71 15 66 2Z"/><circle cx="18" cy="18" r="2" fill="currentColor" stroke="none"/>
+          </svg>
+          <svg class="ds-orn ds-orn--corner ds-orn--br closing__corner closing__corner--br" viewBox="0 0 120 120" fill="none">
+            <path d="M2 118V2H118"/><path d="M2 66C12 56 24 55 34 60C27 70 15 71 2 66Z"/><path d="M60 2C56 12 55 24 60 34C70 27 71 15 66 2Z"/><circle cx="18" cy="18" r="2" fill="currentColor" stroke="none"/>
+          </svg>
+          <svg class="ds-orn ds-orn--corner ds-orn--bl closing__corner closing__corner--bl" viewBox="0 0 120 120" fill="none">
+            <path d="M2 118V2H118"/><path d="M2 66C12 56 24 55 34 60C27 70 15 71 2 66Z"/><path d="M60 2C56 12 55 24 60 34C70 27 71 15 66 2Z"/><circle cx="18" cy="18" r="2" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <p class="closing__monogram ds-script">A <span class="amp">&amp;</span> K</p>
+        <p class="ds-body">Terima kasih atas doa dan restu Bapak/Ibu/Saudara/i.</p>
+        <p class="closing__names ds-meta">Anindya &amp; Kirana · 12 . 12 . 2026</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ==================== COVER ==================== -->
+  <section class="cover" id="cover" aria-label="Sampul undangan pernikahan">
+    <div class="cover__media" aria-hidden="true"><img src="assets/images/hero-wedding.jpg" alt="" fetchpriority="high" decoding="async"></div>
+    <div class="cover__shade" aria-hidden="true"></div>
+    <div class="cover__corners" aria-hidden="true">
+      <svg class="ds-orn ds-orn--corner cover__corner cover__corner--tl" viewBox="0 0 120 120" fill="none">
+        <path d="M2 118V2H118"/><path d="M2 66C12 56 24 55 34 60C27 70 15 71 2 66Z"/><path d="M60 2C56 12 55 24 60 34C70 27 71 15 66 2Z"/><circle cx="18" cy="18" r="2" fill="currentColor" stroke="none"/>
+      </svg>
+      <svg class="ds-orn ds-orn--corner cover__corner cover__corner--tr" viewBox="0 0 120 120" fill="none">
+        <path d="M2 118V2H118"/><path d="M2 66C12 56 24 55 34 60C27 70 15 71 2 66Z"/><path d="M60 2C56 12 55 24 60 34C70 27 71 15 66 2Z"/><circle cx="18" cy="18" r="2" fill="currentColor" stroke="none"/>
+      </svg>
+      <svg class="ds-orn ds-orn--corner cover__corner cover__corner--br" viewBox="0 0 120 120" fill="none">
+        <path d="M2 118V2H118"/><path d="M2 66C12 56 24 55 34 60C27 70 15 71 2 66Z"/><path d="M60 2C56 12 55 24 60 34C70 27 71 15 66 2Z"/><circle cx="18" cy="18" r="2" fill="currentColor" stroke="none"/>
+      </svg>
+      <svg class="ds-orn ds-orn--corner cover__corner cover__corner--bl" viewBox="0 0 120 120" fill="none">
+        <path d="M2 118V2H118"/><path d="M2 66C12 56 24 55 34 60C27 70 15 71 2 66Z"/><path d="M60 2C56 12 55 24 60 34C70 27 71 15 66 2Z"/><circle cx="18" cy="18" r="2" fill="currentColor" stroke="none"/>
+      </svg>
+    </div>
+    <div class="cover__content">
+      <p class="ds-label cover__topline">The Wedding Of</p>
+      <p class="cover__names ds-script">Anindya <span class="amp">&amp;</span> Kirana</p>
+      <p class="cover__date ds-heading--m ds-heading">12 . 12 . 2026</p>
+      <p class="cover__place ds-meta">Grand Garden Ballroom · Jakarta</p>
+      <button class="ds-btn ds-btn--primary cover__open" id="openButton" type="button" aria-label="Buka undangan dan putar musik">Buka Undangan</button>
+      <p class="cover__hint ds-meta">Ketuk untuk membuka · musik akan menyala</p>
+    </div>
+  </section>
+
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Jeda musik" aria-pressed="false" disabled>
+    <span class="music-toggle__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M9 18.5a3 3 0 1 1-2-2.83V5l11-2v11.2a3 3 0 1 1-2-2.83V7.4L10 9.1v9.4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path class="music-wave" d="M17 12v4M20 10v8M14 14v2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </span>
+    <span class="music-toggle__label ds-label">Musik</span>
+  </button>
+
+  <div class="music-panel" id="musicPanel" hidden>
+    <button class="music-panel__close" id="musicPanelClose" type="button" aria-label="Tutup daftar putar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="music-panel__header">
+      <p class="ds-label">Pilihan Musik</p>
+      <h3 class="ds-heading--m ds-heading">Romantic Wedding Piano</h3>
+      <p class="ds-meta">iringan lembut untuk hari bahagia</p>
+    </div>
+    <ul class="music-playlist" id="musicPlaylist">
+      <li class="music-track" data-src="assets/audio/romantic-wedding-piano.mp3" data-title="Romantic Wedding Piano" data-artist="Wedding Collection" tabindex="0" aria-selected="true">
+        <span class="music-track__number ds-numeral">01</span>
+        <span class="music-track__info"><span class="music-track__title">Romantic Wedding Piano</span><span class="music-track__artist ds-meta">Wedding Collection</span></span>
+        <span class="music-track__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      </li>
+      <li class="music-track" data-src="assets/audio/romantic-wedding-piano.mp3" data-title="A Promise of Forever" data-artist="Wedding Collection" tabindex="0" aria-selected="false">
+        <span class="music-track__number ds-numeral">02</span>
+        <span class="music-track__info"><span class="music-track__title">A Promise of Forever</span><span class="music-track__artist ds-meta">Wedding Collection</span></span>
+        <span class="music-track__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      </li>
+      <li class="music-track" data-src="assets/audio/romantic-wedding-piano.mp3" data-title="Golden Vows" data-artist="Wedding Collection" tabindex="0" aria-selected="false">
+        <span class="music-track__number ds-numeral">03</span>
+        <span class="music-track__info"><span class="music-track__title">Golden Vows</span><span class="music-track__artist ds-meta">Wedding Collection</span></span>
+        <span class="music-track__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      </li>
+    </ul>
+    <div class="music-panel__now-playing">
+      <span class="ds-label">Sedang Diputar</span>
+      <span class="music-panel__now-playing-title" id="musicNowPlayingTitle">Romantic Wedding Piano</span>
+      <span class="ds-meta" id="musicNowPlayingArtist">Wedding Collection</span>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Tutup galeri">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Foto sebelumnya">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="lightbox-content">
+      <img id="lightboxImage" alt="">
+      <p class="lightbox-caption ds-meta" id="lightboxCaption"></p>
+    </div>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Foto berikutnya">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <audio id="backgroundMusic" src="assets/audio/romantic-wedding-piano.mp3" preload="metadata" loop></audio>
+  <noscript><p class="no-script">Aktifkan JavaScript untuk membuka undangan ini.</p></noscript>
+</div>
+
+<script src="js/signature-transition.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

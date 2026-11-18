@@ -1,0 +1,133 @@
+/* ==========================================================================
+   SIGNATURE TRANSITION — botanical vine that draws itself on section entry
+   Depends on: tokens.css
+   Trigger:    add .is-drawn (done by signature-transition.js)
+
+   Per-element placement is authored inline as custom properties so the
+   stagger stays explicit and the markup has no positional wrapper groups:
+     --x --y  translate in user units
+     --r      rotation
+     --i      stagger index
+   ========================================================================== */
+
+.sig {
+  display: block;
+  width: min(320px, 58%);
+  margin-inline: auto;
+  color: var(--sig-stroke);
+  overflow: visible;
+}
+
+.sig__vine {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset var(--sig-duration) var(--sig-ease);
+}
+
+.sig__leaf {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.1;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  transform-box: view-box;
+  transform-origin: 0 0;
+  transform:
+    translate(var(--x, 0px), var(--y, 0px))
+    rotate(var(--r, 0deg))
+    scale(var(--s, .2));
+  opacity: 0;
+  transition:
+    transform var(--dur-base) var(--sig-ease-soft),
+    opacity var(--dur-base) var(--ease-out);
+  transition-delay: calc(var(--sig-leaf-gap) * var(--i, 0));
+}
+
+.sig__bud {
+  fill: currentColor;
+  stroke: none;
+  transform-box: view-box;
+  transform-origin: 0 0;
+  transform:
+    translate(var(--x, 0px), var(--y, 0px))
+    scale(var(--s, 0));
+  opacity: 0;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    opacity var(--dur-in) linear;
+  transition-delay: calc(var(--sig-leaf-gap) * var(--i, 0));
+}
+
+/* --- Drawn state ---------------------------------------------------------- */
+
+.sig.is-drawn .sig__vine {
+  stroke-dashoffset: 0;
+}
+
+.sig.is-drawn .sig__leaf {
+  --s: 1;
+  opacity: 1;
+}
+
+.sig.is-drawn .sig__bud {
+  --s: 1;
+  opacity: 1;
+}
+
+/* --- Variants ------------------------------------------------------------- */
+
+.sig--left {
+  width: clamp(180px, 30%, 220px);
+  margin-inline: 0 auto;
+}
+
+.sig--bleed {
+  width: 100%;
+}
+
+.sig--stack {
+  width: clamp(70px, 12%, 90px);
+  transform: rotate(90deg);
+}
+
+/* --- No-JS fallback: ornament present, simply not animated ----------------- */
+
+.sig:not(.is-drawn):not(.js) .sig__vine {
+  stroke-dashoffset: 0;
+}
+
+.sig:not(.is-drawn):not(.js) .sig__leaf {
+  --s: 1;
+  opacity: 1;
+}
+
+.sig:not(.is-drawn):not(.js) .sig__bud {
+  --s: 1;
+  opacity: 1;
+}
+
+/* --- Reduced motion: final frame, no performance -------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .sig .sig__vine {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+
+  .sig .sig__leaf {
+    --s: 1;
+    opacity: 1;
+    transition: none;
+  }
+
+  .sig .sig__bud {
+    --s: 1;
+    opacity: 1;
+    transition: none;
+  }
+}

@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pemilihan Palet — bandingkan 3 opsi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/ornaments.css">
+<style>
+/* ============================================================
+   3 PALET. Semua nilai di sini akan jadi css/tokens.css setelah Anda pilih.
+   --deep = warna anchor untuk section gelap (kembalikan ritme terang-gelap-terang)
+   ============================================================ */
+
+/* --- A · Champagne & Rose --------------------------------- */
+.pal-a {
+  --paper: #FDFAF6;
+  --paper-warm: #F9F1E8;
+  --paper-deep: #F4E9DA;
+  --card: #FFFCF8;
+  --ink: #35292B;
+  --ink-soft: #6A585A;
+  --ink-muted: #9C8B8C;
+  --blush: #EACAC6;
+  --blush-soft: #F5E0DD;
+  --rose: #B87F79;
+  --rose-deep: #8E4F4A;
+  --sage: #B3AEA2;
+  --sage-deep: #6F6A5E;
+  --gold: #C4A574;
+  --champagne: #EAD9BC;
+  --deep: #3A2B2A;
+  --line-hairline: rgba(53, 41, 43, .10);
+  --line-soft: rgba(184, 127, 121, .24);
+  --line-rose: rgba(184, 127, 121, .44);
+  --line-gold: rgba(196, 165, 116, .46);
+  --sig-stroke: #8E4F4A;
+}
+
+/* --- B · Rosewood & Cream (paling hangat, kontras terkuat) - */
+.pal-b {
+  --paper: #FBF4EA;
+  --paper-warm: #F5E8D8;
+  --paper-deep: #EEDBC4;
+  --card: #FFF9F0;
+  --ink: #3E2622;
+  --ink-soft: #6B4A44;
+  --ink-muted: #9A7A72;
+  --blush: #E5BDB6;
+  --blush-soft: #F2D7D1;
+  --rose: #A8564F;
+  --rose-deep: #7C3A34;
+  --sage: #A89878;
+  --sage-deep: #6B5E44;
+  --gold: #B08A50;
+  --champagne: #E5CFA4;
+  --deep: #3A2420;
+  --line-hairline: rgba(62, 38, 34, .12);
+  --line-soft: rgba(168, 86, 79, .26);
+  --line-rose: rgba(168, 86, 79, .48);
+  --line-gold: rgba(176, 138, 80, .48);
+  --sig-stroke: #7C3A34;
+}
+
+/* --- C · Sage & Blush (paling kalem, kurang merah) --------- */
+.pal-c {
+  --paper: #FAF7F0;
+  --paper-warm: #F1F0E6;
+  --paper-deep: #E4E4D6;
+  --card: #FEFCF6;
+  --ink: #2C3830;
+  --ink-soft: #55645A;
+  --ink-muted: #8A978E;
+  --blush: #E3C6C3;
+  --blush-soft: #F1DCDA;
+  --rose: #A9707A;
+  --rose-deep: #7E4F58;
+  --sage: #7E9184;
+  --sage-deep: #55675C;
+  --gold: #AE9668;
+  --champagne: #DED2B4;
+  --deep: #26302A;
+  --line-hairline: rgba(44, 56, 48, .10);
+  --line-soft: rgba(127, 145, 132, .26);
+  --line-rose: rgba(169, 112, 122, .42);
+  --line-gold: rgba(174, 150, 104, .44);
+  --sig-stroke: #7E4F58;
+}
+
+/* ============================================================
+   Chrome pratinjau
+   ============================================================ */
+
+.pv-head {
+  padding: var(--space-10) var(--gutter) var(--space-6);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-sans);
+  font-size: var(--fs-meta);
+  line-height: 1.6;
+}
+
+.pv-head strong {
+  display: block;
+  font-size: 1.05rem;
+  letter-spacing: .04em;
+  margin-bottom: var(--space-2);
+}
+
+.pv-grid {
+  display: grid;
+  gap: 2px;
+  background: var(--line-hairline);
+}
+
+@media (min-width: 64rem) {
+  .pv-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.pal {
+  background: var(--paper);
+  display: grid;
+  grid-template-rows: auto auto auto auto auto auto auto;
+}
+
+/* label kolom */
+.pal__label {
+  padding: var(--space-5) var(--space-6);
+  background: var(--card);
+  border-bottom: 1px solid var(--line-hairline);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.pal__name {
+  font-family: var(--font-script);
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.pal__note {
+  font-size: .78rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
+  max-width: 34ch;
+}
+
+.pal__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: var(--space-2);
+}
+
+.pal__swatches i {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--line-hairline);
+}
+
+/* 1 · hero dengan foto */
+.pv-hero {
+  position: relative;
+  min-height: 260px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: var(--space-2);
+  padding: var(--space-10) var(--space-6);
+  overflow: hidden;
+}
+
+.pv-hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(.92) contrast(1.02);
+  z-index: 0;
+}
+
+.pv-hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.46));
+}
+
+.pv-hero__in {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  color: #fff;
+}
+
+.pv-hero__names {
+  font-family: var(--font-script);
+  font-size: clamp(2.4rem, 4.4vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.pv-hero__names em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--champagne);
+}
+
+/* 2 · section head + signature */
+.pv-section {
+  padding: var(--space-12) var(--space-6);
+  background: var(--paper);
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+}
+
+.pv-section--warm { background: var(--paper-warm); }
+
+.pv-num {
+  font-family: var(--font-sans);
+  font-size: .68rem;
+  letter-spacing: .28em;
+  color: var(--ink-muted);
+}
+
+.pv-section h3 {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.pv-sprig { width: 130px; margin-block: var(--space-2); }
+
+/* 3 · band gelap (anchor kontras) */
+.pv-deep {
+  padding: var(--space-12) var(--space-6);
+  background: var(--deep);
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+}
+
+.pv-deep h3 {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--paper);
+}
+
+.pv-deep p {
+  font-family: var(--font-sans);
+  font-size: .72rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--champagne);
+}
+
+.pv-deep .pv-sprig { opacity: .9; }
+
+/* 4 · timeline item */
+.pv-timeline {
+  padding: var(--space-10) var(--space-6) var(--space-10) var(--space-10);
+  background: var(--paper-warm);
+  display: grid;
+  gap: var(--space-4);
+}
+
+.pv-tl {
+  position: relative;
+  padding-left: var(--space-6);
+  border-left: 1px solid var(--line-rose);
+  display: grid;
+  gap: var(--space-1);
+}
+
+.pv-tl::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rose);
+}
+
+.pv-tl__time {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--rose-deep);
+  letter-spacing: .04em;
+}
+
+.pv-tl h4 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.pv-tl p {
+  font-size: .88rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.pv-tl--feature::before { background: var(--gold); }
+
+/* 5 · kartu gift */
+.pv-cards {
+  padding: var(--space-10) var(--space-6);
+  background: var(--paper);
+  display: grid;
+  gap: var(--space-4);
+}
+
+.pv-card {
+  padding: var(--space-5);
+  background: var(--card);
+  border: 1px solid var(--line-hairline);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.pv-card label {
+  font-family: var(--font-sans);
+  font-size: .68rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.pv-acct {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--paper-deep);
+  border-radius: var(--radius-sm);
+}
+
+.pv-acct code {
+  flex: 1;
+  font-family: var(--font-sans);
+  font-size: .9rem;
+  letter-spacing: .06em;
+  color: var(--ink);
+}
+
+.pv-copy {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background: var(--blush-soft);
+  color: var(--rose-deep);
+}
+
+.pv-copy svg { width: 15px; height: 15px; fill: currentColor; }
+
+.pv-name {
+  font-family: var(--font-sans);
+  font-size: .78rem;
+  color: var(--ink-muted);
+}
+
+/* 6 · signature transition (gambar statis) */
+.pv-sig {
+  padding: var(--space-8) var(--space-6);
+  background: var(--paper-warm);
+}
+
+.pv-sig .sig {
+  display: block;
+  width: min(240px, 70%);
+  margin-inline: auto;
+  color: var(--sig-stroke);
+  overflow: visible;
+}
+
+.pv-sig .sig__vine {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.pv-sig .sig__leaf,
+.pv-sig .sig__bud { display: none; }
+
+/* 7 · tombol */
+.pv-actions {
+  padding: var(--space-10) var(--space-6);
+  background: var(--paper);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+}
+</style>
+</head>
+<body style="margin:0">
+
+<div class="pv-head">
+  <strong>Pemilihan palet — buka di layar lebar untuk membandingkan 3 kolom.</strong>
+  Bandingkan: hero dengan foto, section terang, band gelap, timeline, kartu gift, dan garis signature.
+ Setiap kolom di bawah adalah potongan nyata dari index.html, bukan mockup terpisah.
+</div>
+
+<div class="pv-grid">
+
+  <!-- ============================ A ============================ -->
+  <div class="pal pal-a">
+    <div class="pal__label">
+      <span class="pal__name">A · Champagne &amp; Rose</span>
+      <span class="pal__note">Paling terang dan highest-key. Foto paling dominan, menyisakan sedikit ruang untuk identitas. Risiko: washed out saat foto gelap.</span>
+      <div class="pal__swatches">
+        <i style="background:#FDFAF6"></i><i style="background:#F9F1E8"></i><i style="background:#FFFCF8"></i>
+        <i style="background:#35292B"></i><i style="background:#B87F79"></i><i style="background:#8E4F4A"></i>
+        <i style="background:#C4A574"></i><i style="background:#3A2B2A"></i>
+      </div>
+    </div>
+
+    <div class="pv-hero">
+      <img src="assets/images/hero-wedding.jpg" alt="">
+      <div class="pv-hero__scrim"></div>
+      <div class="pv-hero__in">
+        <span style="font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:#EAD9BC">01 — The Beginning</span>
+        <span class="pv-hero__names">Anindya <em>&amp;</em> Kirana</span>
+        <span style="font-size:.85rem;letter-spacing:.14em;color:rgba(255,255,255,.85)">12 · 12 · 2026</span>
+      </div>
+    </div>
+
+    <div class="pv-section">
+      <span class="pv-num">03</span>
+      <span style="font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:#9C8B8C;font-family:Jost,sans-serif">The Two Of Us</span>
+      <h3>Dua yang Satu</h3>
+      <img class="ds-orn pv-sprig" src="assets/ornaments/sprig-divider.svg" alt="">
+    </div>
+
+    <div class="pv-deep">
+      <p>The Ceremony</p>
+      <h3>Dua Momen, Satu Hari</h3>
+      <img class="ds-orn pv-sprig" src="assets/ornaments/sprig-divider.svg" alt="">
+    </div>
+
+    <div class="pv-timeline">
+      <div class="pv-tl pv-tl--feature">
+        <span class="pv-tl__time">09.00</span>
+        <h4>Janji Suci</h4>
+        <p>Pemberkatan janji suci yang disaksikan oleh keluarga.</p>
+      </div>
+      <div class="pv-tl">
+        <span class="pv-tl__time">11.30</span>
+        <h4>Entrance &amp; Ramah Tamah</h4>
+        <p>Selepas akad, kami menyambut Bapak/Ibu.</p>
+      </div>
+    </div>
+
+    <div class="pv-cards">
+      <div class="pv-card">
+        <label>Bank Mandiri</label>
+        <div class="pv-acct">
+          <code>123000555777999</code>
+          <span class="pv-copy"><svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1z"/><path d="M19 5H8a2 2 0 0 0-2 2v14h2V7h11a2 2 0 0 0 2-2V7"/></svg></span>
+        </div>
+        <span class="pv-name">a.n. Anindya Wibowo</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="pv-sig">
+        <svg class="sig" viewBox="0 0 400 60" fill="none" aria-hidden="true">
+          <path class="sig__vine" pathLength="1" d="M8 40C70 12 120 56 200 34C280 12 330 56 392 30"/>
+        </svg>
+      </div>
+      <div class="pv-actions">
+        <button class="ds-btn ds-btn--primary" type="button">Buka Undangan</button>
+        <button class="ds-btn ds-btn--fill" type="button">Kirim Ucapan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ B ============================ -->
+  <div class="pal pal-b">
+    <div class="pal__label">
+      <span class="pal__name">B · Rosewood &amp; Cream</span>
+      <span class="pal__note">Paling hangat dan kontras terkuat. Band gelap benar-benar gelap, jadi ritme terang-gelap-terang terasa. Skin tone foto paling warmed-in.</span>
+      <div class="pal__swatches">
+        <i style="background:#FBF4EA"></i><i style="background:#F5E8D8"></i><i style="background:#FFF9F0"></i>
+        <i style="background:#3E2622"></i><i style="background:#A8564F"></i><i style="background:#7C3A34"></i>
+        <i style="background:#B08A50"></i><i style="background:#3A2420"></i>
+      </div>
+    </div>
+
+    <div class="pv-hero">
+      <img src="assets/images/hero-wedding.jpg" alt="">
+      <div class="pv-hero__scrim"></div>
+      <div class="pv-hero__in">
+        <span style="font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:#E5CFA4">01 — The Beginning</span>
+        <span class="pv-hero__names">Anindya <em>&amp;</em> Kirana</span>
+        <span style="font-size:.85rem;letter-spacing:.14em;color:rgba(255,255,255,.85)">12 · 12 · 2026</span>
+      </div>
+    </div>
+
+    <div class="pv-section pv-section--warm">
+      <span class="pv-num">03</span>
+      <span style="font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:#9A7A72;font-family:Jost,sans-serif">The Two Of Us</span>
+      <h3>Berkas dua</h3>
+      <img class="ds-orn pv-sprig" src="assets/ornaments/sprig-divider.svg" alt="">
+    </div>
+
+    <div class="pv-deep">
+      <p>The Ceremony</p>
+      <h3>Dua Momen, Satu Hari</h3>
+      <img class="ds-orn pv-sprig" src="assets/ornaments/sprig-divider.svg" alt="">
+    </div>
+
+    <div class="pv-timeline">
+      <div class="pv-tl pv-tl--feature">
+        <span class="pv-tl__time">09.00</span>
+        <h4>Janji Suci</h4>
+        <p>Pemberkatan janji suci yang disaksikan oleh keluarga.</p>
+      </div>
+      <div class="pv-tl">
+        <span class="pv-tl__time">11.30</span>
+        <h4>Entrance &amp; Ramah Tamah</h4>
+        <p>Selepas akad, kami menyambut Bapak/Ibu.</p>
+      </div>
+    </div>
+
+    <div class="pv-cards">
+      <div class="pv-card">
+        <label>Bank Mandiri</label>
+        <div class="pv-acct">
+          <code>123000555777999</code>
+          <span class="pv-copy"><svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1z"/><path d="M19 5H8a2 2 0 0 0-2 2v14h2V7h11a2 2 0 0 0 2-2V7"/></svg></span>
+        </div>
+        <span class="pv-name">a.n. Anindya Wibowo</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="pv-sig">
+        <svg class="sig" viewBox="0 0 400 60" fill="none" aria-hidden="true">
+          <path class="sig__vine" pathLength="1" d="M8 40C70 12 120 56 200 34C280 12 330 56 392 30"/>
+        </svg>
+      </div>
+      <div class="pv-actions">
+        <button class="ds-btn ds-btn--primary" type="button">Buka Undangan</button>
+        <button class="ds-btn ds-btn--fill" type="button">Kirim Ucapan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ C ============================ -->
+  <div class="pal pal-c">
+    <div class="pal__label">
+      <span class="pal__name">C · Sage &amp; Blush</span>
+      <span class="pal__note">Paling kalem dan paling “botanical”. Hijau sage menahan merah blush supaya tidak mudah menjadi nota yang mendominasi. Paling kuat kalau foto Anda banyak bernuansa hijau.</span>
+      <div class="pal__swatches">
+        <i style="background:#FAF7F0"></i><i style="background:#F1F0E6"></i><i style="background:#FEFCF6"></i>
+        <i style="background:#2C3830"></i><i style="background:#A9707A"></i><i style="background:#7E4F58"></i>
+        <i style="background:#7E9184"></i><i style="background:#26302A"></i>
+      </div>
+    </div>
+
+    <div class="pv-hero">
+      <img src="assets/images/hero-wedding.jpg" alt="">
+      <div class="pv-hero__scrim"></div>
+      <div class="pv-hero__in">
+        <span style="font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:#DED2B4">01 — The Beginning</span>
+        <span class="pv-hero__names">Anindya <em>&amp;</em> Kirana</span>
+        <span style="font-size:.85rem;letter-spacing:.14em;color:rgba(255,255,255,.85)">12 · 12 · 2026</span>
+      </div>
+    </div>
+
+    <div class="pv-section">
+      <span class="pv-num">03</span>
+      <span style="font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:#8A978E;font-family:Jost,sans-serif">The Two Of Us</span>
+      <h3>Dua yang Satu</h3>
+      <img class="ds-orn pv-sprig" src="assets/ornaments/sprig-divider.svg" alt="">
+    </div>
+
+    <div class="pv-deep">
+      <p>The Ceremony</p>
+      <h3>Dua Momen, Satu Hari</h3>
+      <img class="ds-orn pv-sprig" src="assets/ornaments/sprig-divider.svg" alt="">
+    </div>
+
+    <div class="pv-timeline">
+      <div class="pv-tl pv-tl--feature">
+        <span class="pv-tl__time">09.00</span>
+        <h4>Janji Suci</h4>
+        <p>Pemberkatan janji suci yang disaksikan oleh keluarga.</p>
+      </div>
+      <div class="pv-tl">
+        <span class="pv-tl__time">11.30</span>
+        <h4>Entrance &amp; Ramah Tamah</h4>
+        <p>Selepas akad, kami menyambut Bapak/Ibu.</p>
+      </div>
+    </div>
+
+    <div class="pv-cards">
+      <div class="pv-card">
+        <label>Bank Mandiri</label>
+        <div class="pv-acct">
+          <code>123000555777999</code>
+          <span class="pv-copy"><svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1z"/><path d="M19 5H8a2 2 0 0 0-2 2v14h2V7h11a2 2 0 0 0 2-2V7"/></svg></span>
+        </div>
+        <span class="pv-name">a.n. Anindya Wibowo</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="pv-sig">
+        <svg class="sig" viewBox="0 0 400 60" fill="none" aria-hidden="true">
+          <path class="sig__vine" pathLength="1" d="M8 40C70 12 120 56 200 34C280 12 330 56 392 30"/>
+        </svg>
+      </div>
+      <div class="pv-actions">
+        <button class="ds-btn ds-btn--primary" type="button">Buka Undangan</button>
+        <button class="ds-btn ds-btn--fill" type="button">Kirim Ucapan</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

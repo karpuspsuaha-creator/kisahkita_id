@@ -1,0 +1,79 @@
+/* ==========================================================================
+   ORNAMENTS — line art only, 1px, colour inherited from --sig-stroke / currentColor
+   Depends on: tokens.css
+   ========================================================================== */
+
+.ds-orn {
+  display: block;
+  color: var(--gold);
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* vector-effect is not an inherited property, so it must be re-stated on descendants. */
+.ds-orn path,
+.ds-orn g,
+.ds-orn circle {
+  vector-effect: non-scaling-stroke;
+}
+
+.ds-orn svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Placement helpers — the only permitted way to position an ornament. */
+.ds-orn--center {
+  width: clamp(9rem, 22vw, 13rem);
+  margin-inline: auto;
+}
+
+.ds-orn--left {
+  width: clamp(7rem, 16vw, 9.5rem);
+  margin-inline: 0 auto;
+}
+
+.ds-orn--inline {
+  width: 1.35rem;
+  flex: none;
+}
+
+.ds-orn--frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--champagne);
+  pointer-events: none;
+}
+
+/* Corner ornaments: author one corner, rotate for the other three. */
+.ds-orn--tl { transform: rotate(0deg); }
+.ds-orn--tr { transform: rotate(90deg); }
+.ds-orn--br { transform: rotate(180deg); }
+.ds-orn--bl { transform: rotate(270deg); }
+
+/* Density rule: one large ornament per screen. Anything denser reads as clutter. */
+.ds-orn--quiet {
+  color: var(--line-rose);
+  opacity: .7;
+}
+
+/* Frame host — a positioned box that an ornament can sit inside. */
+.ds-ornamented {
+  position: relative;
+}
+
+.ds-ornamented > .ds-orn--frame {
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+/* Square corner slot. Must be square, otherwise the rotated variants misalign. */
+.ds-orn--corner {
+  position: absolute;
+  width: 32%;
+  aspect-ratio: 1;
+}

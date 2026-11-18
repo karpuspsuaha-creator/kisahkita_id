@@ -9,11 +9,18 @@
     <!-- Google Fonts: Cormorant Garamond, Plus Jakarta Sans & Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Pinyon+Script&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Tone.js untuk Audio Melodi Lembut -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <!-- V1 Wedding Invitation Design System (Ivory Romantic Classic) -->
+    <link rel="stylesheet" href="css_v1/tokens.css">
+    <link rel="stylesheet" href="css_v1/base.css">
+    <link rel="stylesheet" href="css_v1/ornaments.css">
+    <link rel="stylesheet" href="css_v1/signature-transition.css">
+    <link rel="stylesheet" href="css_v1/styles.css">
 
     <style>
 .custom-scroll::-webkit-scrollbar {
@@ -1374,25 +1381,30 @@ const studioTemplates = [
         name: 'Seruni Sage',
         styleTag: 'Botanical Arch • Minimalis',
         desc: 'Desain kubah lengkung (arch) modern dengan daun botanical melayang dan kartu membulat bersih.',
-        coverImg: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80',
-        coverBg: '#E6EDE7',
-        bodyBg: '#F4F7F4',
-        textColor: '#2D312E',
-        btnBg: '#7A917E',
+        coverImg: 'assets_v1/images/hero-wedding.jpg',
+        coverBg: '#fdfaf4',
+        bodyBg: '#fdfaf4',
+        textColor: '#3a2e2a',
+        btnBg: '#c0847c',
         fontClass: 'font-serif',
         badgeBg: 'bg-sageLight text-sageDark',
         coverSubtitle: 'THE WEDDING OF',
         photoFrameClass: 'w-36 h-44 sm:w-40 sm:h-48 mx-auto rounded-t-full rounded-b-3xl overflow-hidden border-4 border-white shadow-lg',
-        coverCardClass: 'w-full max-w-xs bg-white/85 backdrop-blur-sm rounded-2xl p-4 shadow-sm space-y-2 text-[#2D312E]',
-        contentCardClass: 'bg-white/85 rounded-3xl p-5 shadow-sm text-[#2D312E] max-w-md mx-auto',
-        avatarClass: 'w-20 h-20 rounded-full object-cover mx-auto border-2 border-[#7A917E]/40 shadow-sm',
+        coverCardClass: 'w-full max-w-xs bg-white/85 backdrop-blur-sm rounded-2xl p-4 shadow-sm space-y-2 text-[#3a2e2a]',
+        contentCardClass: 'bg-white/85 rounded-3xl p-5 shadow-sm text-[#3a2e2a] max-w-md mx-auto',
+        avatarClass: 'w-20 h-20 rounded-full object-cover mx-auto border-2 border-[#a6b3a0]/40 shadow-sm',
         ornamentHtml: `
-            <svg class="absolute -top-6 -left-6 w-32 h-32 text-[#7A917E]/25" viewBox="0 0 100 100" fill="currentColor">
-                <path d="M10,90 C10,40 40,10 90,10 C70,45 45,70 10,90 Z"/>
-                <path d="M25,95 C30,60 55,35 95,30 C75,60 55,80 25,95 Z" opacity="0.6"/>
+            <svg class="ds-orn ds-orn--corner cover__corner cover__corner--tl" viewBox="0 0 120 120" fill="none">
+                <path d="M2 118V2H118"/><path d="M2 66C12 56 24 55 34 60C27 70 15 71 2 66Z"/><path d="M60 2C56 12 55 24 60 34C70 27 71 15 66 2Z"/><circle cx="18" cy="18" r="2" fill="currentColor" stroke="none"/>
             </svg>
-            <svg class="absolute -bottom-6 -right-6 w-32 h-32 text-[#7A917E]/20 rotate-180" viewBox="0 0 100 100" fill="currentColor">
-                <path d="M10,90 C10,40 40,10 90,10 C70,45 45,70 10,90 Z"/>
+            <svg class="ds-orn ds-orn--corner cover__corner cover__corner--tr" viewBox="0 0 120 120" fill="none">
+                <path d="M2 118V2H118"/><path d="M2 66C12 56 24 55 34 60C27 70 15 71 2 66Z"/><path d="M60 2C56 12 55 24 60 34C70 27 71 15 66 2Z"/><circle cx="18" cy="18" r="2" fill="currentColor" stroke="none"/>
+            </svg>
+            <svg class="ds-orn ds-orn--corner cover__corner cover__corner--br" viewBox="0 0 120 120" fill="none">
+                <path d="M2 118V2H118"/><path d="M2 66C12 56 24 55 34 60C27 70 15 71 2 66Z"/><path d="M60 2C56 12 55 24 60 34C70 27 71 15 66 2Z"/><circle cx="18" cy="18" r="2" fill="currentColor" stroke="none"/>
+            </svg>
+            <svg class="ds-orn ds-orn--corner cover__corner cover__corner--bl" viewBox="0 0 120 120" fill="none">
+                <path d="M2 118V2H118"/><path d="M2 66C12 56 24 55 34 60C27 70 15 71 2 66Z"/><path d="M60 2C56 12 55 24 60 34C70 27 71 15 66 2Z"/><circle cx="18" cy="18" r="2" fill="currentColor" stroke="none"/>
             </svg>
         `
     },
@@ -1481,6 +1493,7 @@ let currentQuoteIdx = 0;
 
 let activeTemplate = studioTemplates[0];
 let activeColorTheme = studioTemplates[0];
+let originalPreviewHTML = null;
 let uploadedPhotos = {
     cover: studioTemplates[0].coverImg,
     hasCustomCover: false,
@@ -1652,6 +1665,25 @@ function applyColorTheme(themeId) {
 function applyTemplate(templateId) {
     const found = studioTemplates.find(t => t.id === templateId);
     if (!found) return;
+
+    const canvas = document.getElementById('studio-preview-canvas');
+
+    // Seruni Sage: tampilkan konten undangan asli dari folder WEDDING INVITATION - V1 via iframe
+    if (templateId === 'seruni-sage') {
+        if (!originalPreviewHTML) originalPreviewHTML = canvas.innerHTML;
+        canvas.innerHTML = `<iframe src="preview-seruni-sage.html" class="w-full h-full rounded-[34px] overflow-hidden border-0" allowfullscreen></iframe>`;
+        activeTemplate = found;
+        renderLandingTemplates();
+        showToast('Template "Seruni Sage" aktif — preview undangan asli dimuat.');
+        return;
+    }
+
+    // Kembalikan preview asli untuk template lain
+    if (originalPreviewHTML) {
+        canvas.innerHTML = originalPreviewHTML;
+        originalPreviewHTML = null;
+    }
+
     activeTemplate = found;
 
     if (!uploadedPhotos.hasCustomCover) {
