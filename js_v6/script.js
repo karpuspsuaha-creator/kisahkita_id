@@ -15,7 +15,7 @@
     s.textContent = raw;
     document.head.appendChild(s);
     s.remove();
-    return (typeof window.WEDDING_CONFIG !== "undefined") ? window.WEDDING_CONFIG : null;
+    return (typeof WEDDING_CONFIG !== "undefined") ? WEDDING_CONFIG : null;
   }
   async function fetchConfigSource() {
     const ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
