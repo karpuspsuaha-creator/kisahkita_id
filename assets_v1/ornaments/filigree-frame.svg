@@ -1,9 +1,0 @@
-<svg viewBox="0 0 200 280" fill="none" stroke="#C0A468" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bingkai ornamen">
-  <path d="M2 2H198V278H2Z" />
-  <path d="M10 10H190V270H10Z" />
-  <path d="M2 34L34 2M166 2L198 34M2 246L34 278M166 278L198 246" />
-  <path d="M100 2C92 7 92 15 100 20C108 15 108 7 100 2Z" />
-  <path d="M100 260C92 265 92 273 100 278C108 273 108 265 100 260Z" />
-  <path d="M2 140C7 132 15 132 20 140C15 148 7 148 2 140Z" />
-  <path d="M180 140C185 132 193 132 198 140C193 148 185 148 180 140Z" />
-</svg>

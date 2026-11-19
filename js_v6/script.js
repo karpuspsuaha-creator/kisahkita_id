@@ -9,7 +9,7 @@
   // -> kalau config.js di-upload ulang, isi undangan ikut berubah tanpa
   //    perlu upload index.html / script.js / styles.css lagi.
   // Fallback: config dari tag <script> (mis. saat dibuka langsung dari file://)
-  const CONFIG_URL = "config.js";
+  const CONFIG_URL = "js_v6/config.js";
   function evalConfigSource(raw) {
     const s = document.createElement("script");
     s.textContent = raw;

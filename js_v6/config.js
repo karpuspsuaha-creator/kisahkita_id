@@ -5,7 +5,7 @@
  * Cukup ubah data di bawah ini. Semua field di bawah ini
  * otomatis terbaca oleh script.js dan index.html.
  * Format path foto: relatif terhadap folder yang berisi index.html.
- * Contoh: "assets/images/groom.jpg"
+ * Contoh: "assets_v6/images/groom.jpg"
  * ============================================================
  */
 const WEDDING_CONFIG = {
@@ -65,15 +65,15 @@ const WEDDING_CONFIG = {
   // --- FOTO (gantilah path ini dengan foto kamu) ---
   photos: {
     couple: "https://images.unsplash.com/photo-1629210881793-30f33acb2c6a?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb", // foto pasangan (hero)
-    bride: "assets/images/wedding-moment.jpg",
-    groom: "assets/images/couple-story.jpg",
-    greeting: "assets/images/greeting-framed.png",
-    greetingFull: "assets/images/greeting-framed-full.png", // versi rapat untuk lightbox
+    bride: "assets_v6/images/wedding-moment.jpg",
+    groom: "assets_v6/images/couple-story.jpg",
+    greeting: "assets_v6/images/greeting-framed.png",
+    greetingFull: "assets_v6/images/greeting-framed-full.png", // versi rapat untuk lightbox
     gallery: [
-      "assets/images/wedding-ceremony.jpg",
-      "assets/images/wedding-details.jpg",
-      "assets/images/wedding-venue.jpg",
-      "assets/images/couple-story.jpg",
+      "assets_v6/images/wedding-ceremony.jpg",
+      "assets_v6/images/wedding-details.jpg",
+      "assets_v6/images/wedding-venue.jpg",
+      "assets_v6/images/couple-story.jpg",
     ],
   },
 
@@ -127,7 +127,7 @@ const WEDDING_CONFIG = {
       {
         kind: "Transfer Bank",
         title: "Bank Mandiri",
-        image: "assets/images/mandiri-card.jpg",
+        image: "assets_v6/images/mandiri-card.jpg",
         label: "Nomor Rekening",
         number: "123000555777999",
         holder: "a.n. Romeo Pratama",
@@ -136,7 +136,7 @@ const WEDDING_CONFIG = {
       {
         kind: "Dompet Digital",
         title: "DANA",
-        image: "assets/images/dana-card.svg",
+        image: "assets_v6/images/dana-card.svg",
         label: "Nomor DANA",
         number: "081234567890",
         display: "0812 3456 7890",
