@@ -1087,7 +1087,7 @@
                 <div class="space-y-4 text-left">
                     <div>
                         <label class="block text-[10px] font-bold uppercase tracking-widest text-charcoalMuted mb-2">Password</label>
-                        <input type="password" id="dev-password" placeholder="Masukan Password" class="w-full px-4 py-3.5 rounded-2xl bg-cream border border-sage/30 text-charcoal placeholder-charcoalMuted/50 focus:outline-none focus:border-terracotta transition-all">
+                        <input type="password" id="dev-password" placeholder="Masukan Password" onkeydown="if(event.key==='Enter')devLogin()" class="w-full px-4 py-3.5 rounded-2xl bg-cream border border-sage/30 text-charcoal placeholder-charcoalMuted/50 focus:outline-none focus:border-terracotta transition-all">
                     </div>
                     <p id="dev-login-error" class="text-xs text-terracottaDark font-semibold hidden flex items-center gap-2">
                         <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i>
