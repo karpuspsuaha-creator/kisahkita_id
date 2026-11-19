@@ -2522,6 +2522,8 @@ function closeDevCustomMusic() {
 
 // Initializer on window load
 window.onload = function() {
+    // Keamanan: hapus sesi developer saat halaman direfresh/dimuat ulang
+    localStorage.removeItem('dev_auth');
     renderLandingTemplates();
     renderStudioThemeSelector();
     syncStudioToPreview();
