@@ -522,7 +522,7 @@ body.is-open .invite {
   position: absolute;
   top: -10px; left: -10px;
   width: 196px; height: 176px;
-  background: url("assets/frames/deco-tl.png") no-repeat left top / contain;
+  background: url("../assets_v6/frames/deco-tl.png") no-repeat left top / contain;
   opacity: .62;
   pointer-events: none;
   z-index: 3;
@@ -535,7 +535,7 @@ body.is-open .invite {
   position: absolute;
   bottom: -10px; right: -10px;
   width: 178px; height: 165px;
-  background: url("assets/frames/deco-br.png") no-repeat right bottom / contain;
+  background: url("../assets_v6/frames/deco-br.png") no-repeat right bottom / contain;
   opacity: .5;
   pointer-events: none;
   z-index: 3;
