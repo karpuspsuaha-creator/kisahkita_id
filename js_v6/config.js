@@ -64,7 +64,7 @@ const WEDDING_CONFIG = {
 
   // --- FOTO (gantilah path ini dengan foto kamu) ---
   photos: {
-    couple: "https://images.unsplash.com/photo-1629210881793-30f33acb2c6a?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb", // foto pasangan (hero)
+    couple: "assets_v6/images/unsplash-couple-side.jpg", // foto pasangan (hero)
     bride: "assets_v6/images/wedding-moment.jpg",
     groom: "assets_v6/images/couple-story.jpg",
     greeting: "assets_v6/images/greeting-framed.png",
