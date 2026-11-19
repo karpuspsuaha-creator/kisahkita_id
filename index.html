@@ -1664,10 +1664,10 @@ function applyTemplate(templateId) {
     // Seruni Sage: tampilkan konten undangan asli dari folder WEDDING INVITATION - V1 via iframe
     if (templateId === 'seruni-sage') {
         if (!originalPreviewHTML) originalPreviewHTML = canvas.innerHTML;
-        canvas.innerHTML = `<iframe src="preview-seruni-sage.html" class="w-full h-full rounded-[34px] overflow-hidden border-0" allowfullscreen></iframe>`;
+        canvas.innerHTML = `<iframe src="preview-seruni-sage-v6.html" class="w-full h-full rounded-[34px] overflow-hidden border-0" allowfullscreen></iframe>`;
         activeTemplate = found;
         renderLandingTemplates();
-        showToast('Template "Seruni Sage" aktif — preview undangan asli dimuat.');
+        showToast('Template "Seruni Sage" aktif — preview undangan V6 Premium dimuat.');
         return;
     }
 
